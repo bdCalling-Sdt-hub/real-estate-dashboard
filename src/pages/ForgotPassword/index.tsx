@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import GuruForm from "../../component/Form/FormProvider";
-import image from "./../../assets/bg_2.jpg";
-import { authValidationSchema } from "../../schema/auth.schema";
-import ResInput from "../../component/Form/ResInput";
-import { Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Col, Row } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { useForgotPasswordMutation } from "../../redux/features/auth/authApi";
-import ErrorResponse from "../../component/UI/ErrorResponse";
 import { toast } from "sonner";
-
+import logo from "../../assets/Final Logo 2.png";
+import forgotvector from "../../assets/vector/forgotemail.png";
+import ResForm from "../../component/Form/FormProvider";
+import ResInput from "../../component/Form/ResInput";
+import ErrorResponse from "../../component/UI/ErrorResponse";
+import { useForgotPasswordMutation } from "../../redux/features/auth/authApi";
+import { authValidationSchema } from "../../schema/auth.schema";
 interface FieldValues {
   email: string;
 }
@@ -38,13 +37,14 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div
-      className="bg-cover bg-center "
-      style={{ backgroundImage: `url(${image})` }}
-    >
-      <div className="flex justify-center items-center h-screen ">
-        <div className="w-[490px] h-[430px]  bg-white px-4 rounded">
-          <div className=" mt-8 ">
+    <div className="container mx-auto flex justify-around items-center h-screen">
+      <Row align="middle" justify="center" gutter={16}>
+        <Col lg={12}>
+          <img src={logo} alt="Logo" />
+          <img src={forgotvector} alt="Login Vector" />
+        </Col>
+        <Col lg={12}>
+          <div className="w-[500px] mx-auto">
             <NavLink to="/login">
               <LeftOutlined
                 style={{
@@ -56,32 +56,32 @@ const ForgotPassword = () => {
             </NavLink>
             <h1 className="text-primary text-32 font-600 mt-2">Email</h1>
             <p className="text-20 text-gray">
-              Enter your email address to ger a verification code for resetting
+              Enter your email address to get a verification code for resetting
               your password.
             </p>
-          </div>
-          <div className="mt-[25px]">
-            <GuruForm
-              onSubmit={onSubmit}
-              resolver={zodResolver(authValidationSchema.fogotpasswordSchema)}
-            >
-              <ResInput
-                size="large"
-                type="email"
-                name="email"
-                label="Email"
-                placeholder="enter your gmail"
-              />
-              <Button
-                className="w-full mt-[50px]    text-18 font-600 h-10 bg-primary text-white"
-                htmlType="submit"
+            <div className="mt-[20px]">
+              <ResForm
+                onSubmit={onSubmit}
+                resolver={zodResolver(authValidationSchema.fogotpasswordSchema)}
               >
-                Get OTP
-              </Button>
-            </GuruForm>
+                <ResInput
+                  size="large"
+                  type="email"
+                  name="email"
+                  label="Email"
+                  placeholder="Enter your email"
+                />
+                <Button
+                  className="w-full mt-[50px] text-18 font-600 h-10 bg-primary text-white"
+                  htmlType="submit"
+                >
+                  Send OTP
+                </Button>
+              </ResForm>
+            </div>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   );
 };

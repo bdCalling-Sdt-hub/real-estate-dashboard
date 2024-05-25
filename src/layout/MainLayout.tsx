@@ -2,11 +2,11 @@ import { ConfigProvider, Layout } from "antd";
 
 import { Content, Header } from "antd/es/layout/layout";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import HeaderLayout from "./HeaderLayout";
 import { useAppSelector } from "../redux/hooks";
-import { sidebardThemes } from "../themes/sidebarThemes";
 import { paginationTheme } from "../themes/paginationThemes";
+import { sidebardThemes } from "../themes/sidebarThemes";
+import HeaderLayout from "./HeaderLayout";
+import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
   const collapsed = useAppSelector((state) => state.layout.collapsed);
@@ -23,7 +23,6 @@ const MainLayout = () => {
             <ConfigProvider theme={paginationTheme}>
               <Content
                 style={{
-                  padding: "24px 16px 0",
                   backgroundColor: "#edf5ea",
                   paddingLeft: collapsed ? "110px" : "215px",
                 }}

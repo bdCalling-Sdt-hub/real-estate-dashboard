@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ConfigProvider, Table } from "antd";
-import { TablePaginationConfig } from "antd";
+import { ConfigProvider, Table, TablePaginationConfig } from "antd";
 interface ScrollProps {
   x?: number;
   y?: number | "max";
@@ -29,6 +28,22 @@ const ResTable = ({
   return (
     <ConfigProvider theme={theme}>
       <Table
+        components={{
+          header: {
+            cell: (props: any) => {
+              return (
+                <th
+                  {...props}
+                  style={{
+                    ...props.style,
+                    backgroundColor: "#F39200",
+                    color: "white",
+                  }}
+                />
+              );
+            },
+          },
+        }}
         style={style}
         loading={loading}
         columns={column}

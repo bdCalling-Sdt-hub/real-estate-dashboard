@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuOutlined } from "@ant-design/icons";
 import { IoIosNotifications } from "react-icons/io";
-import user from "../assets/person.png";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+
 import { Badge, Button } from "antd";
-import { setCollapsed } from "../redux/features/layout/layoutSlice";
 import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "sonner";
+import { setCollapsed } from "../redux/features/layout/layoutSlice";
 import { useGetMyNotificationQuery } from "../redux/features/notification/notificationApi";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 // import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useEffect } from "react";
-import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useProfileQuery } from "../redux/features/auth/authApi";
+import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import showImage from "../utils/showImage";
 
 const HeaderLayout = () => {
@@ -62,7 +62,7 @@ const HeaderLayout = () => {
 
         <NavLink to={`/${User?.role}/profile`}>
           <img
-            src={showImage(pData?.data?.image) || user}
+            src={showImage(pData?.data?.image)}
             width={40}
             className=" object-cover rounded-full"
             alt=""

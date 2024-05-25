@@ -3,6 +3,17 @@ export const dashboardBookingColumn = [
     title: "Customer Name",
     dataIndex: "name",
     key: "name",
+    showSorterTooltip: { target: "full-header" },
+    filters: [
+      {
+        text: "Joe",
+        value: "Joe",
+      },
+      {
+        text: "Jim",
+        value: "Jim",
+      },
+    ],
   },
   {
     title: "Customer Email",

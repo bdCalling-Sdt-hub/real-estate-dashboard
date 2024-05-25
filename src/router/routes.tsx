@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../pages/Login";
-import ForgotPassword from "../pages/ForgotPassword";
-import VerifyOtp from "../pages/VerifyOtp";
-import NewPassword from "../pages/NewPassword";
-import { routeGenerator } from "../utils/routeGenerator";
-import { vendorRoute } from "./admin.route.";
 import App from "../App";
+import ForgotPassword from "../pages/ForgotPassword";
+import Login from "../pages/Login";
+import NewPassword from "../pages/NewPassword";
+import VerifyOtp from "../pages/VerifyOtp";
+import { routeGenerator } from "../utils/routeGenerator";
+import { adminRoutes } from "./admin.route.";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       <App />
       // </PrivateRoute>
     ),
-    children: routeGenerator(vendorRoute),
+    children: routeGenerator(adminRoutes),
   },
   {
     path: "/login",

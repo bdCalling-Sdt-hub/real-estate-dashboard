@@ -3,19 +3,16 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      primary: "#0B835C",
-      orange: "#FD8533",
-      deepGray: "#969BA0",
-      black: "#181818",
+      primary: "#F39200",
+      black: "#00000",
       white: "#fff",
-      linen: "#FFF0E6",
-      gray: "#595959",
-      red: "#FF4D4F",
+      gray: "#575858",
     },
     fontSize: {
       40: "3rem",
       32: "1.875rem",
       24: "1.5rem",
+      30: "1.875rem",
       20: "1.25rem",
       16: "1rem",
       18: "1.125rem",

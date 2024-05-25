@@ -1,43 +1,29 @@
-import { Row, Col } from "antd";
-import {
-  MdCancel,
-  MdPendingActions,
-  MdRunningWithErrors,
-} from "react-icons/md";
+import { Col, Row } from "antd";
+import { FaWallet } from "react-icons/fa6";
+import { MdApartment } from "react-icons/md";
 
 const DashboardCard = () => {
   return (
-    <Row gutter={[16, 30]}>
-      <Col span={24}>
-        <div className="w-[400px]">
-          <div className="flex items-center justify-between  bg-white px-6 py-3 rounded">
-            <MdPendingActions size={50} />
-            <div className="font-600 ">
-              <h1 className="text-end text-primary text-32">10</h1>
-              <p className="text-24">Pending Request</p>
-            </div>
+    <Row align="middle" justify="center" gutter={16}>
+      <Col span={12}>
+        <div className="bg-white flex justify-between items-center p-6 rounded">
+          <div className="bg-[#EEEFFF] p-2 rounded-full">
+            <MdApartment size={45} color="#3A6FF8" />
+          </div>
+          <div>
+            <h1 className="text-24 font-500 text-gray">Total Properties</h1>
+            <h5 className="text-20 font-500 ">5000</h5>
           </div>
         </div>
       </Col>
-      <Col span={24}>
-        <div className="w-[400px]">
-          <div className="flex items-center justify-between  bg-white px-6 py-3 rounded">
-            <MdRunningWithErrors size={50} />
-            <div className="font-600 ">
-              <h1 className="text-end text-primary text-32">10</h1>
-              <p className="text-24">Ongoing Request</p>
-            </div>
+      <Col span={12}>
+        <div className="bg-white flex justify-between items-center  p-6 rounded">
+          <div className="bg-[#FFE6E1] p-2 rounded-full">
+            <FaWallet size={45} color="#FF8E26" />
           </div>
-        </div>
-      </Col>
-      <Col span={24}>
-        <div className="w-[400px]">
-          <div className="flex items-center justify-between  bg-white px-6 py-3 rounded">
-            <MdCancel size={50} />
-            <div className="font-600 ">
-              <h1 className="text-end text-primary text-32">10</h1>
-              <p className="text-24">Cancelled Request</p>
-            </div>
+          <div>
+            <h1 className="text-24 font-500 text-gray">Total Income</h1>
+            <h5 className="text-20 font-500 ">5000</h5>
           </div>
         </div>
       </Col>

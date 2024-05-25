@@ -1,51 +1,22 @@
-import { MdDashboard, MdOutlineTableRestaurant } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
-import Setting from "../pages/Setting";
-import Notification from "../pages/Notification";
+import { MdDashboard } from "react-icons/md";
 import ChangePasswordFrom from "../pages/ChangePasswordForm";
+import Notification from "../pages/Notification";
+import Setting from "../pages/Setting";
 
+import AdminDashboard from "../pages/AdminDashboard";
 import Otp from "../pages/Otp";
-import UpdatePassword from "../pages/UpdatePassword";
-import VendorDashboard from "../pages/VendorDashboard";
-import Table from "../pages/VendorDashboard/Table";
 import Profile from "../pages/Profile";
-import { BsBorderStyle, BsPeople } from "react-icons/bs";
-import Booking from "../pages/VendorDashboard/Booking";
-import SubAdmin from "../pages/VendorDashboard/SubAdmin";
-import { RiRestaurant2Fill } from "react-icons/ri";
-import Branch from "../pages/VendorDashboard/Branch";
+import UpdatePassword from "../pages/UpdatePassword";
 
-export const vendorRoute = [
+export const adminRoutes = [
   {
     name: "Dashboard",
     path: "dashboard",
     icon: <MdDashboard />,
-    element: <VendorDashboard />,
+    element: <AdminDashboard />,
   },
-  {
-    name: "Branch",
-    path: "branch",
-    icon: <RiRestaurant2Fill />,
-    element: <Branch />,
-  },
-  {
-    name: "SubAdmin",
-    path: "subadmin",
-    icon: <BsPeople />,
-    element: <SubAdmin />,
-  },
-  {
-    name: "Table",
-    path: "table",
-    icon: <MdOutlineTableRestaurant />,
-    element: <Table />,
-  },
-  {
-    name: "Booking",
-    path: "booking",
-    icon: <BsBorderStyle />,
-    element: <Booking />,
-  },
+
   // {
   //   name: "Control Panel",
   //   path: "control",

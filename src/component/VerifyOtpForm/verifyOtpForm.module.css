@@ -8,7 +8,7 @@
 }
 .otpInput {
   background-color: white !important;
-  border: 1px solid #4c9a29;
+  border: 1px solid #f39200;
   text-align: center;
   color: black;
   width: 70px;
@@ -21,7 +21,7 @@
   font-weight: 400;
   font-size: 18px;
   font-weight: 600 !important;
-  background: #4c9a29;
+  background: #f39200;
   align-self: flex-end; /* Assuming you meant to align it to the bottom */
   margin-top: 20px;
   border: none;
@@ -31,7 +31,7 @@
   font-weight: 400;
   font-size: 18px;
   color: black !important;
-  background-color: #4c9a29 !important;
+  background-color: #f39200 !important;
   align-self: flex-end; /* Assuming you meant to align it to the bottom */
   margin-top: 20px;
   border: none;

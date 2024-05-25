@@ -13,7 +13,7 @@
     "@ant-design/icons": "^5.3.4",
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.1",
-    "antd": "^5.15.3",
+    "antd": "^5.16.0",
     "dayjs": "^1.11.10",
     "jodit-react": "^4.0.15",
     "jwt-decode": "^4.0.0",

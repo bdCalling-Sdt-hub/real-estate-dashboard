@@ -2,14 +2,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Button, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
-import logo from "../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/Final Logo 2.png";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { sidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 
 import { IoLogInOutline } from "react-icons/io5";
-import { vendorRoute } from "../router/admin.route.";
+
 import { logout } from "../redux/features/auth/authSlice";
+import { adminRoutes } from "../router/admin.route.";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Sidebar = () => {
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   // const { role }: any = useAppSelector(useCurrentUser) || "vendor";
   const role: any = "super_admin";
-  const SidebarItems = sidebarItemsGenerator(vendorRoute, role);
+  const SidebarItems = sidebarItemsGenerator(adminRoutes, role);
 
   const handeLogout = () => {
     dispatch(logout());
