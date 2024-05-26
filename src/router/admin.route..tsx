@@ -4,7 +4,9 @@ import ChangePasswordFrom from "../pages/ChangePasswordForm";
 import Notification from "../pages/Notification";
 import Setting from "../pages/Setting";
 
+import { TbBrandBooking } from "react-icons/tb";
 import AdminDashboard from "../pages/AdminDashboard";
+import Booking from "../pages/AdminDashboard/Booking";
 import Otp from "../pages/Otp";
 import Profile from "../pages/Profile";
 import UpdatePassword from "../pages/UpdatePassword";
@@ -15,6 +17,12 @@ export const adminRoutes = [
     path: "dashboard",
     icon: <MdDashboard />,
     element: <AdminDashboard />,
+  },
+  {
+    name: "Booking",
+    path: "booking",
+    icon: <TbBrandBooking />,
+    element: <Booking />,
   },
 
   // {

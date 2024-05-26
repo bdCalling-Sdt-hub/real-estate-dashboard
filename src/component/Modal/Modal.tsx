@@ -5,13 +5,21 @@ interface ModalProps {
   showModal: boolean;
   setShowModal: (value: boolean) => void;
   children: ReactNode;
+  width?: number;
 }
-const ResModal = ({ title, showModal, setShowModal, children }: ModalProps) => {
+const ResModal = ({
+  title,
+  showModal,
+  setShowModal,
+  children,
+  width,
+}: ModalProps) => {
   const handleCloseModal = () => {
     setShowModal(!showModal);
   };
   return (
     <Modal
+      width={width}
       title={title}
       open={showModal}
       onCancel={handleCloseModal}
