@@ -75,7 +75,7 @@ const BookingChart = () => {
         <Line
           type="monotone"
           dataKey="pv"
-          stroke="#8884d8"
+          stroke="#3A6FF8"
           activeDot={{ r: 8 }}
         />
       </LineChart>
