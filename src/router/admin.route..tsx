@@ -4,12 +4,14 @@ import ChangePasswordFrom from "../pages/ChangePasswordForm";
 import Notification from "../pages/Notification";
 import Setting from "../pages/Setting";
 
-import { UserOutlined } from "@ant-design/icons";
+import { TransactionOutlined, UserOutlined } from "@ant-design/icons";
 import { FaRegBuilding } from "react-icons/fa6";
+import { RiSecurePaymentFill } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 import AdminDashboard from "../pages/AdminDashboard";
 import AboutUs from "../pages/AdminDashboard/AboutUs";
 import Booking from "../pages/AdminDashboard/Booking";
+import IncomeHistory from "../pages/AdminDashboard/Income/IncomeHistory";
 import PrivacyPolicy from "../pages/AdminDashboard/PrivacyPolicy";
 import Property from "../pages/AdminDashboard/Property";
 import SubAdmin from "../pages/AdminDashboard/SubAdmin";
@@ -50,6 +52,18 @@ export const adminRoutes = [
     path: "property",
     icon: <FaRegBuilding />,
     element: <Property />,
+  },
+  {
+    name: "Income",
+    icon: <RiSecurePaymentFill />,
+    children: [
+      {
+        name: "Transaction",
+        path: "income/overview",
+        icon: <TransactionOutlined />,
+        element: <IncomeHistory />,
+      },
+    ],
   },
   {
     path: "aboutUs",
