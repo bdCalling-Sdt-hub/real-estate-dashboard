@@ -2,14 +2,14 @@
 import { Col, Row } from "antd";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
-import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 // import { useAppSelector } from "../../redux/hooks";
 // import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Setting = () => {
-  const User: TUser | null = useAppSelector(useCurrentUser);
-
+  // const User: TUser | null = useAppSelector(useCurrentUser);
+  const User = {
+    role: "super_admin",
+  };
   return (
     <div className="container mx-auto">
       <Row gutter={[0, 30]}>
@@ -26,6 +26,42 @@ const Setting = () => {
           <div className="flex items-center justify-between text-20  text-black">
             <p className="">Change Password</p>
             <NavLink to={`/${User?.role}/change-password`}>
+              <FaArrowRightToBracket cursor="pointer" />
+            </NavLink>
+          </div>
+          <hr className="text-primary mt-4" />
+        </Col>
+        <Col span={24}>
+          <div className="flex items-center justify-between text-20  text-black">
+            <p className="">About Us</p>
+            <NavLink to={`/${User?.role}/aboutUs`}>
+              <FaArrowRightToBracket cursor="pointer" />
+            </NavLink>
+          </div>
+          <hr className="text-primary mt-4" />
+        </Col>
+        <Col span={24}>
+          <div className="flex items-center justify-between text-20  text-black">
+            <p className="">Terms and Condition</p>
+            <NavLink to={`/${User?.role}/termsAndCondition`}>
+              <FaArrowRightToBracket cursor="pointer" />
+            </NavLink>
+          </div>
+          <hr className="text-primary mt-4" />
+        </Col>
+        <Col span={24}>
+          <div className="flex items-center justify-between text-20  text-black">
+            <p className="">Privacy Policy</p>
+            <NavLink to={`/${User?.role}/privacyPolicy`}>
+              <FaArrowRightToBracket cursor="pointer" />
+            </NavLink>
+          </div>
+          <hr className="text-primary mt-4" />
+        </Col>
+        <Col span={24}>
+          <div className="flex items-center justify-between text-20  text-black">
+            <p className="">Support</p>
+            <NavLink to={`/${User?.role}/support`}>
               <FaArrowRightToBracket cursor="pointer" />
             </NavLink>
           </div>

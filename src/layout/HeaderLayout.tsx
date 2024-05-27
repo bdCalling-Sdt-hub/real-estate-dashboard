@@ -10,15 +10,16 @@ import { useGetMyNotificationQuery } from "../redux/features/notification/notifi
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 // import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useEffect } from "react";
-import { useProfileQuery } from "../redux/features/auth/authApi";
-import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
-import showImage from "../utils/showImage";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 const HeaderLayout = () => {
   const dispatch = useAppDispatch();
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
-  const { data: pData } = useProfileQuery(undefined);
-  const User: TUser | null = useAppSelector(useCurrentUser);
+  // const { data: pData } = useProfileQuery(undefined);
+  // const User: TUser | null = useAppSelector(useCurrentUser);
+  const User = {
+    role: "super_admin",
+  };
   const notification: any = useAppSelector(
     (state) => state.notification.notification
   );
@@ -61,12 +62,7 @@ const HeaderLayout = () => {
         </Badge>
 
         <NavLink to={`/${User?.role}/profile`}>
-          <img
-            src={showImage(pData?.data?.image)}
-            width={40}
-            className=" object-cover rounded-full"
-            alt=""
-          />
+          <FaRegCircleUser color="white" size={25} />
         </NavLink>
       </div>
     </div>

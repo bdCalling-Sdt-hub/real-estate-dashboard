@@ -17,6 +17,7 @@ type TFormConfig = {
 type TFormProps = {
   onSubmit: SubmitHandler<FieldValues>;
   children: ReactNode;
+  disabled?: boolean;
 } & TFormConfig;
 
 const ResForm = ({
@@ -24,6 +25,7 @@ const ResForm = ({
   children,
   defaultValues,
   resolver,
+  disabled = false,
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
 
@@ -53,7 +55,11 @@ const ResForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Form layout="vertical" onFinish={methods.handleSubmit(submit)}>
+      <Form
+        layout="vertical"
+        disabled={disabled}
+        onFinish={methods.handleSubmit(submit)}
+      >
         {children}
       </Form>
     </FormProvider>
