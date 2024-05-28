@@ -23,7 +23,7 @@ const MainLayout = () => {
             <ConfigProvider theme={paginationTheme}>
               <Content
                 style={{
-                  backgroundColor: "#edf5ea",
+                  backgroundColor: "#FEF4E6",
                   paddingLeft: collapsed ? "110px" : "215px",
                 }}
                 className={`responsive-content ${
@@ -34,7 +34,7 @@ const MainLayout = () => {
                   style={{
                     padding: 24,
                     height: "100%",
-                    backgroundColor: "#edf5ea",
+                    backgroundColor: "#FEF4E6",
                   }}
                 >
                   <Outlet />

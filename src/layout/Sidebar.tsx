@@ -39,7 +39,7 @@ const Sidebar = () => {
         position: "fixed",
         top: "0",
         left: "0",
-        backgroundColor: "#D2D9CC",
+        backgroundColor: "#FBDDB0",
       }}
     >
       <div
@@ -51,11 +51,11 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <img src={logo} alt="" width={100} />
+        <img src={logo} alt="" className="p-2" />
       </div>
       <Menu
         style={{
-          backgroundColor: "#D2D9CC",
+          backgroundColor: "#FBDDB0",
           marginTop: "10px",
         }}
         // theme="dark"

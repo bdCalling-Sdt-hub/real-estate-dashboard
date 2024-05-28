@@ -12,6 +12,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AboutUs from "../pages/AdminDashboard/AboutUs";
 import Booking from "../pages/AdminDashboard/Booking";
 import IncomeHistory from "../pages/AdminDashboard/Income/IncomeHistory";
+import IncomeOverview from "../pages/AdminDashboard/Income/IncomeOverview";
 import PrivacyPolicy from "../pages/AdminDashboard/PrivacyPolicy";
 import Property from "../pages/AdminDashboard/Property";
 import SubAdmin from "../pages/AdminDashboard/SubAdmin";
@@ -58,8 +59,14 @@ export const adminRoutes = [
     icon: <RiSecurePaymentFill />,
     children: [
       {
-        name: "Transaction",
+        name: "Overview",
         path: "income/overview",
+        icon: <TransactionOutlined />,
+        element: <IncomeOverview />,
+      },
+      {
+        name: "Transaction",
+        path: "income/transaction",
         icon: <TransactionOutlined />,
         element: <IncomeHistory />,
       },

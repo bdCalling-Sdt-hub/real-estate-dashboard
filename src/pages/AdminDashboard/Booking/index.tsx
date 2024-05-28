@@ -55,6 +55,7 @@ const Booking = () => {
   ];
   return (
     <div className="container mx-auto h-80 my-auto">
+      <h1 className="mb-4 font-500 text-20 text-gray">Booking Details</h1>
       <ResModal
         width={1000}
         title="Booking Details"
