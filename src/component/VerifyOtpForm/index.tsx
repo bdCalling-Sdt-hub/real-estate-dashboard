@@ -25,7 +25,7 @@ const VerifyOtpFrom = () => {
         id: toastId,
         duration: 2000,
       });
-      sessionStorage.setItem("token", res?.data?.token);
+      // sessionStorage.setItem("token", res?.data?.token);
       navigate("/new-password");
     } catch (err) {
       ErrorResponse(err, toastId);
