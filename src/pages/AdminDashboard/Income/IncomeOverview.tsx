@@ -87,11 +87,11 @@ const IncomeOverview = () => {
           <div className="mt-4 bg-white pt-6 pe-6 rounded ">
             <div className="flex justify-between mb-4">
               <h1 className="font-500 text-20 text-gray ps-5 ">
-                Income Statics
+                Income Statics(Packages)
               </h1>
               <DatePicker picker="month" />
             </div>
-            <ResponsiveContainer width="100%" height={450}>
+            <ResponsiveContainer width="100%" height={463}>
               <BarChart data={data}>
                 <defs>
                   <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">

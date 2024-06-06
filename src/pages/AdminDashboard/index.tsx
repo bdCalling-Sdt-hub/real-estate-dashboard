@@ -15,7 +15,7 @@ const AdminDashboard = () => {
   const [year, setYear] = useState(dayjs().format("YYYY"));
   console.log(year);
   return (
-    <div>
+    <div className="container mx-auto">
       <Row gutter={[16, 16]}>
         <Col span={16}>
           <div className="mb-4">
@@ -72,13 +72,10 @@ const AdminDashboard = () => {
                 <div className="h-[20px] w-[20px] bg-primary  "></div>
                 <h1 className="text-16 font-500">Guest User (40%)</h1>
               </div>
-              <div className="flex  items-center gap-x-2">
-                <div className="h-[20px] w-[20px] bg-[#000]  "></div>
-                <h1 className="text-16 font-500">Host User (40%)</h1>
-              </div>
+
               <div className="flex  items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-[#925800]  "></div>
-                <h1 className="text-16 font-500">Property Owner (40%)</h1>
+                <h1 className="text-16 font-500">Host User (40%)</h1>
               </div>
             </div>
           </div>

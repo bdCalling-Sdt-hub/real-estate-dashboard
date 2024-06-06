@@ -9,11 +9,6 @@ const data01 = [
   {
     name: "Host User",
     value: 300,
-    color: "#000",
-  },
-  {
-    name: "Property Manager",
-    value: 300,
     color: "#925800",
   },
 ];
