@@ -78,10 +78,6 @@ const User = () => {
       key: "2",
       label: <p>Host</p>,
     },
-    {
-      key: "3",
-      label: <p>Manager</p>,
-    },
   ];
   return (
     <div className="container mx-auto">
