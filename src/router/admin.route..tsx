@@ -6,11 +6,14 @@ import Setting from "../pages/Setting";
 
 import { TransactionOutlined, UserOutlined } from "@ant-design/icons";
 import { FaRegBuilding } from "react-icons/fa6";
+import { HiOutlineIdentification } from "react-icons/hi";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 import AdminDashboard from "../pages/AdminDashboard";
 import AboutUs from "../pages/AdminDashboard/AboutUs";
 import Booking from "../pages/AdminDashboard/Booking";
+import Guest from "../pages/AdminDashboard/Guest";
+import Host from "../pages/AdminDashboard/Host";
 import IncomeHistory from "../pages/AdminDashboard/Income/IncomeHistory";
 import IncomeOverview from "../pages/AdminDashboard/Income/IncomeOverview";
 import PrivacyPolicy from "../pages/AdminDashboard/PrivacyPolicy";
@@ -18,7 +21,7 @@ import Property from "../pages/AdminDashboard/Property";
 import SubAdmin from "../pages/AdminDashboard/SubAdmin";
 import Support from "../pages/AdminDashboard/Support";
 import TermsAndConditions from "../pages/AdminDashboard/TermsAndCondition";
-import User from "../pages/AdminDashboard/User";
+import VerificationRequest from "../pages/AdminDashboard/VerificatationRequest";
 import Otp from "../pages/Otp";
 import Profile from "../pages/Profile";
 import UpdatePassword from "../pages/UpdatePassword";
@@ -36,11 +39,24 @@ export const adminRoutes = [
     icon: <UserOutlined />,
     element: <SubAdmin />,
   },
+
   {
-    name: "User",
-    path: "user",
+    name: "Guest",
+    path: "guest",
     icon: <UserOutlined />,
-    element: <User />,
+    element: <Guest />,
+  },
+  {
+    name: "Host",
+    path: "host",
+    icon: <UserOutlined />,
+    element: <Host />,
+  },
+  {
+    name: "Verification",
+    path: "verification",
+    icon: <HiOutlineIdentification />,
+    element: <VerificationRequest />,
   },
   {
     name: "Booking",
