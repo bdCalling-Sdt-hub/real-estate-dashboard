@@ -7,10 +7,11 @@ import Setting from "../pages/Setting";
 import { TransactionOutlined, UserOutlined } from "@ant-design/icons";
 import { FaRegBuilding } from "react-icons/fa6";
 import { HiOutlineIdentification } from "react-icons/hi";
-import { RiSecurePaymentFill } from "react-icons/ri";
+import { RiAdvertisementLine, RiSecurePaymentFill } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 import AdminDashboard from "../pages/AdminDashboard";
 import AboutUs from "../pages/AdminDashboard/AboutUs";
+import AdverTisement from "../pages/AdminDashboard/AdverTisement";
 import Booking from "../pages/AdminDashboard/Booking";
 import Guest from "../pages/AdminDashboard/Guest";
 import Host from "../pages/AdminDashboard/Host";
@@ -57,6 +58,12 @@ export const adminRoutes = [
     path: "verification",
     icon: <HiOutlineIdentification />,
     element: <VerificationRequest />,
+  },
+  {
+    name: "Advertisement",
+    path: "advertisement",
+    icon: <RiAdvertisementLine />,
+    element: <AdverTisement />,
   },
   {
     name: "Booking",

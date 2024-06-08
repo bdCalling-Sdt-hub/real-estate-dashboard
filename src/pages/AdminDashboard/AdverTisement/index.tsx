@@ -1,58 +1,69 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Dropdown, Input, MenuProps } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useState } from "react";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
-import { verificationData } from "../../../db";
-import VerificatonDetails from "./VerificationDetails";
+import { adverTisementData } from "../../../db/ads";
+import AdsDetails from "./AdsDetails";
 
-const VerificationRequest = () => {
+const AdverTisement = () => {
   const [show, setShow] = useState<boolean>(false);
+  const handleToggleModal = () => {
+    setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
+  };
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
+
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <p>Guest</p>,
+      label: <p>Land</p>,
     },
     {
       key: "2",
-      label: <p>Host</p>,
+      label: <p>Home</p>,
+    },
+    {
+      key: "3",
+      label: <p>Farm</p>,
     },
   ];
-  const handleToggleModal = () => {
-    setShow((prev: boolean) => !prev);
-  };
   const column = [
     {
-      title: "name",
-      dataIndex: "name",
-      key: "name",
+      title: "Property Name",
+      dataIndex: "propertyName",
+      key: "propertyName",
     },
     {
-      title: "Request Date",
-      dataIndex: "date",
-      key: "date",
+      title: "Owner Name",
+      dataIndex: "ownerName",
+      key: "ownerName",
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
-      title: "User Type",
-      dataIndex: "role",
-      key: "role",
+      title: "Start Date",
+      dataIndex: "startDate",
+      key: "startDate",
     },
     {
-      title: "action",
-
+      title: "End Date",
+      dataIndex: "endDate",
+      key: "endDate",
+    },
+    {
+      title: "Action",
+      key: "action",
       render: (data: any, index: number) => {
         console.log(data, index);
         return (
-          <div className="flex items-center gap-x-2">
+          <div>
             <EyeOutlined
               className="text-18 cursor-pointer"
               onClick={handleToggleModal}
@@ -62,16 +73,17 @@ const VerificationRequest = () => {
       },
     },
   ];
+
   return (
-    <div className="container mx-auto">
-      <div className="flex justify-between items-center mb-2">
-        <h1 className="text-20 font-500 text-gray mb-1">
-          Verification Request
+    <div className="container mx-auto h-80 my-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-20 font-500 text-gray">
+          Active Advertisement Listings
         </h1>
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder="search user"
+            placeholder="search property"
             allowClear
             onSearch={onSearch}
           />
@@ -86,17 +98,20 @@ const VerificationRequest = () => {
         </div>
       </div>
       <ResModal
-        showModal={show}
-        setShowModal={setShow}
         width={1000}
-        title="Verification Information"
+        title="Property Details"
+        setShowModal={setShow}
+        showModal={show}
       >
-        <VerificatonDetails />
+        <AdsDetails />
       </ResModal>
-
-      <ResTable column={column} data={verificationData} />
+      <ResTable
+        column={column}
+        data={adverTisementData}
+        pagination={{ total: adverTisementData?.length, pageSize: 10 }}
+      />
     </div>
   );
 };
 
-export default VerificationRequest;
+export default AdverTisement;
