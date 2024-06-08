@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuOutlined } from "@ant-design/icons";
+import { Badge, Button, Select } from "antd";
+import { KW, US } from "country-flag-icons/react/3x2";
 import { IoIosNotifications } from "react-icons/io";
-
-import { Badge, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { setCollapsed } from "../redux/features/layout/layoutSlice";
@@ -54,7 +54,32 @@ const HeaderLayout = () => {
             .join(" ")}
         </h1>
       </div>
+
       <div className="flex items-center  gap-x-6">
+        <Select
+          defaultValue="arabic"
+          style={{ width: 120 }}
+          options={[
+            {
+              value: "arabic",
+              label: (
+                <div className="flex gap-x-2">
+                  <KW title="Kuwait" className="w-[20px]" />
+                  <p className="font-500">Arabic</p>
+                </div>
+              ),
+            },
+            {
+              value: "english",
+              label: (
+                <div className="flex gap-x-2">
+                  <US title="United States" className="w-[20px]" />
+                  <p className="font-500">English</p>
+                </div>
+              ),
+            },
+          ]}
+        />
         <Badge count={notficationData?.meta?.total}>
           <NavLink to={`/${User?.role}/notification`}>
             <IoIosNotifications className="text-white  text-32 cursor-pointer" />{" "}
