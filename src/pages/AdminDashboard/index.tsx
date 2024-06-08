@@ -2,6 +2,7 @@
 import { Col, DatePicker, Divider, Row, Space } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { dashboardBookingColumn } from "../../Columns";
 import AdminDashboardUserRation from "../../component/AdminDashboardUserRatio/AdminDashboardUserRation";
 import AgentCard from "../../component/AgentCard/AgentCard";
@@ -12,6 +13,7 @@ import { agentData, dashboardBookingColumnData } from "../../db";
 import { TCommonTheme } from "../../themes";
 import style from "./dashboard.module.css";
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   const [year, setYear] = useState(dayjs().format("YYYY"));
   console.log(year);
   return (
@@ -49,7 +51,7 @@ const AdminDashboard = () => {
         </Col>
         <Col span={8}>
           <div className="bg-white p-4 mb-4 rounded">
-            <h1 className="text-20 font-500">Top Agent</h1>
+            <h1 className="text-20 font-500">{t("greeting")}</h1>
             <div className="flex justify-between text-18 mt-4">
               <p>Agent Name</p>
               <p>Total Rent</p>

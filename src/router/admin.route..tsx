@@ -19,7 +19,6 @@ import IncomeHistory from "../pages/AdminDashboard/Income/IncomeHistory";
 import IncomeOverview from "../pages/AdminDashboard/Income/IncomeOverview";
 import PrivacyPolicy from "../pages/AdminDashboard/PrivacyPolicy";
 import Property from "../pages/AdminDashboard/Property";
-import SubAdmin from "../pages/AdminDashboard/SubAdmin";
 import Support from "../pages/AdminDashboard/Support";
 import TermsAndConditions from "../pages/AdminDashboard/TermsAndCondition";
 import VerificationRequest from "../pages/AdminDashboard/VerificatationRequest";
@@ -34,12 +33,12 @@ export const adminRoutes = [
     icon: <MdDashboard />,
     element: <AdminDashboard />,
   },
-  {
-    name: "Sub Admin",
-    path: "sub_admin",
-    icon: <UserOutlined />,
-    element: <SubAdmin />,
-  },
+  // {
+  //   name: "Sub Admin",
+  //   path: "sub_admin",
+  //   icon: <UserOutlined />,
+  //   element: <SubAdmin />,
+  // },
 
   {
     name: "Guest",

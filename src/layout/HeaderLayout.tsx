@@ -2,6 +2,7 @@
 import { MenuOutlined } from "@ant-design/icons";
 import { Badge, Button, Select } from "antd";
 import { KW, US } from "country-flag-icons/react/3x2";
+import { useTranslation } from "react-i18next";
 import { IoIosNotifications } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "sonner";
@@ -13,6 +14,11 @@ import { useEffect } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 
 const HeaderLayout = () => {
+  const { i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    console.log(lng);
+    i18n.changeLanguage(lng);
+  };
   const dispatch = useAppDispatch();
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
   // const { data: pData } = useProfileQuery(undefined);
@@ -57,6 +63,7 @@ const HeaderLayout = () => {
 
       <div className="flex items-center  gap-x-6">
         <Select
+          onChange={changeLanguage}
           defaultValue="arabic"
           style={{ width: 120 }}
           options={[

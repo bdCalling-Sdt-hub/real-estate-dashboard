@@ -4,7 +4,7 @@ import img from "./../../../assets/person.jpg";
 const HostDetails = () => {
   return (
     <div>
-      <h1 className="text-30 font-500">Guest Information</h1>
+      <h1 className="text-30 font-500">Host Information</h1>
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">
@@ -29,13 +29,15 @@ const HostDetails = () => {
             <p className="my-1">Email: nuropu@gmail.com</p>
           </div>
         </div>
-        {/* <div>
-          <h1 className="text-20 font-500">Owner Information</h1>
+        <div>
+          <h1 className="text-20 font-500">Bank Information</h1>
           <div className="mt-1 text-gray">
-            <p>Owner Name:Franklin</p>
-            <p className="mt-1">Contact: +01254256426</p>
+            <p>Bank Name: Asia Bank</p>
+            <p className="mt-1">Beneficiarys Full Name: Nur Opu</p>
+            <p className="mt-1">IBAN/Account No: 1252****224541474</p>
+            <p className="mt-1">Beneficiarys Address: Dhaka,bangladesh</p>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

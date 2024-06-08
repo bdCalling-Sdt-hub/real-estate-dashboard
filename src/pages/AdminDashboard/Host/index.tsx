@@ -83,7 +83,7 @@ const Host = () => {
     <div className="container mx-auto">
       <ResModal
         width={1000}
-        title="Booking Details"
+        title="Host"
         setShowModal={setShow}
         showModal={show}
       >
