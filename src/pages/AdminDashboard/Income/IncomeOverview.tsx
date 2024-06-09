@@ -1,4 +1,5 @@
 import { Col, DatePicker, Row, Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 import {
   Bar,
   BarChart,
@@ -78,16 +79,19 @@ const data = [
 ];
 
 const IncomeOverview = () => {
+  const { t } = useTranslation();
   return (
     <div className="container mx-auto">
-      <h1 className="text-gray font-500 text-20 mb-2">Income Overview</h1>
+      <h1 className="text-gray font-500 text-20 mb-2">
+        {t("Income Overview")}
+      </h1>
       <Row gutter={16}>
         <Col span={14}>
           <IncomeOVerviewCard />
           <div className="mt-4 bg-white pt-6 pe-6 rounded ">
             <div className="flex justify-between mb-4">
               <h1 className="font-500 text-20 text-gray ps-5 ">
-                Income Statics(Packages)
+                {t("Income Statics (Packages)")}
               </h1>
               <DatePicker picker="month" />
             </div>

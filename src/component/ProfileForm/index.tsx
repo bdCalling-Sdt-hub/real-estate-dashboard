@@ -4,6 +4,7 @@
 import { Button } from "antd";
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { MdEditSquare } from "react-icons/md";
 import { toast } from "sonner";
 import { useUpdateProfileMutation } from "../../redux/features/auth/authApi";
@@ -11,12 +12,8 @@ import ResForm from "../Form/FormProvider";
 import ResInput from "../Form/ResInput";
 import ErrorResponse from "../UI/ErrorResponse";
 
-interface ProfilePros {
-  usrName: string;
-  name: string;
-  email: string;
-}
 const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
+  const { t } = useTranslation();
   const [updateProfile] = useUpdateProfileMutation();
   const defaultValues = {
     name: ProfileData?.data?.name,
@@ -50,7 +47,7 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
     >
       <ResInput
         labelColor="#FD8533"
-        label="Name"
+        label={t("Name")}
         type="text"
         name="name"
         placeholder="your name"
@@ -58,7 +55,7 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
       />
       <ResInput
         labelColor="#FD8533"
-        label="Phone Number"
+        label={t("Phone Number")}
         type="number"
         name="name"
         placeholder="your name"
@@ -71,7 +68,7 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
           className="bg-primary w-full flex justify-center items-center font-600 text-18 "
           icon={<MdEditSquare />}
         >
-          Submit
+          {t("Submit")}
         </Button>
       </div>
     </ResForm>

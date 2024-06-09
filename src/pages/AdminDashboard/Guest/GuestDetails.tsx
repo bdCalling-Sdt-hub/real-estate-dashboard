@@ -1,10 +1,12 @@
 import { Divider } from "antd";
+import { useTranslation } from "react-i18next";
 import { IoLocateOutline } from "react-icons/io5";
 import img from "./../../../assets/person.jpg";
 const GuestDetails = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <h1 className="text-30 font-500">Guest Information</h1>
+      <h1 className="text-30 font-500">{t("Guest Information")}</h1>
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">
@@ -22,11 +24,11 @@ const GuestDetails = () => {
       {/* section 3 */}
       <div className="flex justify-between">
         <div>
-          <h1 className="text-20 font-500">Personal Preferrence</h1>
+          <h1 className="text-20 font-500">{t("Personal Preferrence")}</h1>
           <div className="mt-1 text-gray">
-            <p>Joining Date: August 15, 2023</p>
-            <p className="my-1">Contact: +880187662665</p>
-            <p className="my-1">Email: nuropu@gmail.com</p>
+            <p>{t("Joining Date")}: August 15, 2023</p>
+            <p className="my-1">{t("Contact")}: +880187662665</p>
+            <p className="my-1">{t("Email")}: nuropu@gmail.com</p>
           </div>
         </div>
         {/* <div>

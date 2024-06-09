@@ -26,11 +26,14 @@ const AdminDashboard = () => {
           <div className="bg-white p-2 rounded">
             <div className="flex items-center justify-between px-2 mb-4">
               <div>
-                <h1 className="text-black font-600 text-20 ">Overview</h1>
+                <h1 className="text-black font-600 text-20 ">
+                  {t("Overview")}
+                </h1>
               </div>
               <Space className="text-black font-500 flex flex-col items-start">
-                <p>Select Year</p>
+                <p>{t("Select Year")}</p>
                 <DatePicker
+                  className="w-[120px]"
                   onChange={(date, dateString) => setYear(dateString as string)}
                   picker="year"
                   defaultValue={dayjs(dayjs(), "YYYY")}
@@ -51,11 +54,11 @@ const AdminDashboard = () => {
         </Col>
         <Col span={8}>
           <div className="bg-white p-4 mb-4 rounded">
-            <h1 className="text-20 font-500">{t("greeting")}</h1>
+            <h1 className="text-20 font-500">{t("Top Agent")}</h1>
             <div className="flex justify-between text-18 mt-4">
-              <p>Agent Name</p>
-              <p>Total Rent</p>
-              <p>Profit</p>
+              <p>{t("Agent Name")}</p>
+              <p>{t("Total Rent")}</p>
+              <p>{t("Profit")}</p>
             </div>
             <Divider className="mt-2" />
             <div
@@ -67,17 +70,17 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="bg-white p-4">
-            <h1 className="text-16 font-500 ">User Ratio</h1>
+            <h1 className="text-16 font-500 ">{t("User Ratio")}</h1>
             <AdminDashboardUserRation />
             <div className="flex justify-between ">
               <div className="flex  items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-primary  "></div>
-                <h1 className="text-16 font-500">Guest User (40%)</h1>
+                <h1 className="text-16 font-500">{t("Guest User")} (%40)</h1>
               </div>
 
               <div className="flex  items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-[#925800]  "></div>
-                <h1 className="text-16 font-500">Host User (40%)</h1>
+                <h1 className="text-16 font-500">{t("Host User")} (%40)</h1>
               </div>
             </div>
           </div>

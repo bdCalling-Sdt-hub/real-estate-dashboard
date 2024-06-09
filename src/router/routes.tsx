@@ -6,6 +6,7 @@ import NewPassword from "../pages/NewPassword";
 import VerifyOtp from "../pages/VerifyOtp";
 import { routeGenerator } from "../utils/routeGenerator";
 import { adminRoutes } from "./admin.route.";
+
 const router = createBrowserRouter([
   {
     path: "/",

@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { bookingData } from "../../../db";
 import BookingDetails from "./BookingDetails";
 
 const Booking = () => {
+  const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
@@ -55,10 +57,12 @@ const Booking = () => {
   ];
   return (
     <div className="container mx-auto h-80 my-auto">
-      <h1 className="mb-4 font-500 text-20 text-gray">Booking Details</h1>
+      <h1 className="mb-4 font-500 text-20 text-gray">
+        {t("Booking Details")}
+      </h1>
       <ResModal
         width={1000}
-        title="Booking Details"
+        title={t("Booking Details")}
         setShowModal={setShow}
         showModal={show}
       >

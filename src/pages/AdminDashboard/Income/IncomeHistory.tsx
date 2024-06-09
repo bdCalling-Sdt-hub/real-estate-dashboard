@@ -1,9 +1,11 @@
 import { Col, Row } from "antd";
+import { useTranslation } from "react-i18next";
 import IncomeHistoryCard from "../../../component/IncomeHistoryCard/IncomeHistoryCard";
 import ResTable from "../../../component/Table";
 import { packagesData, percentageData } from "../../../db";
 
 const IncomeHistory = () => {
+  const { t } = useTranslation();
   const column1 = [
     {
       title: "TransactionId",
@@ -57,7 +59,7 @@ const IncomeHistory = () => {
     <div className="container mx-auto">
       <Row gutter={16}>
         <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">Percentage</h1>
+          <h1 className="text-gray font-500 text-20 mb-2">{t("Percentage")}</h1>
           <IncomeHistoryCard />
           <div className="mt-2">
             <ResTable
@@ -68,7 +70,7 @@ const IncomeHistory = () => {
           </div>
         </Col>
         <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">Packages</h1>
+          <h1 className="text-gray font-500 text-20 mb-2">{t("Packages")}</h1>
           <IncomeHistoryCard />
           <div className="mt-2">
             <ResTable

@@ -4,6 +4,7 @@
 import { LeftOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Col, Row } from "antd";
+import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import logo from "../../assets/Final Logo 2.png";
@@ -13,11 +14,9 @@ import ResInput from "../../component/Form/ResInput";
 import ErrorResponse from "../../component/UI/ErrorResponse";
 import { useForgotPasswordMutation } from "../../redux/features/auth/authApi";
 import { authValidationSchema } from "../../schema/auth.schema";
-interface FieldValues {
-  email: string;
-}
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [forgotPassword] = useForgotPasswordMutation();
   const navigate = useNavigate();
   const onSubmit = async (data: any) => {
@@ -54,10 +53,11 @@ const ForgotPassword = () => {
                 }}
               />
             </NavLink>
-            <h1 className="text-primary text-32 font-600 mt-2">Email</h1>
+            <h1 className="text-primary text-32 font-600 mt-2">{t("Email")}</h1>
             <p className="text-20 text-gray">
-              Enter your email address to get a verification code for resetting
-              your password.
+              {t(
+                "Enter the email address associated with your account. We'll send you an OTP to your email"
+              )}
             </p>
             <div className="mt-[20px]">
               <ResForm
@@ -68,14 +68,14 @@ const ForgotPassword = () => {
                   size="large"
                   type="email"
                   name="email"
-                  label="Email"
-                  placeholder="Enter your email"
+                  label={t("Email")}
+                  placeholder={t("Enter your email")}
                 />
                 <Button
                   className="w-full mt-[50px] text-18 font-600 h-10 bg-primary text-white"
                   htmlType="submit"
                 >
-                  Send OTP
+                  {t("Send OTP")}
                 </Button>
               </ResForm>
             </div>

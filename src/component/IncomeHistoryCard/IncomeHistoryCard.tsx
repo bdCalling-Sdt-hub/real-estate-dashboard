@@ -1,7 +1,9 @@
 import { Col, Row } from "antd";
+import { useTranslation } from "react-i18next";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 const IncomeHistoryCard = () => {
+  const { t } = useTranslation();
   return (
     <Row align="middle" justify="center" gutter={16}>
       <Col span={12}>
@@ -10,7 +12,7 @@ const IncomeHistoryCard = () => {
             <RiMoneyDollarCircleLine size={45} color="#3A6FF8" />
           </div>
           <div>
-            <h1 className="text-24 font-500 text-gray">Today Income</h1>
+            <h1 className="text-24 font-500 text-gray">{t("Today Income")}</h1>
             <h5 className="text-20 font-500 ">$5000</h5>
           </div>
         </div>
@@ -21,7 +23,7 @@ const IncomeHistoryCard = () => {
             <RiMoneyDollarCircleLine size={45} color="#FF8E26" />
           </div>
           <div>
-            <h1 className="text-24 font-500 text-gray">Total Income</h1>
+            <h1 className="text-24 font-500 text-gray">{t("Total Income")}</h1>
             <h5 className="text-20 font-500 ">$1000</h5>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, MenuProps } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { adverTisementData } from "../../../db/ads";
@@ -11,6 +12,7 @@ import AdsDetails from "./AdsDetails";
 
 const AdverTisement = () => {
   const [show, setShow] = useState<boolean>(false);
+  const { t } = useTranslation();
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
   };
@@ -78,7 +80,7 @@ const AdverTisement = () => {
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-20 font-500 text-gray">
-          Active Advertisement Listings
+          {t("Active Advertisement Listings")}
         </h1>
         <div className="flex gap-x-2">
           <Input.Search
@@ -92,17 +94,12 @@ const AdverTisement = () => {
               className="bg-primary text-white font-500 "
               icon={<FilterOutlined />}
             >
-              Filter
+              {t("Filter")}
             </Button>
           </Dropdown>
         </div>
       </div>
-      <ResModal
-        width={1000}
-        title="Property Details"
-        setShowModal={setShow}
-        showModal={show}
-      >
+      <ResModal width={1000} setShowModal={setShow} showModal={show}>
         <AdsDetails />
       </ResModal>
       <ResTable

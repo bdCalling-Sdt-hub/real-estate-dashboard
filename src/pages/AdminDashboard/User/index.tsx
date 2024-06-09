@@ -4,6 +4,7 @@ import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, MenuProps } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MdBlock } from "react-icons/md";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
@@ -12,6 +13,7 @@ import { userData } from "../../../db";
 import UserDetails from "./UserDetails";
 
 const User = () => {
+  const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
@@ -94,7 +96,7 @@ const User = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder="search user"
+            placeholder={t("search")}
             allowClear
             onSearch={onSearch}
           />

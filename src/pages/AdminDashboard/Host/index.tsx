@@ -4,6 +4,7 @@ import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, MenuProps } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MdBlock } from "react-icons/md";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
@@ -13,6 +14,7 @@ import HostDetails from "./HostDetails";
 
 const Host = () => {
   const [show, setShow] = useState<boolean>(false);
+  const { t } = useTranslation();
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
   };
@@ -83,14 +85,14 @@ const Host = () => {
     <div className="container mx-auto">
       <ResModal
         width={1000}
-        title="Host"
+        // title="Host"
         setShowModal={setShow}
         showModal={show}
       >
         <HostDetails />
       </ResModal>
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-20 font-500 text-gray">Users List</h1>
+        <h1 className="text-20 font-500 text-gray">{t("Host Lists")}</h1>
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
@@ -103,7 +105,7 @@ const Host = () => {
               className="bg-primary text-white font-500 "
               icon={<FilterOutlined />}
             >
-              Filter
+              {t("Filter")}
             </Button>
           </Dropdown>
         </div>

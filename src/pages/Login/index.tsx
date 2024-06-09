@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Col, Row } from "antd";
+import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import logo from "../../assets/Final Logo 2.png";
@@ -15,6 +16,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { authValidationSchema } from "../../schema/auth.schema";
 import { verifyToken } from "../../utils/verifyToken";
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation();
@@ -43,9 +45,11 @@ const Login = () => {
           <div className="w-[500px] mx-auto">
             <div className="bg-white px-4 rounded">
               <div className="text-center mt-6">
-                <h1 className="text-primary text-32 font-600">Welcome</h1>
+                <h1 className="text-primary text-32 font-600">
+                  {t("Welcome")}
+                </h1>
                 <p className="text-20 text-gray">
-                  Please sign in for a better experience
+                  {t("Please login for a better experience")}
                 </p>
               </div>
               <div className="mt-[20px]">
@@ -59,26 +63,26 @@ const Login = () => {
                     size="large"
                     type="email"
                     name="email"
-                    label="Email"
+                    label={t("Email")}
                     placeholder="Enter your email"
                   />
                   <ResInput
                     type="password"
                     size="large"
                     name="password"
-                    label="Password"
+                    label={t("Password")}
                     placeholder="Enter your password"
                   />
                   <NavLink to="/forgot-password">
                     <h5 className="text-18 text-gray text-end font-600 cursor-pointer">
-                      Forgot Password
+                      {t("Forgot Password")}
                     </h5>
                   </NavLink>
                   <Button
                     className="w-full mt-[30px] text-18 font-600 h-10 bg-primary text-white"
                     htmlType="submit"
                   >
-                    Sign In
+                    {t("Sign In")}
                   </Button>
                 </GuruForm>
               </div>

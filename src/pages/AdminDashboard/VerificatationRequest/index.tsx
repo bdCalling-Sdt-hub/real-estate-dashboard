@@ -3,12 +3,14 @@ import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, MenuProps } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { verificationData } from "../../../db";
 import VerificatonDetails from "./VerificationDetails";
 
 const VerificationRequest = () => {
+  const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
@@ -66,12 +68,12 @@ const VerificationRequest = () => {
     <div className="container mx-auto">
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-20 font-500 text-gray mb-1">
-          Verification Request
+          {t("Verification Request")}
         </h1>
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder="search user"
+            placeholder={t("search")}
             allowClear
             onSearch={onSearch}
           />
@@ -80,7 +82,7 @@ const VerificationRequest = () => {
               className="bg-primary text-white font-500 "
               icon={<FilterOutlined />}
             >
-              Filter
+              {t("Filter")}
             </Button>
           </Dropdown>
         </div>

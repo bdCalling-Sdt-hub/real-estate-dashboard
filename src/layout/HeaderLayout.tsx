@@ -14,9 +14,8 @@ import { useEffect } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 
 const HeaderLayout = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const changeLanguage = (lng: string) => {
-    console.log(lng);
     i18n.changeLanguage(lng);
   };
   const dispatch = useAppDispatch();
@@ -54,21 +53,22 @@ const HeaderLayout = () => {
           }}
         />
         <h1 className="text-white text-20">
-          {pathname
+          {/* {pathname
             .split(/[/ -]/)
             .map((part) => part.toUpperCase())
-            .join(" ")}
+            .join(" ")} */}
+          {t("Dashboard")}
         </h1>
       </div>
 
       <div className="flex items-center  gap-x-6">
         <Select
           onChange={changeLanguage}
-          defaultValue="arabic"
+          defaultValue="ar"
           style={{ width: 120 }}
           options={[
             {
-              value: "arabic",
+              value: "ar",
               label: (
                 <div className="flex gap-x-2">
                   <KW title="Kuwait" className="w-[20px]" />
@@ -77,7 +77,7 @@ const HeaderLayout = () => {
               ),
             },
             {
-              value: "english",
+              value: "en",
               label: (
                 <div className="flex gap-x-2">
                   <US title="United States" className="w-[20px]" />

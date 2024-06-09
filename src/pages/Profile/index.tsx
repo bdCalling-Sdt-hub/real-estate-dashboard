@@ -1,18 +1,22 @@
 import { Button } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MdEditSquare } from "react-icons/md";
 import FileUpload from "../../component/FileUpload";
 import ProfileForm from "../../component/ProfileForm";
 import UseImageUpload from "../../hooks/useImageUpload";
 import { useProfileQuery } from "../../redux/features/auth/authApi";
 const Profile = () => {
+  const { t } = useTranslation();
   const { imageUrl, setFile, imageFile } = UseImageUpload();
   const [toggleEdit, setToggleEdit] = useState<boolean>(true);
   const { data: profile } = useProfileQuery(undefined);
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-20 font-500 mb-2 text-gray">Personal Information</h1>
+      <h1 className="text-20 font-500 mb-2 text-gray">
+        {t("Personal Information")}
+      </h1>
       <div className="bg-white p-6">
         <div className="flex justify-end">
           <Button
@@ -21,7 +25,7 @@ const Profile = () => {
             icon={<MdEditSquare />}
             onClick={(prev) => setToggleEdit(!prev)}
           >
-            Edit
+            {t("Edit")}
           </Button>
         </div>
         <div className="flex items-center  gap-x-4 text-white ">

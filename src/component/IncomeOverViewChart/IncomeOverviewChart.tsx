@@ -1,4 +1,5 @@
 import { Col, DatePicker, Row, Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 import {
   Bar,
   BarChart,
@@ -91,6 +92,7 @@ const data = [
   },
 ];
 const IncomeOverviewChart = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <Row gutter={[16, 12]}>
@@ -98,7 +100,7 @@ const IncomeOverviewChart = () => {
           <div className="bg-white p-4">
             <div className="flex items-center justify-between">
               <h1 className="text-20 font-500 text-gray">
-                Total Income (Host)
+                {t("Total Income (Host)")}
               </h1>
               <DatePicker picker="month" />
             </div>
@@ -124,13 +126,13 @@ const IncomeOverviewChart = () => {
               <div className="flex items-center gap-x-2">
                 <div className="bg-primary h-[20px] w-[20px] rounded-full"></div>
                 <h1 className="text-primary text-18 font-500 ">
-                  Basic Host:($5,621)
+                  {t("Basic Host")}:($5,621)
                 </h1>
               </div>
               <div className="flex items-center gap-x-2">
                 <div className="bg-gray h-[20px] w-[20px] rounded-full"></div>
                 <h1 className="text-gray text-18 font-500 ">
-                  Super Host:($5,621)
+                  {t("Super Host")}:($5,621)
                 </h1>
               </div>
             </div>
@@ -140,7 +142,7 @@ const IncomeOverviewChart = () => {
           <div className="bg-white p-4">
             <div className="flex items-center justify-between">
               <h1 className="text-20 font-500 text-gray mb-4">
-                Income Statics(Percentage)
+                {t("Income Statics (Percentage)")}
               </h1>
               <DatePicker picker="month" />
             </div>

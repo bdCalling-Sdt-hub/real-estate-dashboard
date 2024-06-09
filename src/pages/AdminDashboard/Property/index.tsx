@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { propertyData } from "../../../db/propertyData";
@@ -8,6 +9,7 @@ import PropertyDetails from "./PropertyDetails";
 
 const Property = () => {
   const [show, setShow] = useState<boolean>(false);
+  const { t } = useTranslation();
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
   };
@@ -55,10 +57,12 @@ const Property = () => {
   ];
   return (
     <div className="container mx-auto h-80 my-auto">
-      <h1 className="text-20 mb-2 font-500 text-gray">Property Information</h1>
+      <h1 className="text-20 mb-2 font-500 text-gray">
+        {t("Property Information")}
+      </h1>
       <ResModal
         width={1000}
-        title="Booking Details"
+        title={t("Property Details")}
         setShowModal={setShow}
         showModal={show}
       >

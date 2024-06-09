@@ -1,7 +1,9 @@
-import { TSidebarItem, TUserPath } from "../types";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { TSidebarItem, TUserPath } from "../types";
 
-export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
+export const SidebarItemsGenerator = (items: TUserPath[], role: string) => {
+  const { t } = useTranslation();
   const sidebarItems = items.reduce((acc: TSidebarItem[], item) => {
     if (item.path && item.name) {
       acc.push({
@@ -9,7 +11,7 @@ export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
         icon: item.icon,
         label: (
           <NavLink className="font-500 text-16" to={`/${role}/${item.path}`}>
-            {item.name}
+            {t(item.name)}
           </NavLink>
         ),
       });
@@ -18,7 +20,7 @@ export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
     if (item.children) {
       acc.push({
         key: item.name as string,
-        label: <p className="font-500 text-16">{item.name}</p>,
+        label: <p className="font-500 text-16">{t(item.name as string)}</p>,
         icon: item?.icon,
         children: item.children.map((child) => {
           if (child.name) {
@@ -27,7 +29,7 @@ export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
               icon: child?.icon,
               label: (
                 <NavLink className="font-500" to={`/${role}/${child.path}`}>
-                  {child.name}
+                  {t(child.name)}
                 </NavLink>
               ),
             };

@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { baseApi } from "./api/baseApi";
@@ -15,9 +15,10 @@ import authSlice from "./features/auth/authSlice";
 import layoutSlice from "./features/layout/layoutSlice";
 import otpSlice from "./features/otp/otpSlice";
 
-import tableSlice from "./features/table/tableSlice";
-import notificationSlice from "./features/notification/notificationSlice";
 import branchSlice from "./features/branch/branchSlice";
+import localSlice from "./features/locals/localSlice";
+import notificationSlice from "./features/notification/notificationSlice";
+import tableSlice from "./features/table/tableSlice";
 
 const persistConfig = {
   key: "auth",
@@ -35,6 +36,7 @@ export const store = configureStore({
     table: tableSlice,
     notification: notificationSlice,
     branch: branchSlice,
+    lang: localSlice,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares({
