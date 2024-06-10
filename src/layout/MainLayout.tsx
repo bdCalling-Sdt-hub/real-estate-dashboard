@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
   const collapsed = useAppSelector((state) => state.layout.collapsed);
+  const { lang } = useAppSelector((state) => state.lang);
 
   return (
     <div>
@@ -24,7 +25,9 @@ const MainLayout = () => {
               <Content
                 style={{
                   backgroundColor: "#FEF4E6",
-                  paddingLeft: collapsed ? "110px" : "215px",
+                  ...(lang === "ar"
+                    ? { paddingRight: collapsed ? "110px" : "215px" }
+                    : { paddingLeft: collapsed ? "110px" : "215px" }),
                 }}
                 className={`responsive-content ${
                   !collapsed ? "collapsed" : ""

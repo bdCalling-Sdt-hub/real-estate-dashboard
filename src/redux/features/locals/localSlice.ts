@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  lang: "ar",
+  lang: localStorage.getItem("i18nextLng") ?? "ar",
 };
 const localSlice = createSlice({
   name: "layout",
   initialState,
   reducers: {
     setlang: (state) => {
-      const lang = localStorage.getItem("i18nextLng") ?? "ar";
-      state.lang = lang;
+      state.lang = localStorage.getItem("i18nextLng") ?? "ar";
     },
   },
 });

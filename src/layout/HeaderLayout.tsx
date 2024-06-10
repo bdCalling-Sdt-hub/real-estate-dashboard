@@ -12,13 +12,16 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 // import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { setlang } from "../redux/features/locals/localSlice";
 
 const HeaderLayout = () => {
   const { i18n, t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { lang } = useAppSelector((state) => state.lang);
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    dispatch(setlang());
   };
-  const dispatch = useAppDispatch();
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
   // const { data: pData } = useProfileQuery(undefined);
   // const User: TUser | null = useAppSelector(useCurrentUser);
@@ -38,7 +41,9 @@ const HeaderLayout = () => {
       <div
         className="flex items-center"
         style={{
-          marginLeft: collapsed ? "100px" : "200px",
+          ...(lang === "ar"
+            ? { marginRight: collapsed ? "100px" : "200px" }
+            : { marginLeft: collapsed ? "100px" : "200px" }),
         }}
       >
         <Button

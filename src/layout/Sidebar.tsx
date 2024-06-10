@@ -15,6 +15,7 @@ import { SidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 
 const Sidebar = () => {
   const location = useLocation();
+  const { lang } = useAppSelector((state) => state?.lang);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -40,8 +41,8 @@ const Sidebar = () => {
         overflow: "auto",
         position: "fixed",
         top: "0",
-        left: "0",
         backgroundColor: "#FBDDB0",
+        ...(lang === "ar" ? { right: 0 } : { left: 0 }),
       }}
     >
       <div

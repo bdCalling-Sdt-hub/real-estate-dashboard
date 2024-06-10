@@ -6,10 +6,13 @@ import { TUser, useCurrentUser } from "./redux/features/auth/authSlice";
 import { setNotification } from "./redux/features/notification/notificationSlice";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 // import PrivateRoute from "./router/PrivateRoutes";
+import { ConfigProvider } from "antd";
 import { socket } from "./socket";
 
 function App() {
   const dispatch = useAppDispatch();
+  const { lang } = useAppSelector((state) => state.lang);
+  console.log(lang);
   const user: TUser | null = useAppSelector(useCurrentUser);
   useEffect(() => {
     socket.connect();
@@ -29,7 +32,9 @@ function App() {
 
   return (
     // <PrivateRoute role={undefined}>
-    <MainLayout />
+    <ConfigProvider direction={lang === "ar" ? "rtl" : "ltr"}>
+      <MainLayout />
+    </ConfigProvider>
     // {/* </PrivateRoute> */}
   );
 }

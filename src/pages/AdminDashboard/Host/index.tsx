@@ -96,7 +96,7 @@ const Host = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder="search user"
+            placeholder={t("search")}
             allowClear
             onSearch={onSearch}
           />
