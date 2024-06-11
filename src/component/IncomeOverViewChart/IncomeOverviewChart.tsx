@@ -126,13 +126,13 @@ const IncomeOverviewChart = () => {
               <div className="flex items-center gap-x-2">
                 <div className="bg-primary h-[20px] w-[20px] rounded-full"></div>
                 <h1 className="text-primary text-18 font-500 ">
-                  {t("Basic Host")}:($5,621)
+                  {t("Silver Plan")}:($5,621)
                 </h1>
               </div>
               <div className="flex items-center gap-x-2">
                 <div className="bg-gray h-[20px] w-[20px] rounded-full"></div>
                 <h1 className="text-gray text-18 font-500 ">
-                  {t("Super Host")}:($5,621)
+                  {t("Gold Plan")}:($5,621)
                 </h1>
               </div>
             </div>

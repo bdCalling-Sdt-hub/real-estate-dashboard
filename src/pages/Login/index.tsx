@@ -46,10 +46,10 @@ const Login = () => {
             <div className="bg-white px-4 rounded">
               <div className="text-center mt-6">
                 <h1 className="text-primary text-32 font-600">
-                  {t("Welcome")}
+                  {t("Welcome!")}
                 </h1>
                 <p className="text-20 text-gray">
-                  {t("Please login for a better experience")}
+                  {t("Please login for a better experience!")}
                 </p>
               </div>
               <div className="mt-[20px]">

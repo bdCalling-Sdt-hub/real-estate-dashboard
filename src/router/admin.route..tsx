@@ -41,14 +41,14 @@ export const adminRoutes = [
   // },
 
   {
-    name: "Guest",
-    path: "guest",
+    name: "Tenants",
+    path: "Tenants",
     icon: <UserOutlined />,
     element: <Guest />,
   },
   {
-    name: "Host",
-    path: "host",
+    name: "Landlords",
+    path: "landlords",
     icon: <UserOutlined />,
     element: <Host />,
   },
@@ -65,14 +65,14 @@ export const adminRoutes = [
     element: <AdverTisement />,
   },
   {
-    name: "Booking",
-    path: "booking",
+    name: "Reservations",
+    path: "reservations",
     icon: <TbBrandBooking />,
     element: <Booking />,
   },
   {
-    name: "Property",
-    path: "property",
+    name: "Real Estate",
+    path: "realState",
     icon: <FaRegBuilding />,
     element: <Property />,
   },
@@ -120,7 +120,7 @@ export const adminRoutes = [
   // },
 
   {
-    name: "Setting",
+    name: "Settings",
     path: "setting",
     icon: <CiSettings />,
     element: <Setting />,
@@ -130,7 +130,7 @@ export const adminRoutes = [
     element: <Profile />,
   },
   {
-    path: "notification",
+    path: "notifications",
     element: <Notification />,
   },
   {

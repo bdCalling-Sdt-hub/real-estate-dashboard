@@ -85,7 +85,7 @@ const AdverTisement = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder="search property"
+            placeholder={t("search")}
             allowClear
             onSearch={onSearch}
           />

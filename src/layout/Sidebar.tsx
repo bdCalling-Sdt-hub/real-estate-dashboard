@@ -49,7 +49,6 @@ const Sidebar = () => {
         style={{
           color: "white",
           display: "flex",
-
           justifyContent: "center",
           alignItems: "center",
         }}

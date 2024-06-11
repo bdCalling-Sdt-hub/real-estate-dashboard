@@ -5,7 +5,7 @@ export const dashboardBookingColumn = [
     key: "name",
   },
   {
-    title: "Customer Email",
+    title: "Email",
     dataIndex: "email",
     key: "email",
   },

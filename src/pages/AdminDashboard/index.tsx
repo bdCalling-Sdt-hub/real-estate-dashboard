@@ -54,10 +54,10 @@ const AdminDashboard = () => {
         </Col>
         <Col span={8}>
           <div className="bg-white p-4 mb-4 rounded">
-            <h1 className="text-20 font-500">{t("Top Agent")}</h1>
+            <h1 className="text-20 font-500">{t("Top Users")}</h1>
             <div className="flex justify-between text-18 mt-4">
-              <p>{t("Agent Name")}</p>
-              <p>{t("Total Rent")}</p>
+              <p>{t("User Name")}</p>
+              <p>{t("Total Rents")}</p>
               <p>{t("Profit")}</p>
             </div>
             <Divider className="mt-2" />
@@ -75,12 +75,12 @@ const AdminDashboard = () => {
             <div className="flex justify-between ">
               <div className="flex  items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-primary  "></div>
-                <h1 className="text-16 font-500">{t("Guest User")} (%40)</h1>
+                <h1 className="text-16 font-500">{t("Tenants")} (%40)</h1>
               </div>
 
               <div className="flex  items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-[#925800]  "></div>
-                <h1 className="text-16 font-500">{t("Host User")} (%40)</h1>
+                <h1 className="text-16 font-500">{t("Landlords")} (%40)</h1>
               </div>
             </div>
           </div>

@@ -17,8 +17,8 @@ const Setting = () => {
       <Row gutter={[0, 30]}>
         <Col span={24}>
           <div className="flex items-center justify-between text-20  text-black">
-            <p className="">{t("Notification")}</p>
-            <NavLink to={`/${User?.role}/notification`}>
+            <p className="">{t("Notifications")}</p>
+            <NavLink to={`/${User?.role}/notifications`}>
               <FaArrowRightToBracket cursor="pointer" />
             </NavLink>
           </div>
