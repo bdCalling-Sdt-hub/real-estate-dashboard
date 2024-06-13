@@ -23,38 +23,42 @@ const Host = () => {
 
   const column = [
     {
-      title: "name",
+      title: t("Name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Joinning Date",
+      title: t("Joining Date"),
       dataIndex: "date",
       key: "date",
     },
     {
-      title: "Email",
+      title: t("Email"),
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "Contact",
+      title: t("Contact No"),
       dataIndex: "number",
       key: "number",
     },
     {
-      title: "Address",
+      title: t("Address"),
       dataIndex: "address",
       key: "address",
     },
     {
-      title: "User Type",
+      title: t("User Type"),
       dataIndex: "role",
       key: "role",
     },
     {
-      title: "action",
-
+      title: t("Account Status"),
+      dataIndex: "status",
+      key: "status", // Corrected the key to "status"
+    },
+    {
+      title: t("Action"),
       render: (data: any, index: number) => {
         console.log(data, index);
         return (
@@ -74,11 +78,11 @@ const Host = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <p>Verified</p>,
+      label: <p>{t("Verified")}</p>,
     },
     {
       key: "2",
-      label: <p>Unverified</p>,
+      label: <p>{t("Not Verified")}</p>,
     },
   ];
   return (
@@ -92,7 +96,7 @@ const Host = () => {
         <HostDetails />
       </ResModal>
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-20 font-500 text-gray">{t("Host Lists")}</h1>
+        <h1 className="text-20 font-500 text-gray">{t("Landlords List")}</h1>
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}

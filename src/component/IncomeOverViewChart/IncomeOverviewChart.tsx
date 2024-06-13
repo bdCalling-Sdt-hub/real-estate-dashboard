@@ -142,7 +142,7 @@ const IncomeOverviewChart = () => {
           <div className="bg-white p-4">
             <div className="flex items-center justify-between">
               <h1 className="text-20 font-500 text-gray mb-4">
-                {t("Income Statics (Percentage)")}
+                {t("Income Statistics (Percentage)")}
               </h1>
               <DatePicker picker="month" />
             </div>

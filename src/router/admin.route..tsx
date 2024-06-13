@@ -87,7 +87,7 @@ export const adminRoutes = [
         element: <IncomeOverview />,
       },
       {
-        name: "Transaction",
+        name: "Transactions",
         path: "income/transaction",
         icon: <TransactionOutlined />,
         element: <IncomeHistory />,

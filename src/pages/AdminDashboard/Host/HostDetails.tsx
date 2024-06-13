@@ -6,7 +6,7 @@ const HostDetails = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <h1 className="text-30 font-500">{t("Host Information")}</h1>
+      <h1 className="text-30 font-500">{t("Landlords Information")}</h1>
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">

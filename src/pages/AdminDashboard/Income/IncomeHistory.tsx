@@ -8,53 +8,55 @@ const IncomeHistory = () => {
   const { t } = useTranslation();
   const column1 = [
     {
-      title: "TransactionId",
+      title: t("TXN ID"),
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Date",
+      title: t("Date"),
       dataIndex: "date",
       key: "date",
     },
     {
-      title: "Amount",
+      title: t("Amount"),
       dataIndex: "amount",
       key: "amount",
     },
     {
-      title: "Sender",
+      title: t("User"),
       dataIndex: "sender",
       key: "sender",
     },
   ];
+
   const column2 = [
     {
-      title: "TransactionId",
+      title: t("TXN ID"),
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Date",
+      title: t("Date"),
       dataIndex: "date",
       key: "date",
     },
     {
-      title: "Amount",
+      title: t("Amount"),
       dataIndex: "amount",
       key: "amount",
     },
     {
-      title: "Sender",
+      title: t("User"),
       dataIndex: "sender",
       key: "sender",
     },
     {
-      title: "Package",
+      title: t("Package"),
       dataIndex: "package",
       key: "package",
     },
   ];
+
   return (
     <div className="container mx-auto">
       <Row gutter={16}>

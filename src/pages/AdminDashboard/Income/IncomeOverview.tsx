@@ -91,7 +91,7 @@ const IncomeOverview = () => {
           <div className="mt-4 bg-white pt-6 pe-6 rounded ">
             <div className="flex justify-between mb-4">
               <h1 className="font-500 text-20 text-gray ps-5 ">
-                {t("Income Statics (Packages)")}
+                {t("Income Statistics (Packages)")}
               </h1>
               <DatePicker picker="month" />
             </div>

@@ -74,11 +74,11 @@ const User = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <p>Guest</p>,
+      label: <p>Tenant</p>,
     },
     {
       key: "2",
-      label: <p>Host</p>,
+      label: <p>Landlord</p>,
     },
   ];
   return (

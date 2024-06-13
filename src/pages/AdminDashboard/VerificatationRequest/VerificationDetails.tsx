@@ -40,7 +40,7 @@ const VerificatonDetails = () => {
           <h1 className="text-20 font-500"></h1>
           <div className="mt-1 text-gray">
             <p>{t("Name")}: Mr Opu Khan</p>
-            <p className="my-1">{t("User Type")}: Guest</p>
+            <p className="my-1">{t("User Type")}: Tenant</p>
             <p>{t("Joining Date")}: August 24 2024</p>
           </div>
         </div>

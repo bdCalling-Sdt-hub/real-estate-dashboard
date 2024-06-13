@@ -13,35 +13,36 @@ const Booking = () => {
   const handleToggleModal = () => {
     setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
   };
+
   const column = [
     {
-      title: "ID",
+      title: t("ID"),
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Date",
+      title: t("Date"),
       dataIndex: "date",
       key: "date",
     },
     {
-      title: "User Name",
+      title: t("User Name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Proerty",
+      title: t("Property"),
       dataIndex: "property",
       key: "property",
     },
     {
-      title: "Owner Name",
+      title: t("Landlord Name"),
       dataIndex: "owner",
       key: "owner",
     },
     {
-      title: "action",
-
+      title: t("Action"),
+      key: "action",
       render: (data: any, index: number) => {
         console.log(data, index);
         return (
@@ -55,14 +56,17 @@ const Booking = () => {
       },
     },
   ];
+
   return (
     <div className="container mx-auto h-80 my-auto">
-      <h1 className="mb-4 font-500 text-20 text-gray">
-        {t("Booking Details")}
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="mb-4 font-500 text-20 text-gray">
+          {t("Reservations Details")}
+        </h1>
+      </div>
       <ResModal
         width={1000}
-        title={t("Booking Details")}
+        title={t("Reservations Details")}
         setShowModal={setShow}
         showModal={show}
       >

@@ -34,7 +34,7 @@ const PropertyDetails = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-20 font-500">{t("Host Information")}</h1>
+          <h1 className="text-20 font-500">{t("Landlords Information")}</h1>
           <div className="mt-1 text-gray flex flex-col gap-y-1">
             <p>{t("Name")}:Franklin</p>
             <p>{t("Email")}:ownber@gmail.com</p>

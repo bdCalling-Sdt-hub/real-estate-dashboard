@@ -32,7 +32,7 @@ const BookingDetails = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-20 font-500">{t("Host Information")}</h1>
+          <h1 className="text-20 font-500">{t("Landlords Information")}</h1>
           <div className="mt-1 text-gray">
             <p>{t("Name")}:Franklin</p>
             <p className="mt-1">{t("Contact")}: +01254256426</p>

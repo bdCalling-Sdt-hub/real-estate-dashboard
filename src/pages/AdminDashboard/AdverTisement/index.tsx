@@ -22,45 +22,41 @@ const AdverTisement = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <p>Land</p>,
+      label: <p>{t("Residential")}</p>,
     },
     {
       key: "2",
-      label: <p>Home</p>,
-    },
-    {
-      key: "3",
-      label: <p>Farm</p>,
+      label: <p>{t("Commercial")}</p>,
     },
   ];
   const column = [
     {
-      title: "Property Name",
+      title: t("Ad ID"),
       dataIndex: "propertyName",
       key: "propertyName",
     },
     {
-      title: "Owner Name",
+      title: t("Advertiser"),
       dataIndex: "ownerName",
       key: "ownerName",
     },
     {
-      title: "Category",
+      title: t("Category"),
       dataIndex: "category",
       key: "category",
     },
     {
-      title: "Start Date",
+      title: t("Start Date"),
       dataIndex: "startDate",
       key: "startDate",
     },
     {
-      title: "End Date",
+      title: t("End Date"),
       dataIndex: "endDate",
       key: "endDate",
     },
     {
-      title: "Action",
+      title: t("Action"),
       key: "action",
       render: (data: any, index: number) => {
         console.log(data, index);
@@ -85,7 +81,7 @@ const AdverTisement = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder={t("search")}
+            placeholder={t("Search")}
             allowClear
             onSearch={onSearch}
           />

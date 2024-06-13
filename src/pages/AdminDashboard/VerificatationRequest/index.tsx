@@ -17,11 +17,11 @@ const VerificationRequest = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <p>Tenant</p>,
+      label: <p>{t("Tenant")}</p>,
     },
     {
       key: "2",
-      label: <p>Landlord</p>,
+      label: <p>{t("Landlord")}</p>,
     },
   ];
   const handleToggleModal = () => {
@@ -29,28 +29,27 @@ const VerificationRequest = () => {
   };
   const column = [
     {
-      title: "name",
+      title: t("Name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Request Date",
+      title: t("Request Date"),
       dataIndex: "date",
       key: "date",
     },
     {
-      title: "Email",
+      title: t("Email"),
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "User Type",
+      title: t("User Type"),
       dataIndex: "role",
       key: "role",
     },
     {
-      title: "action",
-
+      title: t("Action"),
       render: (data: any, index: number) => {
         console.log(data, index);
         return (
@@ -64,16 +63,17 @@ const VerificationRequest = () => {
       },
     },
   ];
+
   return (
     <div className="container mx-auto">
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-20 font-500 text-gray mb-1">
-          {t("Verification Request")}
+          {t("Verification Requests")}
         </h1>
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder={t("search")}
+            placeholder={t("Search")}
             allowClear
             onSearch={onSearch}
           />

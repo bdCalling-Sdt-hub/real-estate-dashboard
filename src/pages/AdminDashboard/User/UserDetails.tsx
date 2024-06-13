@@ -1,10 +1,12 @@
 import { Divider } from "antd";
+import { useTranslation } from "react-i18next";
 import { IoLocateOutline } from "react-icons/io5";
 import img from "./../../../assets/person.jpg";
 const UserDetails = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <h1 className="text-30 font-500">Guest Information</h1>
+      <h1 className="text-30 font-500">{t("Tenant Information")}</h1>
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">

@@ -3,7 +3,6 @@ import { Col, DatePicker, Divider, Row, Space } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { dashboardBookingColumn } from "../../Columns";
 import AdminDashboardUserRation from "../../component/AdminDashboardUserRatio/AdminDashboardUserRation";
 import AgentCard from "../../component/AgentCard/AgentCard";
 import BookingChart from "../../component/BookingChart/BookingChart";
@@ -14,6 +13,29 @@ import { TCommonTheme } from "../../themes";
 import style from "./dashboard.module.css";
 const AdminDashboard = () => {
   const { t } = useTranslation();
+  const dashboardBookingColumn = [
+    {
+      title: t("User Name"),
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: t("Email"),
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: t("Joining Date"),
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: t("Type"),
+      dataIndex: "type",
+      key: "type",
+    },
+  ];
+
   const [year, setYear] = useState(dayjs().format("YYYY"));
   console.log(year);
   return (
@@ -57,7 +79,7 @@ const AdminDashboard = () => {
             <h1 className="text-20 font-500">{t("Top Users")}</h1>
             <div className="flex justify-between text-18 mt-4">
               <p>{t("User Name")}</p>
-              <p>{t("Total Rents")}</p>
+              <p>{t("Rents")}</p>
               <p>{t("Profit")}</p>
             </div>
             <Divider className="mt-2" />

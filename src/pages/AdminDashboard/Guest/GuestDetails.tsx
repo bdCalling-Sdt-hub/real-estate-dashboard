@@ -6,7 +6,7 @@ const GuestDetails = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <h1 className="text-30 font-500">{t("Guest Information")}</h1>
+      <h1 className="text-30 font-500">{t("Tenant Information")}</h1>
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">
