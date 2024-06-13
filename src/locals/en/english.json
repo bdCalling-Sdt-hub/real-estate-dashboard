@@ -81,6 +81,7 @@
   "Real estate information": "Real estate information",
   "Property Name": "Property Name",
   "Landlord Name": "Landlord Name",
+
   "Income Statistics (Percentage)": "Income Statistics (Percentage)",
   "Income Statistics (Packages)": "Income Statistics (Packages)",
   "Package": "Package",
@@ -135,6 +136,6 @@
   "Confirm Password": "Confirm Password",
   "Verification Requests": "Verification Requests",
   "Verification": "Verification",
-  "Advertisement": "Advertisements",
+  "Advertisements": "Advertisements",
   "Search": "search"
 }

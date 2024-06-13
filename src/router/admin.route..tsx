@@ -59,7 +59,7 @@ export const adminRoutes = [
     element: <VerificationRequest />,
   },
   {
-    name: "Advertisement",
+    name: "Advertisements",
     path: "advertisement",
     icon: <RiAdvertisementLine />,
     element: <AdverTisement />,
