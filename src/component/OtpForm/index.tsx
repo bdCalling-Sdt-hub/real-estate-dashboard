@@ -55,7 +55,7 @@ const OtpForm = ({ type }: IotpForm) => {
     try {
       const formatedOtp = otp.join("");
       const res = await verifyOtp({ otp: formatedOtp, token }).unwrap();
-      toast.success("Otp verified successfully", {
+      toast.success(res?.data?.message, {
         id: toastId,
         duration: 2000,
       });

@@ -19,8 +19,8 @@ const NewPassword = () => {
   const onSubmit = async (data: any) => {
     const toastId = toast.loading("Password resetting....");
     try {
-      await resetPassword(data).unwrap();
-      toast.success("Password reseted successfully", {
+      const res = await resetPassword(data).unwrap();
+      toast.success(res?.data?.message, {
         id: toastId,
         duration: 200,
       });

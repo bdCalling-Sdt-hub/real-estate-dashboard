@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     const toastId = toast.loading("Sending Otp..");
     try {
       const res = await forgotPassword(data).unwrap();
-      toast.success("An otp successfully sent your email", {
+      toast.success(res?.data?.message, {
         id: toastId,
         duration: 2000,
       });

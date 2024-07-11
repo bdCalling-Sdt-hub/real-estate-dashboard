@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuOutlined } from "@ant-design/icons";
-import { Badge, Button, Select } from "antd";
+import { Avatar, Badge, Button, Select } from "antd";
 import { KW, US } from "country-flag-icons/react/3x2";
 import { useTranslation } from "react-i18next";
 import { IoIosNotifications } from "react-icons/io";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
 import { setCollapsed } from "../redux/features/layout/layoutSlice";
 import { useGetMyNotificationQuery } from "../redux/features/notification/notificationApi";
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { setlang } from "../redux/features/locals/localSlice";
+import { useProfileQuery } from "../redux/features/auth/authApi";
 
 const HeaderLayout = () => {
   const { i18n, t } = useTranslation();
@@ -22,6 +23,7 @@ const HeaderLayout = () => {
     i18n.changeLanguage(lng);
     dispatch(setlang());
   };
+  const { data: profile } = useProfileQuery(undefined);
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
   // const { data: pData } = useProfileQuery(undefined);
   // const User: TUser | null = useAppSelector(useCurrentUser);
@@ -34,7 +36,6 @@ const HeaderLayout = () => {
   useEffect(() => {
     toast.info(notification?.message);
   }, [notification]);
-  const { pathname } = useLocation();
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   return (
     <div className="flex justify-between">
@@ -99,7 +100,14 @@ const HeaderLayout = () => {
         </Badge>
 
         <NavLink to={`/${User?.role}/profile`}>
-          <FaRegCircleUser color="white" size={25} />
+          {profile?.data?.image ? (
+            <Avatar
+              size={45}
+              src={<img src={profile?.data?.image} alt="avatar" />}
+            />
+          ) : (
+            <FaRegCircleUser color="white" size={25} />
+          )}
         </NavLink>
       </div>
     </div>

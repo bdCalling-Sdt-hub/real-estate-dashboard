@@ -137,5 +137,9 @@
   "Verification Requests": "Verification Requests",
   "Verification": "Verification",
   "Advertisements": "Advertisements",
-  "Search": "search"
+  "Search": "search",
+  "Close": "close",
+  "month": "month",
+  "unverified": "unverified",
+  "verified": "verified"
 }

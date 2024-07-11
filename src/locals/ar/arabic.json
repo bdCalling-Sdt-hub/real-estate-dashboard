@@ -147,5 +147,9 @@
   "Advertisements": "إعلانات",
   "Booking": "الحجز",
   "Property": "العقار",
-  "Transaction": "عملية"
+  "Transaction": "عملية",
+  "Close": "يغلق",
+  "month": "شهر",
+  "unverified":"غير مُتحقق",
+  "verified":"مُتحقق"
 }

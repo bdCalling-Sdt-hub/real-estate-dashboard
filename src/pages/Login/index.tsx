@@ -16,15 +16,18 @@ import { useAppDispatch } from "../../redux/hooks";
 import { authValidationSchema } from "../../schema/auth.schema";
 import { verifyToken } from "../../utils/verifyToken";
 const Login = () => {
+  // const [LoginFn] = useLoginMutation()
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation();
   const onSubmit = async (data: any) => {
+    // const res = await LoginFn()
     const toastId = toast.loading("Logging in..");
     // navigate("/dashboard");
     try {
       const res: any = await login(data).unwrap();
+      console.log(res);
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 2000 });

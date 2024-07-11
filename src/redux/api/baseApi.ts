@@ -11,20 +11,22 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import { tagTypesList } from "../../types/tagTypes";
-
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://103.145.138.74:5000/api/v1",
+  baseUrl: "http://192.168.10.14:9005/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const otpToken = sessionStorage.getItem("token");
 
     const token = (getState() as RootState).auth.token;
-
+    const language = localStorage.getItem("i18nextLng");
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
     if (otpToken) {
       headers.set("token", otpToken);
+    }
+    if (language) {
+      headers.set("Accept-Language", language);
     }
 
     return headers;
@@ -49,7 +51,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     console.log("Sending refresh token");
 
     const res = await fetch(
-      "http://103.145.138.78:5000/api/v1/auth/refresh-token",
+      "http://192.168.10.14:9005/api/v1/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",

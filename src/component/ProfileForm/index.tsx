@@ -17,18 +17,18 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
   const [updateProfile] = useUpdateProfileMutation();
   const defaultValues = {
     name: ProfileData?.data?.name,
+    phoneNumber: ProfileData?.data?.phoneNumber,
   };
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => { 
     const toastId = toast.loading("Updating profile...");
-
     try {
       const formData = new FormData();
       if (imageFile) {
-        formData.append("file", imageFile);
+        formData.append("image", imageFile);
       }
       formData.append("data", JSON.stringify(data));
       const res = await updateProfile(formData).unwrap();
-      toast.success("Profile updated successfully", {
+      toast.success(res?.message, {
         id: toastId,
         duration: 2000,
       });
@@ -57,8 +57,8 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
         labelColor="#FD8533"
         label={t("Phone Number")}
         type="number"
-        name="name"
-        placeholder="your name"
+        name="phoneNumber"
+        placeholder="your phone number"
         size="large"
       />
 

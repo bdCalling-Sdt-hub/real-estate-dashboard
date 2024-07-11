@@ -8,7 +8,9 @@ const AboutUs = () => {
   const { t } = useTranslation();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const onSubmit = async () => {};
+  const onSubmit = async () => {
+    console.log(content);
+  };
   return (
     <div className="container mx-auto">
       <h1 className="text-20 text-gray font-500 mb-2">{t("About Us")}</h1>

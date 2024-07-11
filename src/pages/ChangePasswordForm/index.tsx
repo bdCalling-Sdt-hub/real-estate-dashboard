@@ -33,7 +33,7 @@ const ChangePasswordFrom = () => {
     const toastId = toast.loading("Changing....");
     try {
       const res: any = await changePassword(data).unwrap();
-      toast.success("Password changed successfully", {
+      toast.success(res?.data?.message, {
         id: toastId,
         duration: 2000,
       });
