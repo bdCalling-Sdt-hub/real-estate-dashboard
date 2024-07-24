@@ -101,8 +101,7 @@ const Property = () => {
       },
     },
   ];
-
-  // console.log("--------------------->", query);
+ 
   return (
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center">

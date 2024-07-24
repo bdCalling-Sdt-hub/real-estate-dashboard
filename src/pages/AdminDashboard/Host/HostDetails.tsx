@@ -5,8 +5,7 @@ import { IoLocateOutline } from "react-icons/io5";
 import moment from "moment";
 import { NumberFormat } from "../../../utils/Format";
 const HostDetails = ({ modalData }: { modalData: any }) => {
-  const { t } = useTranslation();
-  console.log(modalData);
+  const { t } = useTranslation(); 
   return (
     <div>
       <h1 className="text-30 font-500">{t("Landlords Information")}</h1>

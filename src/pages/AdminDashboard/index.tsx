@@ -36,8 +36,7 @@ const AdminDashboard = () => {
     },
   ];
 
-  const [year, setYear] = useState(dayjs().format("YYYY"));
-  console.log(year);
+  const [year, setYear] = useState(dayjs().format("YYYY")); 
   return (
     <div className="container mx-auto">
       <Row gutter={[16, 16]}>

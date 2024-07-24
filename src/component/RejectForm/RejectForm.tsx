@@ -12,13 +12,11 @@ const RejectForm = ({ id }: { id: string }) => {
   const [rejectFn] = useRejectIdVerificationMutation();
   const { t } = useTranslation();
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // console.log(data)
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => { 
 
     toast.loading("rejecting...", { id: "rejectId" });
     try {
-      const res = await rejectFn({ id, body: data }).unwrap();
-      console.log(res);
+      const res = await rejectFn({ id, body: data }).unwrap(); 
       toast.success(res?.message, { id: "rejectId" });
     } catch (error) {
       ErrorResponse(error, "rejectId");

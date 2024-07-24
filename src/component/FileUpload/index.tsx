@@ -38,8 +38,7 @@ const FileUpload = ({
         Upload
       </div>
     </button>
-  );
-  // console.log("--------------------->>>>", imageFile);
+  ); 
   return (
     <ConfigProvider theme={multiUpload}>
       <Upload {...props}>

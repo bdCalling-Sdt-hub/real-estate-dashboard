@@ -5,7 +5,7 @@ import { NumberFormat, priceFormat } from "../../../utils/Format";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PropertyDetails = ({ modalData }: { modalData: any }) => {
   const { t } = useTranslation();
-  console.log(modalData);
+  
   return (
     <div>
       <h1 className="text-30 font-500">{t("Property Information")}</h1>

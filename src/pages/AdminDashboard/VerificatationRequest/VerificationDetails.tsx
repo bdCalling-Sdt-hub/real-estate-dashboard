@@ -32,8 +32,7 @@ const VerificatonDetails = ({
       const res: any = await updateUserFn({
         id,
         body: { verificationRequest: "accepted", isVerified: true },
-      }).unwrap();
-      console.log(res);
+      }).unwrap(); 
       toast.success(res.message, { id: "accept" });
       if (res.success) {
         setShow((prev: any) => !prev);

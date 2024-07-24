@@ -44,8 +44,7 @@ const ChangePasswordFrom = () => {
   const handleForgotPassword = async () => {
     const toastId = toast.loading("Sending Otp");
     try {
-      const res = await forgotPassword(profile?.data).unwrap();
-      console.log(res);
+      const res = await forgotPassword(profile?.data).unwrap(); 
       toast.success("An otp sent to your email address", {
         id: toastId,
         duration: 2000,

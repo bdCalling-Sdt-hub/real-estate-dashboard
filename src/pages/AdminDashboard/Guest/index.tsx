@@ -113,8 +113,7 @@ const Guest = () => {
       title: t("Contact No"),
       dataIndex: "phoneNumber",
       key: "number",
-      render: (data: any) => {
-        // console.log(data)
+      render: (data: any) => { 
         return data ? NumberFormat(data) : data;
       },
     },

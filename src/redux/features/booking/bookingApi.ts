@@ -12,8 +12,7 @@ const bookingApi = baseApi.injectEndpoints({
         params: query,
       }),
       providesTags: [tagTypes.booking],
-      // transformResponse: (response: TResponseRedux<any>) => {
-      //   console.log("response", response);
+      // transformResponse: (response: TResponseRedux<any>) => { 
       //   return {
       //     data: response.data,
       //     meta: response.meta,

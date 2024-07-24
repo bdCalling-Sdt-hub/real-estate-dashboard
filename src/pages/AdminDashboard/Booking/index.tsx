@@ -80,8 +80,7 @@ const Booking = () => {
       title: t("Action"),
       key: "action",
       render: (data: any) => {
-        setModalData(data);
-        // console.log(data, index);
+        setModalData(data); 
         return (
           <div>
             <EyeOutlined

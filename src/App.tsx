@@ -11,14 +11,12 @@ import { socket } from "./socket";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { lang } = useAppSelector((state) => state.lang);
-  console.log(lang);
+  const { lang } = useAppSelector((state) => state.lang); 
   const user: TUser | null = useAppSelector(useCurrentUser);
   useEffect(() => {
     socket.connect();
     const handleNotificationEvent = (data: any) => {
-      dispatch(setNotification(data));
-      console.log(data);
+      dispatch(setNotification(data)); 
     };
 
     socket.on(user?.userId as string, handleNotificationEvent);

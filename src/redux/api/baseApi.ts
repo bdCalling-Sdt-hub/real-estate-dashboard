@@ -38,8 +38,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
-  let result = await baseQuery(args, api, extraOptions);
-  console.log(result);
+  let result = await baseQuery(args, api, extraOptions); 
   if (result?.error?.status === 404) {
     toast.error((result.error.data as any).message);
   }
@@ -47,8 +46,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     toast.error((result.error.data as any).message);
   }
   if (result?.error?.status === 401) {
-    //* Send Refresh
-    console.log("Sending refresh token");
+    //* Send Refresh 
 
     const res = await fetch(
       "http://192.168.10.14:9005/api/v1/auth/refresh-token",
@@ -58,8 +56,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       }
     );
 
-    const data = await res.json();
-    console.log("data", data);
+    const data = await res.json(); 
     if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
 
