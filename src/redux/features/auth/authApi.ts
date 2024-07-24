@@ -62,7 +62,7 @@ const authApi = baseApi.injectEndpoints({
     }),
     getAllUser: builder.query({
       query: (query) => ({
-        url: "/users/all",
+        url: "/users",
         method: "GET",
         params: query,
       }),
@@ -71,6 +71,15 @@ const authApi = baseApi.injectEndpoints({
     updateUser: builder.mutation({
       query: (data) => ({
         url: `/users/update/${data?.id}`,
+        method: "PATCH",
+        body: data.body,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+
+    rejectIdVerification: builder.mutation({
+      query: (data) => ({
+        url: `/users/verification-request-reject/${data?.id}`,
         method: "PATCH",
         body: data.body,
       }),
@@ -89,4 +98,5 @@ export const {
   useUpdateProfileMutation,
   useUpdateUserMutation,
   useGetAllUserQuery,
+  useRejectIdVerificationMutation,
 } = authApi;

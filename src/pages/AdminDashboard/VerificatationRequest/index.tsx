@@ -1,43 +1,99 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, MenuProps } from "antd";
-import { SearchProps } from "antd/es/input";
-import { useState } from "react";
+import { Button, Dropdown, Input, Menu } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
-import { verificationData } from "../../../db";
 import VerificatonDetails from "./VerificationDetails";
+import {
+  useGetAllUserQuery, 
+} from "../../../redux/features/auth/authApi"; 
 
 const VerificationRequest = () => {
-  const { t } = useTranslation();
+  const query: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    console.log(info?.source, value);
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: <p>{t("Tenant")}</p>,
-    },
-    {
-      key: "2",
-      label: <p>{t("Landlord")}</p>,
-    },
-  ];
-  const handleToggleModal = () => {
-    setShow((prev: boolean) => !prev);
+  const [search, setSearch] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [filter, SetFilter] = useState<string | null>(null);
+
+
+  const [verificationData, setVerificationData] = useState([]);
+  const { t } = useTranslation();
+
+  query["limit"] = limit;
+  query["page"] = page;
+  query["searchTerm"] = search;
+  query["verificationRequest"] = "send";
+
+  if (filter) {
+    query["role"] = filter;
+  }
+
+  // if (isVerified === true || isVerified === false) {
+  //   query["isVerified"] = isVerified;
+  // }
+
+  const { data: data, isSuccess } = useGetAllUserQuery({ ...query });
+
+  const [modalData, setModalData] = useState({});
+
+  useEffect(() => {
+    if (isSuccess) {
+      setVerificationData(data?.data?.data);
+    }
+  }, [isSuccess, data]);
+
+  const handleToggleModal = (data: any) => {
+    setModalData(data);
+    setShow((prevShow) => !prevShow);
   };
+
+  const onPaginationChange = (page: any, pageSize: any) => {
+    setPage(page);
+    setLimit(pageSize);
+  };
+
+  //  const handelToBlock = async (id: string) => {
+  //    toast.loading("Blocking...", { id: "block", duration: 2000 });
+  //    try {
+  //      const res: any = await updateUserFn({
+  //        id,
+  //        body: { status: "blocked" },
+  //      }).unwrap();
+
+  //      toast.success(res.message, { id: "block", duration: 2000 });
+  //    } catch (error) {
+  //      ErrorResponse(error, "block");
+  //    }
+  //  };
+
+  //  const handelToUnBlock = async (id: string) => {
+  //    toast.loading("Blocking...", { id: "active", duration: 2000 });
+  //    try {
+  //      const res: any = await updateUserFn({
+  //        id,
+  //        body: { status: "active" },
+  //      }).unwrap();
+
+  //      toast.success(res.message, { id: "active", duration: 2000 });
+  //    } catch (error) {
+  //      ErrorResponse(error, "active");
+  //    }
+  //  };
+
   const column = [
     {
       title: t("Name"),
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: t("Request Date"),
-      dataIndex: "date",
-      key: "date",
-    },
+    // {
+    //   title: t("Request Date"),
+    //   dataIndex: "date",
+    //   key: "date",
+    // },
     {
       title: t("Email"),
       dataIndex: "email",
@@ -47,16 +103,18 @@ const VerificationRequest = () => {
       title: t("User Type"),
       dataIndex: "role",
       key: "role",
+      render: (data: any) => {
+        return data === "landlord" ? t("Landlord") : t("Tenant");
+      },
     },
     {
       title: t("Action"),
-      render: (data: any, index: number) => {
-        console.log(data, index);
+      render: (data: any) => {
         return (
           <div className="flex items-center gap-x-2">
             <EyeOutlined
               className="text-18 cursor-pointer"
-              onClick={handleToggleModal}
+              onClick={() => handleToggleModal(data)}
             />
           </div>
         );
@@ -75,9 +133,26 @@ const VerificationRequest = () => {
             style={{ width: 304 }}
             placeholder={t("Search")}
             allowClear
-            onSearch={onSearch}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <Dropdown menu={{ items }} placement="bottomLeft">
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item
+                  className={`${filter === "landlord" && "bg-primary"}`}
+                  onClick={() => SetFilter("landlord")}
+                >
+                  {t("Landlord")}
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => SetFilter("user")}
+                  className={`${filter === "user" && "bg-primary"}`}
+                >
+                  {t("Tenant")}
+                </Menu.Item>
+              </Menu>
+            }
+          >
             <Button
               className="bg-primary text-white font-500 "
               icon={<FilterOutlined />}
@@ -93,10 +168,19 @@ const VerificationRequest = () => {
         width={1000}
         title="Verification Information"
       >
-        <VerificatonDetails />
+        <VerificatonDetails modalData={modalData} setShow={setShow} />
       </ResModal>
 
-      <ResTable column={column} data={verificationData} />
+      <ResTable
+        column={column}
+        data={verificationData}
+        pagination={{
+          total: data?.data?.meta?.total || 0,
+          pageSize: limit || 10,
+          onChange: onPaginationChange,
+          showSizeChanger: true,
+        }}
+      />
     </div>
   );
 };

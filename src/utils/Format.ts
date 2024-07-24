@@ -47,6 +47,25 @@ export const NumberFormat = (phoneNumber: string): string => {
     .join("");
 };
 
+export const BankNumberFormat = (Number: string): string => {
+  const len = localStorage.getItem("i18nextLng");
+  if (!Number) {
+    return "";
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const maskedNumber: any = Number.slice(-4).padStart(Number.length, "*");
+  const formattedNumber = maskedNumber.match(/.{1,4}/g).join(" ");
+
+  return formattedNumber
+    .split("")
+    .map((digit: string | number) =>
+      len === "en"
+        ? westernToEnglishDigits[digit] || digit
+        : westernToKuwaitiDigits[digit] || digit
+    )
+    .join("");
+};
+
 // export const priceFormat = (price: number) => {
 //   const len = localStorage.getItem("i18nextLng");
 //   return new Intl.NumberFormat(`${len === "en" ? "en-US" : "ar-kw"}`, {
