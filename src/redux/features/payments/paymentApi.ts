@@ -28,7 +28,55 @@ const PaymentApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.payment],
     }),
+    getTotalIncomes: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/payments/total-incomes",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
+    packageStatisticsIncome: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/payments/packages-statistics-incomes",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
+    percentageStatisticsIncome: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/payments/percentage-statistics-incomes",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
+    packageStatisticsIncomes: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/payments/package-statistics-incomes",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
+    topLandlordIncome: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/payments/top-landlord-income",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
   }),
 });
 
-export const { useGetPackageIncomeQuery, useGetPercentageIncomeQuery  } = PaymentApi;
+export const {
+  useGetPackageIncomeQuery,
+  useGetPercentageIncomeQuery,
+  useGetTotalIncomesQuery,
+  usePackageStatisticsIncomeQuery,
+  usePercentageStatisticsIncomeQuery,
+  usePackageStatisticsIncomesQuery,
+  useTopLandlordIncomeQuery
+} = PaymentApi;

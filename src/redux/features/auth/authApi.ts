@@ -61,7 +61,7 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.user],
     }),
     getAllUser: builder.query({
-      query: (query) => ({
+      query: (query:Record<string, any>) => ({
         url: "/users",
         method: "GET",
         params: query,

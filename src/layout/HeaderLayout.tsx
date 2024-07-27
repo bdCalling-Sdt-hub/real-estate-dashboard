@@ -94,7 +94,7 @@ const HeaderLayout = () => {
           ]}
         />
         <Badge count={notficationData?.meta?.total}>
-          <NavLink to={`/${User?.role}/notification`}>
+          <NavLink to={`/${User?.role}/notifications`}>
             <IoIosNotifications className="text-white  text-32 cursor-pointer" />{" "}
           </NavLink>
         </Badge>

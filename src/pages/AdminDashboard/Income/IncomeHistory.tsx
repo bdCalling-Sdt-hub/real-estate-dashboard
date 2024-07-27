@@ -42,8 +42,7 @@ const IncomeHistory = () => {
     success,
     setPercentageData,
     percentageIncome,
-  ]);
-  console.log("____________________>>", packagesData);
+  ]); 
   const column1 = [
     {
       title: t("TXN ID"),

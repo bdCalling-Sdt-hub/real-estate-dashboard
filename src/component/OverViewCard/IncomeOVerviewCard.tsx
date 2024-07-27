@@ -1,9 +1,21 @@
 import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { useGetTotalIncomesQuery } from "../../redux/features/payments/paymentApi";
+import { priceFormat } from "../../utils/Format";
+import { useEffect } from "react";
+import ErrorResponse from "../UI/ErrorResponse";
 
 const IncomeOVerviewCard = () => {
+  const { data, isError, error } = useGetTotalIncomesQuery({});
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (isError) {
+      ErrorResponse(error);
+    }
+  }, [isError, error]);
+
   return (
     <Row align="middle" justify="center" gutter={16}>
       <Col span={12}>
@@ -13,7 +25,9 @@ const IncomeOVerviewCard = () => {
           </div>
           <div className="text-center">
             <h1 className="text-30 font-700 text-gray">{t("Today Income")}</h1>
-            <h5 className="text-32 font-500">$5000K</h5>
+            <h5 className="text-32 font-500">
+              {priceFormat(data?.data?.todayIncome)}
+            </h5>
           </div>
         </div>
       </Col>
@@ -24,7 +38,9 @@ const IncomeOVerviewCard = () => {
           </div>
           <div className="text-center">
             <h1 className="text-30 font-700 text-gray">{t("Total Income")}</h1>
-            <h5 className="text-32 font-500">$5000K</h5>
+            <h5 className="text-32 font-500">
+              {priceFormat(data?.data?.totalIncome)}
+            </h5>
           </div>
         </div>
       </Col>

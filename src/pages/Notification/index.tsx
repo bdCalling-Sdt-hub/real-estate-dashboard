@@ -14,8 +14,12 @@ import ErrorResponse from "../../component/UI/ErrorResponse";
 import ResPagination from "../../component/UI/Pagination";
 import { useState } from "react";
 import NoData from "../../component/NoData/NoData";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Notification = () => {
+  const user: TUser | null = useAppSelector(useCurrentUser);
+
   const [page, setPage] = useState<number>(1);
   const query: Record<string, any> = {};
   if (page) query["page"] = page;
@@ -34,10 +38,13 @@ const Notification = () => {
         id: toastId,
         duration: 2000,
       });
+      window.location.reload();
     } catch (error) {
       ErrorResponse(error, toastId);
     }
   };
+
+  console.log(notificationData);
   return (
     <div>
       <div className="flex justify-end">
