@@ -15,11 +15,10 @@ import UserDetails from "./UserDetails";
 const User = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const handleToggleModal = () => {
-    setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
+    setShow((prevShow) => !prevShow);
   };
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-   
 
   const column = [
     {
@@ -55,7 +54,7 @@ const User = () => {
     {
       title: "action",
 
-      render: (data: any, index: number) => { 
+      render: (data: any, index: number) => {
         return (
           <div className="flex items-center gap-x-2">
             <EyeOutlined
@@ -97,7 +96,7 @@ const User = () => {
             style={{ width: 304 }}
             placeholder={t("search")}
             allowClear
-            onSearch={onSearch}
+            onSearch={(e: any) => setSearch(e.target.value)}
           />
           <Dropdown menu={{ items }} placement="bottomLeft">
             <Button

@@ -6,19 +6,25 @@ import NewPassword from "../pages/NewPassword";
 import VerifyOtp from "../pages/VerifyOtp";
 import { routeGenerator } from "../utils/routeGenerator";
 import { adminRoutes } from "./admin.route.";
+import PrivateRoute from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute role="admin">
+        <App />
+      </PrivateRoute>
+    ),
   },
 
   {
-    path: "/super_admin",
+    path: "/admin",
+
     element: (
-      // <PrivateRoute role="vendor">
-      <App />
-      // </PrivateRoute>
+      <PrivateRoute role="admin">
+        <App />
+      </PrivateRoute>
     ),
     children: routeGenerator(adminRoutes),
   },

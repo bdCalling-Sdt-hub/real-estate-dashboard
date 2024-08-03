@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { setCollapsed } from "../redux/features/layout/layoutSlice";
 import { useGetMyNotificationQuery } from "../redux/features/notification/notificationApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-// import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
+import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { setlang } from "../redux/features/locals/localSlice";
@@ -26,10 +26,10 @@ const HeaderLayout = () => {
   const { data: profile } = useProfileQuery(undefined);
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
   // const { data: pData } = useProfileQuery(undefined);
-  // const User: TUser | null = useAppSelector(useCurrentUser);
-  const User = {
-    role: "super_admin",
-  };
+  const User: TUser | null = useAppSelector(useCurrentUser);
+  // const User = {
+  //   role: "super_admin",
+  // };
   const notification: any = useAppSelector(
     (state) => state.notification.notification
   );
