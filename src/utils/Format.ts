@@ -4,7 +4,7 @@ export const priceFormat = (price: number) => {
 
   return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "KWT",
+    currency: "KWD",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);

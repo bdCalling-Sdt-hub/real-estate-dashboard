@@ -12,7 +12,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const { imageUrl, setFile, imageFile } = UseImageUpload();
   const [toggleEdit, setToggleEdit] = useState<boolean>(true);
-
+// console.log(profile);
   return (
     <div className="container mx-auto">
       <h1 className="text-20 font-500 mb-2 text-gray">

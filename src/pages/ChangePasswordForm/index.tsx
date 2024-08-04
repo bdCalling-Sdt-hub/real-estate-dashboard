@@ -28,7 +28,7 @@ const ChangePasswordFrom = () => {
   const dispatch = useAppDispatch();
   const [changePassword] = useChangePasswordMutation();
   const { data: profile } = useProfileQuery(undefined);
-  const [forgotPassword] = useForgotPasswordMutation();
+  const [forgotPassword] = useForgotPasswordMutation(); 
   const onSubmit = async (data: any) => {
     const toastId = toast.loading("Changing....");
     try {

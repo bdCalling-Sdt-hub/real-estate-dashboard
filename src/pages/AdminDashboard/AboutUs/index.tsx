@@ -4,36 +4,39 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDoneOutline } from "react-icons/md";
-import { useGetContentsQuery, useUpdateContentMutation } from "../../../redux/features/content/contentApi";
+import {
+  useGetContentsQuery,
+  useUpdateContentMutation,
+} from "../../../redux/features/content/contentApi";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
   const { t } = useTranslation();
   const editor = useRef(null);
-  const { data: data, isSuccess } = useGetContentsQuery({})
-  const [updateAboutFn, { isLoading }] = useUpdateContentMutation()
+  const { data: data, isSuccess } = useGetContentsQuery({});
+  const [updateAboutFn, { isLoading }] = useUpdateContentMutation();
   const [content, setContent] = useState("");
-
+  const navigate = useNavigate();
 
   useEffect(() => {
-
     if (isSuccess) {
-      setContent(data?.data?.data[0].aboutUs
-      )
+      setContent(data?.data?.data[0].aboutUs);
     }
-  }, [isSuccess, data])
+  }, [isSuccess, data]);
   if (isLoading) {
-    toast.loading("Loading...", { id: "content" })
+    toast.loading("Loading...", { id: "content" });
   }
   const onSubmit = async () => {
     try {
-      const res: any = await updateAboutFn({ aboutUs: content })
+      const res: any = await updateAboutFn({ aboutUs: content });
       if (res?.data?.success) {
-        toast.success(res?.data?.message, { id: "content" })
+        toast.success(res?.data?.message, { id: "content" });
+        navigate("/admin/setting");
       }
     } catch (error) {
-      ErrorResponse(error, "content")
+      ErrorResponse(error, "content");
     }
   };
   return (
@@ -44,7 +47,6 @@ const AboutUs = () => {
         //   height: "600px",
         // }}
         ref={editor}
-
         value={content}
         onChange={(newContent) => setContent(newContent)}
       />

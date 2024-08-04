@@ -7,6 +7,7 @@ import { MdDoneOutline } from "react-icons/md";
 import { useGetContentsQuery, useUpdateContentMutation } from "../../../redux/features/content/contentApi";
 import { toast } from "sonner";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
+import { useNavigate } from "react-router-dom";
 
 const TermsAndConditions = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const TermsAndConditions = () => {
   const { data: data, isSuccess } = useGetContentsQuery({})
   const [updateAboutFn, { isLoading }] = useUpdateContentMutation()
   const [content, setContent] = useState("");
-
+const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -31,6 +32,7 @@ const TermsAndConditions = () => {
       const res: any = await updateAboutFn({ termsAndConditions: content })
       if (res?.data?.success) {
         toast.success(res?.data?.message, { id: "content" })
+         navigate("/admin/setting");
       }
     } catch (error) {
       ErrorResponse(error, "content")

@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen flex items-center justify-center">
+    <div className="container mx-auto h-screen flex items-center justify-center" >
       <Row align="middle" justify="center" gutter={16}>
         <Col span={12}>
           <img src={logo} alt="Logo" />
