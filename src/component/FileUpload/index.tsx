@@ -10,6 +10,7 @@ const FileUpload = ({
   disabled,
   listType = "picture-card",
   imageUrl,
+  image,
 }: any) => {
   const customRequest = ({ file }: { file: File | null }) => {
     setSelectedFile(file);
@@ -37,14 +38,13 @@ const FileUpload = ({
         Upload
       </div>
     </button>
-  );
-
+  ); 
   return (
     <ConfigProvider theme={multiUpload}>
       <Upload {...props}>
-        {imageUrl ? (
+        {image || imageUrl ? (
           <img
-            src={imageUrl}
+            src={imageUrl || image}
             alt="avatar"
             style={{
               width: "100%",

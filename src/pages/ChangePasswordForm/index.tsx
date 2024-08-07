@@ -28,12 +28,12 @@ const ChangePasswordFrom = () => {
   const dispatch = useAppDispatch();
   const [changePassword] = useChangePasswordMutation();
   const { data: profile } = useProfileQuery(undefined);
-  const [forgotPassword] = useForgotPasswordMutation();
+  const [forgotPassword] = useForgotPasswordMutation(); 
   const onSubmit = async (data: any) => {
     const toastId = toast.loading("Changing....");
     try {
       const res: any = await changePassword(data).unwrap();
-      toast.success("Password changed successfully", {
+      toast.success(res?.data?.message, {
         id: toastId,
         duration: 2000,
       });
@@ -44,8 +44,7 @@ const ChangePasswordFrom = () => {
   const handleForgotPassword = async () => {
     const toastId = toast.loading("Sending Otp");
     try {
-      const res = await forgotPassword(profile?.data).unwrap();
-      console.log(res);
+      const res = await forgotPassword(profile?.data).unwrap(); 
       toast.success("An otp sent to your email address", {
         id: toastId,
         duration: 2000,

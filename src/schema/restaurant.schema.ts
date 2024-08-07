@@ -7,8 +7,7 @@ const OpeningHoursSchema = object({
   openingTime: string(), // Assuming openingTime and closingTime are strings
   closingTime: string(),
 }).refine(
-  ({ openingTime, closingTime }) => {
-    console.log(openingTime, closingTime);
+  ({ openingTime, closingTime }) => { 
     // Custom validation: closingTime must not be earlier than openingTime
     const openingMoment = dayjs(openingTime, "HH:mm");
     const closingMoment = dayjs(closingTime, "HH:mm");

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, DatePicker, Row, Tooltip } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Bar,
@@ -12,87 +14,65 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  usePackageStatisticsIncomesQuery,
+  usePercentageStatisticsIncomeQuery,
+} from "../../redux/features/payments/paymentApi";
+import moment, { Moment } from "moment";
+import { priceFormat } from "../../utils/Format";
+import NoData from "../NoData/NoData";
 
-const data01 = [
-  {
-    name: "Guest User",
-    value: 500,
-    color: "#F39200",
-  },
-  {
-    name: "Host User",
-    value: 300,
-    color: "#575858",
-  },
-];
-const data = [
-  {
-    name: "Jan",
-    uv: 4000,
-    pv: 2400,
-  },
-  {
-    name: "Feb",
-    uv: 3000,
-    pv: 1398,
-  },
-  {
-    name: "Mar",
-    uv: 2000,
-    pv: 9800,
-  },
-  {
-    name: "Apr",
-    uv: 2780,
-    pv: 3908,
-  },
-  {
-    name: "May",
-    uv: 1890,
-    pv: 4800,
-  },
-  {
-    name: "Jun",
-    pv: 3800,
-  },
-  {
-    name: "July",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Aug",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Sept",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Oct",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Oct",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Nov",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Dec",
-    uv: 3490,
-    pv: 4300,
-  },
-];
+type IData = {
+  totalIncome: number;
+  packageName: string;
+  color?: string;
+};
+
 const IncomeOverviewChart = () => {
   const { t } = useTranslation();
+  const [year, setYear] = useState<Moment | string>(moment().format("yyyy"));
+  const [month, setMonth] = useState<Moment | string>(moment().format("MM"));
+  const [percentageIncomeYear, setPercentageIncomeYear] = useState(
+    moment().format("yyyy")
+  );
+  const [percentageIncomeData, setPercentageIncomeData] = useState([]);
+  const [packageCalculationsData, setPackageCalculationsData] = useState<
+    IData[] | []
+  >([]);
+
+  const percentageQuery: Record<string, any> = {};
+  const packageCalculationsQuery: Record<string, any> = {};
+
+  percentageQuery["year"] = percentageIncomeYear;
+  packageCalculationsQuery["month"] = month;
+  packageCalculationsQuery["year"] = year;
+
+  const { data: percentage, isSuccess: percentageSuccess } =
+    usePercentageStatisticsIncomeQuery({
+      ...percentageQuery,
+    });
+
+  const { data: packageCalculations, isSuccess: packageCalculationsSuccess } =
+    usePackageStatisticsIncomesQuery({
+      ...packageCalculationsQuery,
+    });
+
+  useEffect(() => {
+    if (percentageSuccess) {
+      setPercentageIncomeData(percentage?.data?.monthlyIncome);
+    }
+    if (packageCalculationsSuccess) {
+      console.log(packageCalculations?.data);
+
+      setPackageCalculationsData(packageCalculations?.data);
+    }
+  }, [
+    packageCalculations,
+    packageCalculationsSuccess,
+    percentage,
+    percentageSuccess,
+  ]);
+
   return (
     <div>
       <Row gutter={[16, 12]}>
@@ -102,40 +82,62 @@ const IncomeOverviewChart = () => {
               <h1 className="text-20 font-500 text-gray">
                 {t("Total Income (Host)")}
               </h1>
-              <DatePicker picker="month" />
+              <DatePicker
+                picker="month"
+                onChange={(date, dateString) => {
+                  setMonth(moment(dateString).format("MM"));
+                  setYear(moment(dateString).format("yyyy"));
+                }}
+              />
             </div>
-            <ResponsiveContainer width="100%" height={261}>
-              <PieChart width={730} height={200}>
-                <Pie
-                  data={data01}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
-                  label
-                >
-                  {data01.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="flex justify-between">
-              <div className="flex items-center gap-x-2">
-                <div className="bg-primary h-[20px] w-[20px] rounded-full"></div>
-                <h1 className="text-primary text-18 font-500 ">
-                  {t("Silver Plan")}:($5,621)
-                </h1>
-              </div>
-              <div className="flex items-center gap-x-2">
-                <div className="bg-gray h-[20px] w-[20px] rounded-full"></div>
-                <h1 className="text-gray text-18 font-500 ">
-                  {t("Gold Plan")}:($5,621)
-                </h1>
-              </div>
-            </div>
+            {packageCalculationsData?.length > 0 ? (
+              <>
+                <ResponsiveContainer width="100%" height={261}>
+                  <PieChart width={730} height={200}>
+                    <Pie
+                      data={packageCalculationsData}
+                      dataKey="totalIncome"
+                      nameKey="packageName"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      label
+                    >
+                      {packageCalculationsData?.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={index === 0 ? "#F39200" : "#575858"}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="flex justify-between">
+                  {packageCalculationsData?.map(
+                    (entry: IData, index: number) => (
+                      <div className="flex items-center gap-x-2">
+                        <div
+                          className={`${
+                            index === 0 ? "bg-primary" : "bg-gray"
+                          } h-[20px] w-[20px] rounded-full`}
+                        ></div>
+                        <h1
+                          className={`${
+                            index === 0 ? "text-primary" : "text-gray"
+                          } text-18 font-500 `}
+                        >
+                          {t(entry?.packageName)}:(
+                          {priceFormat(entry?.totalIncome)})
+                        </h1>
+                      </div>
+                    )
+                  )}
+                </div>
+              </>
+            ) : (
+              <NoData />
+            )}
           </div>
         </Col>
         <Col span={24}>
@@ -144,10 +146,15 @@ const IncomeOverviewChart = () => {
               <h1 className="text-20 font-500 text-gray mb-4">
                 {t("Income Statistics (Percentage)")}
               </h1>
-              <DatePicker picker="month" />
+              <DatePicker
+                picker="year"
+                onChange={(date, dateString) =>
+                  setPercentageIncomeYear(moment(dateString).format("yyyy"))
+                }
+              />
             </div>
             <ResponsiveContainer width="100%" height={305}>
-              <BarChart data={data}>
+              <BarChart data={percentageIncomeData}>
                 <defs>
                   <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#F39200" />
@@ -160,7 +167,7 @@ const IncomeOverviewChart = () => {
                 <Tooltip />
                 <Legend />
                 <Bar
-                  dataKey="pv"
+                  dataKey="income"
                   fill="url(#colorPv)"
                   barSize={10}
                   radius={[10, 10, 0, 0]}

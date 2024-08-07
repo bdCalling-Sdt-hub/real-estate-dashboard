@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from "antd";
 import { useTranslation } from "react-i18next";
-import { IoLocateOutline } from "react-icons/io5";
-import img from "./../../../assets/person.jpg";
-const GuestDetails = () => {
+import { IoLocateOutline } from "react-icons/io5"; 
+import moment from "moment";
+import { NumberFormat } from "../../../utils/Format";
+const GuestDetails = ({ modalData }: { modalData: any }) => {
   const { t } = useTranslation();
   return (
     <div>
@@ -10,12 +12,12 @@ const GuestDetails = () => {
       <Divider />
       {/* section 2 */}
       <div className="flex gap-x-4">
-        <img src={img} alt="" width={200} />
+        <img src={modalData?.image} alt="" width={200} />
         <div>
-          <h1 className="text-20 font-500">John Smith</h1>
+          <h1 className="text-20 font-500">{modalData?.name}</h1>
           <div className="flex items-center gap-x-2 text-gray mt-2">
             <IoLocateOutline />
-            <p>New York,USA</p>
+            <p>{modalData?.address}</p>
           </div>
         </div>
       </div>
@@ -26,9 +28,16 @@ const GuestDetails = () => {
         <div>
           <h1 className="text-20 font-500">{t("Personal Preferrence")}</h1>
           <div className="mt-1 text-gray">
-            <p>{t("Joining Date")}: August 15, 2023</p>
-            <p className="my-1">{t("Contact")}: +880187662665</p>
-            <p className="my-1">{t("Email")}: nuropu@gmail.com</p>
+            <p>
+              {t("Joining Date")}:{" "}
+              {NumberFormat(moment(modalData?.createdAt).format("L"))}
+            </p>
+            <p className="my-1">
+              {t("Contact")}: {NumberFormat(modalData?.phoneNumber)}
+            </p>
+            <p className="my-1">
+              {t("Email")}: {modalData?.email}
+            </p>
           </div>
         </div>
         {/* <div>

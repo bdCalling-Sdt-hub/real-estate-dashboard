@@ -13,6 +13,7 @@ const ResModal = ({
   setShowModal,
   children,
   width,
+  
 }: ModalProps) => {
   const handleCloseModal = () => {
     setShowModal(!showModal);

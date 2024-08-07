@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, DatePicker, Row, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,75 +12,32 @@ import {
 } from "recharts";
 import IncomeOverviewChart from "../../../component/IncomeOverViewChart/IncomeOverviewChart";
 import IncomeOVerviewCard from "../../../component/OverViewCard/IncomeOVerviewCard";
-const data = [
-  {
-    name: "Jan",
-    uv: 4000,
-    pv: 2400,
-  },
-  {
-    name: "Feb",
-    uv: 3000,
-    pv: 1398,
-  },
-  {
-    name: "Mar",
-    uv: 2000,
-    pv: 9800,
-  },
-  {
-    name: "Apr",
-    uv: 2780,
-    pv: 3908,
-  },
-  {
-    name: "May",
-    uv: 1890,
-    pv: 4800,
-  },
-  {
-    name: "Jun",
-    pv: 3800,
-  },
-  {
-    name: "July",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Aug",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Sept",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Oct",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Oct",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Nov",
-    uv: 3490,
-    pv: 4300,
-  },
-  {
-    name: "Dec",
-    uv: 3490,
-    pv: 4300,
-  },
-];
+import { usePackageStatisticsIncomeQuery } from "../../../redux/features/payments/paymentApi";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 const IncomeOverview = () => {
+  const [packageIncomeYear, setPackageIncomeYear] = useState(
+    moment().format("yyyy")
+  );
+  const [packageIncomeData, setPackageIncomeData] = useState([]);
+
+  const packageQuery: Record<string, any> = {};
+  packageQuery["year"] = packageIncomeYear;
+
+  const { data: packages, isSuccess: packageSuccess } =
+    usePackageStatisticsIncomeQuery({
+      ...packageQuery,
+    });
+
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (packageSuccess) {
+      setPackageIncomeData(packages?.data?.monthlyIncome);
+    }
+  }, [packageSuccess, packages]);
+
   return (
     <div className="container mx-auto">
       <h1 className="text-gray font-500 text-20 mb-2">
@@ -93,10 +51,15 @@ const IncomeOverview = () => {
               <h1 className="font-500 text-20 text-gray ps-5 ">
                 {t("Income Statistics (Packages)")}
               </h1>
-              <DatePicker picker="month" />
+              <DatePicker
+                picker="year"
+                onChange={(date, dateString) =>
+                  setPackageIncomeYear(dateString.toString() as string)
+                }
+              />
             </div>
             <ResponsiveContainer width="100%" height={463}>
-              <BarChart data={data}>
+              <BarChart data={packageIncomeData}>
                 <defs>
                   <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#F39200" />
@@ -104,12 +67,12 @@ const IncomeOverview = () => {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
                 <Bar
-                  dataKey="pv"
+                  dataKey="income"
                   fill="url(#colorPv)"
                   barSize={10}
                   radius={[10, 10, 0, 0]}

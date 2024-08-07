@@ -3,15 +3,17 @@ import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
+import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
 // import { useAppSelector } from "../../redux/hooks";
 // import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Setting = () => {
   const { t } = useTranslation();
-  // const User: TUser | null = useAppSelector(useCurrentUser);
-  const User = {
-    role: "super_admin",
-  };
+  const User: TUser | null = useAppSelector(useCurrentUser);
+  // const User = {
+  //   role: "super_admin",
+  // };
   return (
     <div className="container mx-auto">
       <Row gutter={[0, 30]}>

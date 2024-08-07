@@ -5,7 +5,7 @@ import ResInput from "../../../component/Form/ResInput";
 
 const EditSubAdmin = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    
   };
   return (
     <div>

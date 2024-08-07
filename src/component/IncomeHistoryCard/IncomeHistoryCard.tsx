@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { priceFormat } from "../../utils/Format";
+ 
 
-const IncomeHistoryCard = () => {
+const IncomeHistoryCard = ({
+  todayIncome,
+  totalIncome,
+}: {
+  totalIncome: any;
+  todayIncome: any;
+}) => {
   const { t } = useTranslation();
   return (
     <Row align="middle" justify="center" gutter={16}>
@@ -13,7 +22,9 @@ const IncomeHistoryCard = () => {
           </div>
           <div>
             <h1 className="text-24 font-500 text-gray">{t("Today Income")}</h1>
-            <h5 className="text-20 font-500 ">$5000</h5>
+            <h5 className="text-20 font-500 ">
+              {priceFormat(parseInt(todayIncome))}
+            </h5>
           </div>
         </div>
       </Col>
@@ -24,7 +35,9 @@ const IncomeHistoryCard = () => {
           </div>
           <div>
             <h1 className="text-24 font-500 text-gray">{t("Total Income")}</h1>
-            <h5 className="text-20 font-500 ">$1000</h5>
+            <h5 className="text-20 font-500 ">
+              {priceFormat(parseInt(totalIncome))}
+            </h5>
           </div>
         </div>
       </Col>

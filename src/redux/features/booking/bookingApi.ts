@@ -7,13 +7,12 @@ const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     GetAllBooking: builder.query({
       query: (query) => ({
-        url: "/booking/owner",
+        url: "/bookings",
         method: "GET",
         params: query,
       }),
       providesTags: [tagTypes.booking],
-      // transformResponse: (response: TResponseRedux<any>) => {
-      //   console.log("response", response);
+      // transformResponse: (response: TResponseRedux<any>) => { 
       //   return {
       //     data: response.data,
       //     meta: response.meta,
@@ -22,7 +21,7 @@ const bookingApi = baseApi.injectEndpoints({
     }),
     UpdateBooking: builder.mutation({
       query: (data) => ({
-        url: `/booking/${data?.id}`,
+        url: `/bookings/${data?.id}`,
         method: "PATCH",
         body: data?.body,
       }),
@@ -30,7 +29,7 @@ const bookingApi = baseApi.injectEndpoints({
     }),
     GetBookingStatics: builder.query({
       query: (query) => ({
-        url: `/booking/statics`,
+        url: `/bookings/statics`,
         method: "GET",
         params: query,
       }),

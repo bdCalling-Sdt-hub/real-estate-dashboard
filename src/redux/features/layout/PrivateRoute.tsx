@@ -8,8 +8,7 @@ interface TPrivateRoute {
   children: ReactNode;
   role: string | undefined;
 }
-const PrivateRoute = ({ children, role }: TPrivateRoute) => {
-  console.log(role);
+const PrivateRoute = ({ children, role }: TPrivateRoute) => { 
   const token = useAppSelector(useCurrentToken);
 
   let user: any;

@@ -25,6 +25,7 @@ const UseImageUpload = (initialImage = null) => {
     // @ts-ignore
   };
 
+
   return {
     imageUrl,
     setFile,

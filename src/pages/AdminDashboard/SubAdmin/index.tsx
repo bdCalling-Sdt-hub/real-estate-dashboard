@@ -33,8 +33,7 @@ const SubAdmin = () => {
     {
       title: "action",
 
-      render: (data: any, index: number) => {
-        console.log(data, index);
+      render: (data: any, index: number) => { 
         return (
           <div className="flex items-center gap-x-2">
             <LiaEdit

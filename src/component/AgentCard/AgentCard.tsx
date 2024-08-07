@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from "antd";
-import person from "../../assets/person.jpg";
+import { priceFormat } from "../../utils/Format";
 const AgentCard = ({ data }: any) => {
   return (
     <>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-x-2">
           <img
-            src={person}
-            alt=""
+            src={data?.author?.image}
+            alt={data?.author?.name}
             className="w-12 h-12 rounded-full object-cover"
           />
           <div>
-            <h1 className="text-20 font-500 mb-1">{data?.name}</h1>
-            <h5 className="text-gray ">{data?.address}</h5>
+            <h1 className="text-20 font-500 mb-1">{data?.author?.name}</h1>
           </div>
         </div>
-        <h1 className="text-20 font-500 text-gray">{data?.properties}</h1>
-        <h1>{data?.income}</h1>
+        <h1 className="text-20 font-500 text-gray">
+          {data?.totalTransactions}
+        </h1>
+        <h1>{priceFormat(data?.totalIncome)}</h1>
       </div>
       <Divider className="my-1" />
     </>

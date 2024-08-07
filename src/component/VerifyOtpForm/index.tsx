@@ -10,9 +10,11 @@ import {
 } from "../../redux/features/otp/otpApi";
 import ErrorResponse from "../UI/ErrorResponse";
 import style from "./verifyOtpForm.module.css";
+import { useState } from "react";
 
 const VerifyOtpFrom = () => {
   const navigate = useNavigate();
+  const [otp, setOtp] = useState<string | null>();
   const [VerifyOtp] = useVerifyOtpMutation();
   const [resendOtps] = useResendOtpMutation();
 
@@ -20,7 +22,12 @@ const VerifyOtpFrom = () => {
     const toastId = toast.loading("VERIFYING...");
 
     try {
-      // const res = await VerifyOtp({ otp: formatedOtp }).unwrap();
+      if (!otp) {
+        toast.error("Please enter OTP", { duration: 2000 });
+        return;
+      }
+
+      await VerifyOtp({ otp: otp }).unwrap();
       toast.success("Otp verified successfully", {
         id: toastId,
         duration: 2000,
@@ -32,21 +39,21 @@ const VerifyOtpFrom = () => {
     }
   };
   const onChange: GetProp<typeof Input.OTP, "onChange"> = (text) => {
-    console.log("onChange:", text);
+    setOtp(text); 
   };
 
   const sharedProps: OTPProps = {
     onChange,
     style: { width: "400px" },
   };
+
   const resendOtp = async () => {
     const toastId = toast.loading("Resending....");
 
     try {
       const res: any = await resendOtps({
         email: sessionStorage.getItem("email"),
-      }).unwrap();
-      console.log(res);
+      }).unwrap(); 
       toast.success("Otp sent successfully", { id: toastId, duration: 2000 });
       sessionStorage.setItem("token", res?.data?.token);
     } catch (error) {

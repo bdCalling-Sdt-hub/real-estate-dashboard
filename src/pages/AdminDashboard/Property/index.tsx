@@ -1,100 +1,136 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
-import { Button, Dropdown, MenuProps } from "antd";
-import { useState } from "react";
+import { Button, Dropdown, Menu, Space } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
-import { propertyData } from "../../../db/propertyData";
 import PropertyDetails from "./PropertyDetails";
+import { useGetAllPropertyQuery } from "../../../redux/features/property/propertyApi";
+import { priceFormat } from "../../../utils/Format";
+import { useGetAllCategoriesQuery } from "../../../redux/features/category/categoryApi";
 
-const Property = () => {
+const Property = () => { 
+  const [category, setCategory] = useState<string | null>(null);
+  const query: Record<string, any> = {};
+  const categoryQuery: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [property, setProperty] = useState([]);
   const { t } = useTranslation();
-  const handleToggleModal = () => {
-    setShow((prevShow) => !prevShow); // Toggle the state using the previous state value
+  if (category) {
+    query["category"] = category;
+  }
+  query["limit"] = limit;
+  query["page"] = page;
+  const { data: data, isSuccess } = useGetAllPropertyQuery({ ...query });
+
+  categoryQuery["limit"] = 99999999999;
+  const { data: categories } = useGetAllCategoriesQuery({ ...categoryQuery });
+
+  const [modalData, setModalData] = useState({});
+
+  useEffect(() => {
+    if (isSuccess) {
+      setProperty(data?.data?.allResidence);
+    }
+  }, [isSuccess, data]);
+
+  const handleToggleModal = (data: any) => {
+    setModalData(data);
+    setShow((prevShow) => !prevShow);
   };
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: <p>{t("Apartment")}</p>,
-    },
-    {
-      key: "2",
-      label: <p>{t("House")}</p>,
-    },
-    {
-      key: "3",
-      label: <p>{t("Chalet")}</p>,
-    },
-    {
-      key: "4",
-      label: <p>{t("Farm")}</p>,
-    },
-    {
-      key: "5",
-      label: <p>{t("Land")}</p>,
-    },
-    {
-      key: "6",
-      label: <p>{t("Commercial")}</p>,
-    },
-  ];
+
+  const onPaginationChange = (page: any, pageSize: any) => { 
+    setPage(page);
+    setLimit(pageSize);
+  };
+
+
   const column = [
     {
       title: t("Property Name"),
-      dataIndex: "property",
-      key: "property",
+      dataIndex: "propertyName",
+      key: "property Name",
     },
     {
       title: t("Price"),
       dataIndex: "price",
       key: "price",
+      render: (data: any) => {
+        return <p className="font-700">{priceFormat(data)}</p>;
+      },
     },
     {
       title: t("Category"),
       dataIndex: "category",
       key: "category",
+      render: (data: any) => {
+        return <p>{t(data?.name)}</p>;
+      },
     },
-    {
-      title: t("Address"),
-      dataIndex: "address",
-      key: "address",
-    },
+    // {
+    //   title: t("Address"),
+    //   dataIndex: "address",
+    //   key: "address",
+    //   render: (data: any) => {
+    //     return <p>{data?.apartment + data?.floor + data?.house + data?.area + data?.state + data?.street}</p>;
+    //   },
+    // },
     {
       title: t("Landlord Name"),
-      dataIndex: "agent",
+      dataIndex: "host",
       key: "agent",
+      render: (data: any) => {
+        return <p>{data.name}</p>;
+      },
     },
     {
       title: t("Action"),
       key: "action",
-      render: (data: any, index: number) => {
-        console.log(data, index);
+      render: (data: any) => {
         return (
           <div>
             <EyeOutlined
               className="text-18 cursor-pointer"
-              onClick={handleToggleModal}
+              onClick={() => handleToggleModal(data)}
             />
           </div>
         );
       },
     },
   ];
-
+ 
   return (
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center">
         <h1 className="text-20 mb-2 font-500 text-gray">{t("Real Estate")}</h1>
-        <Dropdown menu={{ items }} placement="bottomLeft">
-          <Button
-            className="bg-primary text-white font-500 "
-            icon={<FilterOutlined />}
+        <Space size="middle">
+          <Dropdown
+            overlay={
+              <Menu>
+                {categories?.data?.data?.length !== 0 &&
+                  categories?.data?.data?.map((item: any) => (
+                    <Menu.Item
+                      className={`${category === item?._id && "bg-primary"}`}
+                      onClick={() => setCategory(item?._id)}
+                      key={item?._id}
+                    >
+                      {t(item.name)}
+                    </Menu.Item>
+                  ))}
+              </Menu>
+            }
           >
-            {t("Filter")}
-          </Button>
-        </Dropdown>
+            <Button
+              className="bg-primary text-white font-500 "
+              icon={<FilterOutlined />}
+            >
+              {t("Filter")}
+            </Button>
+          </Dropdown>
+        </Space>
       </div>
       <ResModal
         width={1000}
@@ -102,12 +138,18 @@ const Property = () => {
         setShowModal={setShow}
         showModal={show}
       >
-        <PropertyDetails />
+        <PropertyDetails modalData={modalData} />
       </ResModal>
       <ResTable
         column={column}
-        data={propertyData}
-        pagination={{ total: propertyData?.length, pageSize: 10 }}
+        data={property}
+        // onTableChange={}
+        pagination={{
+          total: data?.data?.meta?.total || 0,
+          pageSize: limit || 10,
+          onChange: onPaginationChange,
+          showSizeChanger: true,
+        }}
       />
     </div>
   );

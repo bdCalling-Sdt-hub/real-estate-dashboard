@@ -2,8 +2,10 @@ import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { FaWallet } from "react-icons/fa6";
 import { MdApartment } from "react-icons/md";
+import { priceFormat } from "../../utils/Format";
 
-const DashboardCard = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DashboardCard = ({ incomeData }: { incomeData: any }) => {
   const { t } = useTranslation();
   return (
     <Row align="middle" justify="center" gutter={16}>
@@ -16,7 +18,7 @@ const DashboardCard = () => {
             <h1 className="text-24 font-500 text-gray">
               {t("Total Properties")}
             </h1>
-            <h5 className="text-20 font-500 ">5000</h5>
+            <h5 className="text-20 font-500 ">{incomeData?.properties}</h5>
           </div>
         </div>
       </Col>
@@ -27,7 +29,9 @@ const DashboardCard = () => {
           </div>
           <div>
             <h1 className="text-24 font-500 text-gray">{t("Total Income")}</h1>
-            <h5 className="text-20 font-500 ">5000</h5>
+            <h5 className="text-20 font-500 ">
+              {priceFormat(incomeData?.totalIncome)}
+            </h5>
           </div>
         </div>
       </Col>
