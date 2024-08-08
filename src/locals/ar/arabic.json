@@ -151,5 +151,7 @@
   "Close": "يغلق",
   "month": "شهر",
   "unverified":"غير مُتحقق",
-  "verified":"مُتحقق"
+  "verified":"مُتحقق",
+  "user unblock success":"تم فك حظر المستخدم بنجاح",
+  "user blocked success":"تم حظر المستخدم بنجاح"
 }

@@ -58,7 +58,15 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
             <p className="mt-1">
               {t("Beneficiarys Address")}: {modalData?.bankInfo?.bankAddress}
             </p>
+            <p className="mt-1">
+              {t("country")}: {modalData?.bankInfo?.country}
+            </p>
+            <p className="mt-1">
+              {t("swiftCode")}: {modalData?.bankInfo?.swiftCode}
+            </p>
+
           </div>
+  
         </div>
       </div>
     </div>

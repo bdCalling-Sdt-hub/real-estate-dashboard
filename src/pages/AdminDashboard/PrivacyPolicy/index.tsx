@@ -30,10 +30,12 @@ const PrivacyPolicy = () => {
   }
   const onSubmit = async () => {
     try {
-      const res: any = await updateAboutFn({ privacyPolicy: content });
-      if (res?.data?.success) {
-        toast.success(res?.data?.message, { id: "content" });
+      const res: any = await updateAboutFn({ privacyPolicy: content }).unwrap();
+      if (res?.success) {
+        toast.success("Privacy policy is updated", { id: "content" });
         navigate("/admin/setting");
+      }else{
+        toast.success(res?.message, { id: "content" });
       }
     } catch (error) {
       ErrorResponse(error, "content");

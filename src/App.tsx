@@ -12,8 +12,9 @@ import { useAppDispatch, useAppSelector } from "./redux/hooks";
 // import PrivateRoute from "./router/PrivateRoutes";
 import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
+import PrivateRoute from "./router/PrivateRoutes";
 
-const URL = "http://103.145.138.74:9001";
+const URL = "http://192.168.10.142:9001";
 
 function App() {
   const token: string | null = useAppSelector(useCurrentToken);
@@ -37,11 +38,11 @@ function App() {
   }, [dispatch, socket, user]);
 
   return (
-    // <PrivateRoute role={undefined}>
+    <PrivateRoute role={undefined}>
     <ConfigProvider direction={lang === "ar" ? "rtl" : "ltr"}>
       <MainLayout />
     </ConfigProvider>
-    // {/* </PrivateRoute> */}
+     </PrivateRoute>
   );
 }
 

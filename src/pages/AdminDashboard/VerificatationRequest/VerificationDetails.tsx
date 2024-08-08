@@ -11,6 +11,7 @@ import moment from "moment";
 import { useUpdateUserMutation } from "../../../redux/features/auth/authApi";
 import { toast } from "sonner";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
+import { CgLayoutGrid } from "react-icons/cg";
 const VerificatonDetails = ({
   modalData,
   setShow,
@@ -33,14 +34,17 @@ const VerificatonDetails = ({
         id,
         body: { verificationRequest: "accepted", isVerified: true },
       }).unwrap(); 
-      toast.success(res.message, { id: "accept" });
       if (res.success) {
+        toast.success(t("user verifications accepted"), { id: "accept" });
         setShow((prev: any) => !prev);
+      }else{
+        toast.success(res.message, { id: "accept" });
       }
     } catch (error) {
       ErrorResponse(error, "accept");
     }
   };
+ 
   return (
     <div>
       <ResModal
@@ -53,25 +57,25 @@ const VerificatonDetails = ({
       <h1 className="text-30 font-500">{t("Verification Details")}</h1>
       <Divider />
       {/* section 2 */}
-      <div className="flex gap-x-4">
-        <Image
+      <h1 className="text-32 font-semibold my-4">Selfie</h1>
+      <Image
           className="object-cover"
           height={200}
-          src={modalData?.civilId?.frontSide}
+          src={modalData?.documents?.selfie}
           alt="civilId frontSide"
         />
-        <Image
+
+<h1 className="text-32 font-semibold my-4">Documents</h1>
+      <div className="flex gap-x-4">
+       
+        {
+          modalData?.documents?.documents?.length > 0 && modalData?.documents?.documents?.map((doc:any)=> <Image
           className="object-cover"
           height={200}
-          src={modalData?.civilId?.backSide}
-          alt="civilId backSide"
-        />
-        <Image
-          className="object-cover"
-          height={200}
-          src={drivingLicense}
-          alt=""
-        />
+          src={doc?.url}
+          alt="Documents"
+        />)
+        }
       </div>
       <Divider />
 

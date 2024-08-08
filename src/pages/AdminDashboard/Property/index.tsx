@@ -55,9 +55,17 @@ const Property = () => {
       key: "property Name",
     },
     {
-      title: t("Price"),
-      dataIndex: "price",
-      key: "price",
+      title: t("Monthly Price"),
+      dataIndex: "perMonthPrice",
+      key: "perMonthPrice",
+      render: (data: any) => {
+        return <p className="font-700">{priceFormat(data)}</p>;
+      },
+    },
+    {
+      title: t("Per Night Price"),
+      dataIndex: "perNightPrice",
+      key: "perNightPrice",
       render: (data: any) => {
         return <p className="font-700">{priceFormat(data)}</p>;
       },

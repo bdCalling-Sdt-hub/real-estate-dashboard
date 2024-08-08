@@ -70,7 +70,13 @@ const Guest = () => {
         body: { status: "blocked" },
       }).unwrap();
 
-      toast.success(res.message, { id: "block", duration: 2000 });
+      if(res.success){
+
+        toast.success(t("user blocked success"), { id: "block", duration: 2000 });
+      }else{
+      
+        toast.success(res.message, { id: "block", duration: 2000 });
+      }
     } catch (error) {
       ErrorResponse(error, "block");
     }
@@ -84,7 +90,12 @@ const Guest = () => {
         body: { status: "active" },
       }).unwrap();
 
-      toast.success(res.message, { id: "active", duration: 2000 });
+      if(res.success){
+        toast.success(t("user unblock success"), { id: "active", duration: 2000 });
+      }else{
+  
+        toast.success(res.message, { id: "active", duration: 2000 });
+      }
     } catch (error) {
       ErrorResponse(error, "active");
     }

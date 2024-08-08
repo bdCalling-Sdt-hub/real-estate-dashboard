@@ -72,8 +72,13 @@ const Host = () => {
         id,
         body: { status: "blocked" },
       }).unwrap();
+if(res.success){
 
-      toast.success(res.message, { id: "block", duration: 2000 });
+  toast.success(t("user blocked success"), { id: "block", duration: 2000 });
+}else{
+
+  toast.success(res.message, { id: "block", duration: 2000 });
+}
     } catch (error) {
       ErrorResponse(error, "block");
     }
@@ -86,8 +91,12 @@ const Host = () => {
         id,
         body: { status: "active" },
       }).unwrap();
+    if(res.success){
+      toast.success(t("user unblock success"), { id: "active", duration: 2000 });
+    }else{
 
       toast.success(res.message, { id: "active", duration: 2000 });
+    }
     } catch (error) {
       ErrorResponse(error, "active");
     }

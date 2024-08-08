@@ -140,6 +140,10 @@
   "Search": "search",
   "Close": "close",
   "month": "month",
-  "unverified": "unverified",
-  "verified": "verified"
+  "unverified": "unverified", 
+  "verified": "verified",
+  "user unblock success":"User unblocked successfully",
+  "user blocked success":"User blocked successfully",
+  "user verifications accepted":""
+  
 }
