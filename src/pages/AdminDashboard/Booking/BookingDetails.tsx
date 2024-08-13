@@ -49,7 +49,7 @@ const BookingDetails = ({ modalData }: { modalData: any }) => {
               {t("Name")}: {modalData?.user?.name}
             </p>
             <p>
-              {t("Total Amount")}: {priceFormat(modalData?.totalPrice)}
+              {t("Total Amount")}: {modalData?.totalPrice? priceFormat(modalData?.totalPrice):modalData?.totalPrice}
             </p>
           </div>
         </div>
@@ -60,7 +60,7 @@ const BookingDetails = ({ modalData }: { modalData: any }) => {
               {t("Name")}: {modalData?.author?.name}
             </p>
             <p className="mt-1">
-              {t("Contact")}: {NumberFormat(modalData?.author?.phoneNumber)}
+              {t("Contact")}: { modalData?.residence?.host?.phoneNumber? NumberFormat(modalData?.residence?.host?.phoneNumber):modalData?.residence?.host?.phoneNumber}
             </p>
           </div>
         </div>

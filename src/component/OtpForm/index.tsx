@@ -27,7 +27,7 @@ const OtpForm = ({ type }: IotpForm) => {
   const token = useAppSelector((state) => state.otp.token);
   const user: TUser | null = useAppSelector(useCurrentUser);
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(new Array(4).fill(""));
+  const [otp, setOtp] = useState(new Array(6).fill(""));
   const otpBoxReference: React.MutableRefObject<
     (InputRef | HTMLInputElement)[]
   > = useRef<(InputRef | HTMLInputElement)[]>([]);
@@ -35,7 +35,7 @@ const OtpForm = ({ type }: IotpForm) => {
     let newArr = [...otp];
     newArr[index] = value;
     setOtp(newArr);
-    if (value && index < 4 - 1) {
+    if (value && index < 6 - 1) {
       otpBoxReference.current[index + 1].focus();
     }
   };
@@ -46,7 +46,7 @@ const OtpForm = ({ type }: IotpForm) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       otpBoxReference.current[index - 1].focus();
     }
-    if (e.key === "Enter" && e.currentTarget.value && index < 4 - 1) {
+    if (e.key === "Enter" && e.currentTarget.value && index < 6 - 1) {
       otpBoxReference.current[index + 1].focus();
     }
   };
@@ -66,6 +66,7 @@ const OtpForm = ({ type }: IotpForm) => {
     }
   };
   const handleResendOtp = async () => {
+    console.log(profileData)
     const toastId = toast.loading("Resending");
     try {
       const res = await resendOtp(profileData?.data).unwrap();
@@ -79,7 +80,7 @@ const OtpForm = ({ type }: IotpForm) => {
     <div className={` mt-2  flex flex-col`} style={{ height: "300px" }}>
       <Row>
         {otp.map((digit, index) => (
-          <Col lg={4} className="flex justify-center">
+          <Col lg={6} className="flex justify-center">
             <Input
               key={index}
               value={digit}

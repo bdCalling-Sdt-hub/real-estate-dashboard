@@ -13,7 +13,8 @@ import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
 
-const URL = "http://103.145.138.74:9001";
+const URL = "http://192.168.1.9:9001"
+// "http://103.145.138.74:9001";
 
 function App() {
   const token: string | null = useAppSelector(useCurrentToken);

@@ -41,7 +41,7 @@ const Booking = () => {
   const column = [
     {
       title: t("ID"),
-      dataIndex: "id",
+      dataIndex: "_id",
       key: "id",
     },
     {
@@ -55,7 +55,7 @@ const Booking = () => {
     {
       title: t("User Name"),
       dataIndex: "user",
-      key: "name",
+      key: "user",
       render: (data: any) => {
         return data?.name;
       },
@@ -70,10 +70,10 @@ const Booking = () => {
     },
     {
       title: t("Landlord Name"),
-      dataIndex: "author",
+      dataIndex: "residence",
       key: "owner",
       render: (data: any) => {
-        return data?.name;
+        return data?.host?.name;
       },
     },
     {
