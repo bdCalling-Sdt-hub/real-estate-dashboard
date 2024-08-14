@@ -27,7 +27,7 @@ const OtpForm = ({ type }: IotpForm) => {
   const token = useAppSelector((state) => state.otp.token);
   const user: TUser | null = useAppSelector(useCurrentUser);
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(new Array(4).fill(""));
+  const [otp, setOtp] = useState(new Array(6).fill(""));
   const otpBoxReference: React.MutableRefObject<
     (InputRef | HTMLInputElement)[]
   > = useRef<(InputRef | HTMLInputElement)[]>([]);
@@ -35,7 +35,7 @@ const OtpForm = ({ type }: IotpForm) => {
     let newArr = [...otp];
     newArr[index] = value;
     setOtp(newArr);
-    if (value && index < 4 - 1) {
+    if (value && index < 6 - 1) {
       otpBoxReference.current[index + 1].focus();
     }
   };
@@ -46,7 +46,7 @@ const OtpForm = ({ type }: IotpForm) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       otpBoxReference.current[index - 1].focus();
     }
-    if (e.key === "Enter" && e.currentTarget.value && index < 4 - 1) {
+    if (e.key === "Enter" && e.currentTarget.value && index < 6 - 1) {
       otpBoxReference.current[index + 1].focus();
     }
   };
@@ -96,7 +96,7 @@ const OtpForm = ({ type }: IotpForm) => {
           </Col>
         ))}
       </Row>
-      <div className="flex justify-between my-4">
+      <div className="flex justify-between my-6">
         <p className="text-black font-600 text-18 text-600">
           Don't received code?
         </p>
@@ -110,7 +110,7 @@ const OtpForm = ({ type }: IotpForm) => {
       <div>
         <Button
           onClick={handleSubmit}
-          disabled={otp.join("").length !== 4}
+          disabled={otp.join("").length !== 6}
           htmlType="submit"
           className={`${style.otpButton}  `}
           block

@@ -38,7 +38,9 @@ const Host = () => {
 
   query["limit"] = limit;
   query["page"] = page;
+
   query["searchTerm"] = search;
+  
   query["role"] = "landlord";
 
   if (isVerified === true || isVerified === false) {

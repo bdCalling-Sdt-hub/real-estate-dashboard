@@ -52,7 +52,7 @@ const Property = () => {
     {
       title: t("Property Name"),
       dataIndex: "propertyName",
-      key: "property Name",
+      key: "propertyName",
     },
     {
       title: t("Monthly Price"),
@@ -91,7 +91,7 @@ const Property = () => {
       dataIndex: "host",
       key: "agent",
       render: (data: any) => {
-        return <p>{data.name}</p>;
+        return <p>{data?.name}</p>;
       },
     },
     {
