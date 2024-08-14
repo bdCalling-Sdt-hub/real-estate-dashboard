@@ -114,7 +114,8 @@ const AdminDashboard = () => {
     userSuccess,
     users,
   ]);
-
+  
+console.log(userRatio)
   return (
     <div className="container mx-auto">
       <Row gutter={[16, 16]}>
@@ -187,13 +188,13 @@ const AdminDashboard = () => {
               <div className="flex items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-primary"></div>
                 <h1 className="text-16 font-500">
-                  {t("Tenants")} ({data?.value})
+                  {t("Tenants")} ({ userRatio?.length > 0 && userRatio[0].value })
                 </h1>
               </div>
               <div className="flex items-center gap-x-2">
                 <div className="h-[20px] w-[20px] bg-[#925800]"></div>
                 <h1 className="text-16 font-500">
-                  {t("Landlords")} ({data?.value})
+                  {t("Landlords")} ({ userRatio?.length > 0 && userRatio[1].value })
                 </h1>
               </div>
             </div>
