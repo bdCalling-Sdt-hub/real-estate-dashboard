@@ -2,10 +2,10 @@ import { Divider } from "antd";
 import { useTranslation } from "react-i18next";
 import { IoLocateOutline } from "react-icons/io5";
 import { NumberFormat, priceFormat } from "../../../utils/Format";
+import { CgLayoutGrid } from "react-icons/cg";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PropertyDetails = ({ modalData }: { modalData: any }) => {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation(); 
   return (
     <div>
       <h1 className="text-30 font-500">{t("Property Information")}</h1>
@@ -63,7 +63,13 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
             <p>
               {t("Pricing")}:{" "}
               <span className="font-700 text-primary">
-                {priceFormat(parseInt(modalData?.price))} / {t("month")}
+                {priceFormat(parseInt(modalData?.perNightPrice))} / {t("night")}
+              </span>
+            </p>
+            <p>
+              {t("Pricing")}:{" "}
+              <span className="font-700 text-primary">
+                {priceFormat(parseInt(modalData?.perMonthPrice))} / {t("month")}
               </span>
             </p>
           </div>
@@ -92,12 +98,12 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
               {t("Verification Status")}:{" "}
               <span
                 className={`px-2 py-1 rounded-md ${
-                  modalData?.host?.civilId?.status
+                  modalData?.host?.verificationRequest ==="accepted"
                     ? "bg-[#bbf7d0] text-[#15803d]"
                     : "bg-[#fecaca] text-[#b91c1c]"
                 }`}
               >
-                {modalData?.host?.civilId?.status
+                {modalData?.host?.verificationRequest ==="accepted"
                   ? t("verified")
                   : t("unverified")}
               </span>

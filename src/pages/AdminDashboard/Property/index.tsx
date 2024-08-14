@@ -52,12 +52,20 @@ const Property = () => {
     {
       title: t("Property Name"),
       dataIndex: "propertyName",
-      key: "property Name",
+      key: "propertyName",
     },
     {
-      title: t("Price"),
-      dataIndex: "price",
-      key: "price",
+      title: t("Monthly Price"),
+      dataIndex: "perMonthPrice",
+      key: "perMonthPrice",
+      render: (data: any) => {
+        return <p className="font-700">{priceFormat(data)}</p>;
+      },
+    },
+    {
+      title: t("Per Night Price"),
+      dataIndex: "perNightPrice",
+      key: "perNightPrice",
       render: (data: any) => {
         return <p className="font-700">{priceFormat(data)}</p>;
       },
@@ -83,7 +91,7 @@ const Property = () => {
       dataIndex: "host",
       key: "agent",
       render: (data: any) => {
-        return <p>{data.name}</p>;
+        return <p>{data?.name}</p>;
       },
     },
     {

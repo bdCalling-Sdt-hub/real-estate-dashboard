@@ -12,8 +12,7 @@ import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import { tagTypesList } from "../../types/tagTypes";
 const baseQuery = fetchBaseQuery({
-  baseUrl:"http://192.168.1.9:9005/api/v1",
-  //  "http://103.145.138.74:9005/api/v1",
+  baseUrl: "http://192.168.10.240:9005/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const otpToken = sessionStorage.getItem("token");
@@ -50,8 +49,9 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     //* Send Refresh 
 
     const res = await fetch(
-      `http://192.168.1.9:9005/api/v1/auth/refresh-token`,
-      // "http://103.145.138.74:9005/api/v1/auth/refresh-token",
+
+      "http://192.168.10.240:9005/api/v1/auth/refresh-token",
+
       {
         method: "POST",
         credentials: "include",

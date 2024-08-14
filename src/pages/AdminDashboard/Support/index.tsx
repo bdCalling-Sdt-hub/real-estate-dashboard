@@ -29,10 +29,12 @@ const navigate = useNavigate();
   const onSubmit = async () => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res: any = await updateAboutFn({ supports: content })
-      if (res?.data?.success) {
-        toast.success(res?.data?.message, { id: "content" })
-         navigate("/admin/setting");
+      const res: any = await updateAboutFn({ supports: content }).unwrap()
+      if (res?.success) {
+        toast.success("Support is updated", { id: "content" });
+        navigate("/admin/setting");
+      }else{
+        toast.success(res?.message, { id: "content" });
       }
     } catch (error) {
       ErrorResponse(error, "content")

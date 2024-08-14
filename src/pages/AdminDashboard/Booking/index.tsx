@@ -8,6 +8,8 @@ import ResTable from "../../../component/Table";
 import BookingDetails from "./BookingDetails";
 import { useGetAllBookingQuery } from "../../../redux/features/booking/bookingApi";
 import moment from "moment";
+import { render } from "react-dom";
+import { CgLayoutGrid } from "react-icons/cg";
 
 const Booking = () => {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ const Booking = () => {
   const { data: data, isSuccess } = useGetAllBookingQuery({ ...query });
 
   const [modalData, setModalData] = useState({});
-
+  const startIndex = (page - 1) * limit;
   useEffect(() => {
     if (isSuccess) {
       setBookings(data?.data?.data);
@@ -41,8 +43,13 @@ const Booking = () => {
   const column = [
     {
       title: t("ID"),
-      dataIndex: "_id",
+
+      dataIndex: "key",
+
       key: "id",
+      render:(data:any, record:any, index:any)=>{   
+        return startIndex + index + 1
+      },
     },
     {
       title: t("Date"),

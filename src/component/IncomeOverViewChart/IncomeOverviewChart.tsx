@@ -77,7 +77,7 @@ const IncomeOverviewChart = () => {
     <div>
       <Row gutter={[16, 12]}>
         <Col span={24}>
-          <div className="bg-white p-4">
+          <div className="bg-white p-4 h-[360px]">
             <div className="flex items-center justify-between">
               <h1 className="text-20 font-500 text-gray">
                 {t("Total Income (Host)")}

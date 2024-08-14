@@ -67,7 +67,7 @@ const VerifyOtpFrom = () => {
           theme={{
             components: {
               Input: {
-                lineHeight: 4,
+                lineHeight: 6,
               },
             },
           }}

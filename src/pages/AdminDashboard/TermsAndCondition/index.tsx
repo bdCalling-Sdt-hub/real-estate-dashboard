@@ -29,10 +29,12 @@ const navigate = useNavigate();
   }
   const onSubmit = async () => {
     try {
-      const res: any = await updateAboutFn({ termsAndConditions: content })
-      if (res?.data?.success) {
-        toast.success(res?.data?.message, { id: "content" })
-         navigate("/admin/setting");
+      const res: any = await updateAboutFn({ termsAndConditions: content }).unwrap()
+      if (res?.success) {
+        toast.success("terms and conditions policy is updated", { id: "content" });
+        navigate("/admin/setting");
+      }else{
+        toast.success(res?.message, { id: "content" });
       }
     } catch (error) {
       ErrorResponse(error, "content")
