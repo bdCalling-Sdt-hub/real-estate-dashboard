@@ -53,7 +53,7 @@ const AdverTisement = () => {
 
   const column = [
     {
-      title: t("Ad ID"),
+      title: t("Property Name"),
       dataIndex: "property",
       key: "propertyName",
       render: (data: any) => {

@@ -43,7 +43,9 @@ const Booking = () => {
   const column = [
     {
       title: t("ID"),
+
       dataIndex: "key",
+
       key: "id",
       render:(data:any, record:any, index:any)=>{   
         return startIndex + index + 1
@@ -60,7 +62,7 @@ const Booking = () => {
     {
       title: t("User Name"),
       dataIndex: "user",
-      key: "name",
+      key: "user",
       render: (data: any) => {
         return data?.name;
       },
@@ -75,10 +77,10 @@ const Booking = () => {
     },
     {
       title: t("Landlord Name"),
-      dataIndex: "author",
+      dataIndex: "residence",
       key: "owner",
       render: (data: any) => {
-        return data?.name;
+        return data?.host?.name;
       },
     },
     {

@@ -86,6 +86,7 @@ const IncomeHistory = () => {
       dataIndex: "residenceAuthority",
       key: "Landlord",
       render: (data: any) => {
+        console.log("------------------------->>", percentageData)
         return data?.name;
       },
     },

@@ -66,6 +66,7 @@ const OtpForm = ({ type }: IotpForm) => {
     }
   };
   const handleResendOtp = async () => {
+    console.log(profileData)
     const toastId = toast.loading("Resending");
     try {
       const res = await resendOtp(profileData?.data).unwrap();
@@ -79,7 +80,7 @@ const OtpForm = ({ type }: IotpForm) => {
     <div className={` mt-2  flex flex-col`} style={{ height: "300px" }}>
       <Row>
         {otp.map((digit, index) => (
-          <Col lg={4} className="flex justify-center">
+          <Col lg={6} className="flex justify-center">
             <Input
               key={index}
               value={digit}
