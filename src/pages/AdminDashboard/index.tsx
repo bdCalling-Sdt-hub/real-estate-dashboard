@@ -2,22 +2,22 @@
 
 import { Col, DatePicker, Divider, Row, Space } from "antd";
 import dayjs from "dayjs";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AdminDashboardUserRation from "../../component/AdminDashboardUserRatio/AdminDashboardUserRation";
 import AgentCard from "../../component/AgentCard/AgentCard";
 import BookingChart from "../../component/BookingChart/BookingChart";
 import DashboardCard from "../../component/DashboardCard";
+import NoData from "../../component/NoData/NoData";
 import ResTable from "../../component/Table";
-import { TCommonTheme } from "../../themes";
-import style from "./dashboard.module.css";
-import moment from "moment";
+import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
 import {
   useGetTotalIncomesQuery,
   useTopLandlordIncomeQuery,
 } from "../../redux/features/payments/paymentApi";
-import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
-import NoData from "../../component/NoData/NoData";
+import { TCommonTheme } from "../../themes";
+import style from "./dashboard.module.css";
 
 type IRatioData = {
   name: string;
@@ -115,7 +115,6 @@ const AdminDashboard = () => {
     users,
   ]);
 
-  console.log(topAgentData);
   return (
     <div className="container mx-auto">
       <Row gutter={[16, 16]}>
@@ -168,10 +167,13 @@ const AdminDashboard = () => {
             <div
               className={`overflow-y-auto h-[357px] pe-2 ${style.scrollbarCustom}`}
             >
-              {topAgentData?.length > 0 &&
-                topAgentData?.map((data, index) => (
+              {topAgentData?.length > 0 ? (
+                topAgentData.map((data, index) => (
                   <AgentCard key={index} data={data} />
-                ))}
+                ))
+              ) : (
+                <NoData />
+              )}
             </div>
           </div>
           <div className="bg-white p-4">
@@ -181,19 +183,19 @@ const AdminDashboard = () => {
             ) : (
               <NoData />
             )}
-            <div className="grid grid-cols-1">
-              {userRatio?.map((data: IRatioData, index: number) => (
-                <div key={index} className="flex  items-center gap-x-2">
-                  <div
-                    className={`h-[20px] w-[20px] ${
-                      index === 0 && "bg-primary"
-                    } bg-[${data?.color}] `}
-                  ></div>
-                  <h1 className="text-16 font-500">
-                    {t("Tenants")} ({data?.value})
-                  </h1>
-                </div>
-              ))}
+            <div className="flex justify-between">
+              <div className="flex items-center gap-x-2">
+                <div className="h-[20px] w-[20px] bg-primary"></div>
+                <h1 className="text-16 font-500">
+                  {t("Tenants")} ({data?.value})
+                </h1>
+              </div>
+              <div className="flex items-center gap-x-2">
+                <div className="h-[20px] w-[20px] bg-[#925800]"></div>
+                <h1 className="text-16 font-500">
+                  {t("Landlords")} ({data?.value})
+                </h1>
+              </div>
             </div>
           </div>
         </Col>

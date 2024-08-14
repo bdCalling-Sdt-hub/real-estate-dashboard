@@ -2,18 +2,18 @@
 import { MenuOutlined } from "@ant-design/icons";
 import { Avatar, Badge, Button, Select } from "antd";
 import { KW, US } from "country-flag-icons/react/3x2";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
+import { useProfileQuery } from "../redux/features/auth/authApi";
+import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
 import { setCollapsed } from "../redux/features/layout/layoutSlice";
+import { setlang } from "../redux/features/locals/localSlice";
 import { useGetMyNotificationQuery } from "../redux/features/notification/notificationApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { TUser, useCurrentUser } from "../redux/features/auth/authSlice";
-import { useEffect } from "react";
-import { FaRegCircleUser } from "react-icons/fa6";
-import { setlang } from "../redux/features/locals/localSlice";
-import { useProfileQuery } from "../redux/features/auth/authApi";
 
 const HeaderLayout = () => {
   const { i18n, t } = useTranslation();
@@ -21,7 +21,7 @@ const HeaderLayout = () => {
   const { lang } = useAppSelector((state) => state.lang);
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    dispatch(setlang());
+    dispatch(setlang(localStorage.getItem("i18nextLng")));
   };
   const { data: profile } = useProfileQuery(undefined);
   const { data: notficationData } = useGetMyNotificationQuery({ read: false });
@@ -36,6 +36,7 @@ const HeaderLayout = () => {
   useEffect(() => {
     toast.info(notification?.message);
   }, [notification]);
+
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   return (
     <div className="flex justify-between">
@@ -70,7 +71,7 @@ const HeaderLayout = () => {
       <div className="flex items-center  gap-x-6">
         <Select
           onChange={changeLanguage}
-          defaultValue="ar"
+          defaultValue={localStorage.getItem("i18nextLng") || "ar"}
           style={{ width: 120 }}
           options={[
             {

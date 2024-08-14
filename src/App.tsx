@@ -14,9 +14,7 @@ import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
 import PrivateRoute from "./router/PrivateRoutes";
 
-
 const URL = "http://192.168.10.240:9001";
-
 
 function App() {
   const token: string | null = useAppSelector(useCurrentToken);
@@ -30,7 +28,10 @@ function App() {
       dispatch(setNotification(data));
     };
 
-    socket.on("notification::"+user?.userId as string, handleNotificationEvent);
+    socket.on(
+      ("notification::" + user?.userId) as string,
+      handleNotificationEvent
+    );
 
     return () => {
       // Clean up the event listener when the component is unmounted
@@ -41,10 +42,10 @@ function App() {
 
   return (
     <PrivateRoute role={undefined}>
-    <ConfigProvider direction={lang === "ar" ? "rtl" : "ltr"}>
-      <MainLayout />
-    </ConfigProvider>
-     </PrivateRoute>
+      <ConfigProvider direction={lang === "ar" ? "rtl" : "ltr"}>
+        <MainLayout />
+      </ConfigProvider>
+    </PrivateRoute>
   );
 }
 

@@ -12,14 +12,15 @@ import ResForm from "../Form/FormProvider";
 import ResInput from "../Form/ResInput";
 import ErrorResponse from "../UI/ErrorResponse";
 
-const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
+const ProfileForm = ({ ProfileData, imageFile, toggleEdit, refetch }: any) => {
   const { t } = useTranslation();
   const [updateProfile] = useUpdateProfileMutation();
+
   const defaultValues = {
     name: ProfileData?.data?.name,
     phoneNumber: ProfileData?.data?.phoneNumber,
   };
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => { 
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Updating profile...");
     try {
       const formData = new FormData();
@@ -28,6 +29,7 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit }: any) => {
       }
       formData.append("data", JSON.stringify(data));
       const res = await updateProfile(formData).unwrap();
+      refetch();
       toast.success(res?.message, {
         id: toastId,
         duration: 2000,

@@ -12,7 +12,7 @@ i18n
   .init({
     fallbackLng: "en",
     debug: true,
-    lng: "ar",
+    lng: localStorage.getItem("i18nextLng") || "ar",
     resources: {
       en: {
         translation: english,

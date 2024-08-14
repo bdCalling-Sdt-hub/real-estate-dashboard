@@ -1,18 +1,18 @@
 import { Button } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 import { MdEditSquare } from "react-icons/md";
 import FileUpload from "../../component/FileUpload";
 import ProfileForm from "../../component/ProfileForm";
 import UseImageUpload from "../../hooks/useImageUpload";
 import { useProfileQuery } from "../../redux/features/auth/authApi";
-import { IoMdClose } from "react-icons/io";
 const Profile = () => {
-  const { data: profile } = useProfileQuery(undefined);
+  const { data: profile, refetch } = useProfileQuery(undefined);
   const { t } = useTranslation();
   const { imageUrl, setFile, imageFile } = UseImageUpload();
   const [toggleEdit, setToggleEdit] = useState<boolean>(true);
-// console.log(profile);
+  // console.log(profile);
   return (
     <div className="container mx-auto">
       <h1 className="text-20 font-500 mb-2 text-gray">
@@ -44,6 +44,7 @@ const Profile = () => {
         </div>
         <div className="w-full mt-4">
           <ProfileForm
+            refetch={refetch}
             ProfileData={profile}
             imageFile={imageFile}
             toggleEdit={toggleEdit}

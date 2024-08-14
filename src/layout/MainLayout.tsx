@@ -1,7 +1,9 @@
 import { ConfigProvider, Layout } from "antd";
 
 import { Content, Header } from "antd/es/layout/layout";
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hooks";
 import { paginationTheme } from "../themes/paginationThemes";
 import { sidebardThemes } from "../themes/sidebarThemes";
@@ -11,6 +13,23 @@ import Sidebar from "./Sidebar";
 const MainLayout = () => {
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   const { lang } = useAppSelector((state) => state.lang);
+
+  const navigate = useNavigate();
+  const User = useAppSelector(useCurrentUser);
+  useEffect(() => {
+    // Get the navigation entries and cast them to the correct type
+    const navigationEntries = performance.getEntriesByType(
+      "navigation"
+    ) as PerformanceNavigationTiming[];
+
+    // Check if the page load was not from a reload
+    const isReload = navigationEntries[0]?.type === "reload";
+
+    // If it's not a reload and user data is available, navigate to the dashboard
+    if (!isReload && User && User.role) {
+      navigate(`/${User.role}/dashboard`);
+    }
+  }, [User, navigate]);
 
   return (
     <div>
