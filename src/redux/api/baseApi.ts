@@ -12,7 +12,7 @@ import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import { tagTypesList } from "../../types/tagTypes";
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://192.168.10.240:9005/api/v1",
+  baseUrl: "http://115.127.156.14:9005/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const otpToken = sessionStorage.getItem("token");
@@ -50,7 +50,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
     const res = await fetch(
 
-      "http://192.168.10.240:9005/api/v1/auth/refresh-token",
+      "http://115.127.156.14:9005/api/v1/auth/refresh-token",
 
       {
         method: "POST",

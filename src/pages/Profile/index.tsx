@@ -29,18 +29,18 @@ const Profile = () => {
             {t(toggleEdit ? "Edit" : "Close")}
           </Button>
         </div>
-        <div className="flex items-center  gap-x-4 text-white ">
+        <div className="flex flex-col  gap-x-4 text-white ">
           <div className="flex items-center gap-x-4">
             <FileUpload
               setSelectedFile={setFile}
               imageUrl={imageUrl}
               image={profile?.data?.image}
             />
-            <h1 className="text-24 w-full text-gray font-500">
-              {profile?.data?.username}
-            </h1>
           </div>
-          <h1 className="text-40 text-black font-600">{profile?.data?.name}</h1>
+            <h1 className="text-24 w-full text-gray font-500">
+              {profile?.data?.name}
+            </h1>
+          <h1 className="text-20 text-gray font-600">{profile?.data?.phoneCode}{profile?.data?.phoneNumber}</h1>
         </div>
         <div className="w-full mt-4">
           <ProfileForm
