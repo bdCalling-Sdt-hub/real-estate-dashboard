@@ -12,12 +12,12 @@ import {
 import storage from "redux-persist/lib/storage";
 import { baseApi } from "./api/baseApi";
 import authSlice from "./features/auth/authSlice";
-import layoutSlice from "./features/layout/layoutSlice";
-import otpSlice from "./features/otp/otpSlice";
-
 import branchSlice from "./features/branch/branchSlice";
+import layoutSlice from "./features/layout/layoutSlice";
 import localSlice from "./features/locals/localSlice";
 import notificationSlice from "./features/notification/notificationSlice";
+import otpSlice from "./features/otp/otpSlice";
+import PropertySlice from "./features/property/propertySlice";
 import tableSlice from "./features/table/tableSlice";
 
 const persistConfig = {
@@ -37,6 +37,7 @@ export const store = configureStore({
     notification: notificationSlice,
     branch: branchSlice,
     lang: localSlice,
+    property: PropertySlice,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares({
