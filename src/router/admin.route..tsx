@@ -80,12 +80,12 @@ export const adminRoutes = [
     name: "Income",
     icon: <RiSecurePaymentFill />,
     children: [
-      {
-        name: "Overview",
-        path: "income/overview",
-        icon: <TransactionOutlined />,
-        element: <IncomeOverview />,
-      },
+      // {
+      //   name: "Overview",
+      //   path: "income/overview",
+      //   icon: <TransactionOutlined />,
+      //   element: <IncomeOverview />,
+      // },
       {
         name: "Transactions",
         path: "income/transaction",

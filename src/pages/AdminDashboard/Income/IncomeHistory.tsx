@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import IncomeHistoryCard from "../../../component/IncomeHistoryCard/IncomeHistoryCard";
 import ResTable from "../../../component/Table"; 
 import {
+  useGetAllTransitionsQuery,
   useGetPackageIncomeQuery,
   useGetPercentageIncomeQuery,
 } from "../../../redux/features/payments/paymentApi";
@@ -24,25 +25,25 @@ const IncomeHistory = () => {
     totalPaymentsList: [],
   });
 
-  const { data: packageIncome, isSuccess } = useGetPackageIncomeQuery({});
-  const { data: percentageIncome, isSuccess: success } =
-    useGetPercentageIncomeQuery({});
+  const percentageQuery:Record<string, any> = {}
+  const adsQuery:Record<string, any> = {}
+  percentageQuery["type"] = "BookingResidence"
+  adsQuery["type"] = "Ads"
+
+  const { data: adsIncome, isSuccess } = useGetAllTransitionsQuery(adsQuery); 
+  const { data: percentageIncome, isSuccess:success } = useGetAllTransitionsQuery(percentageQuery);
+ 
 
   useEffect(() => {
     if (isSuccess) {
-      setPackagesData(packageIncome?.data);
+      setPackagesData(adsIncome?.data);
     }
     if (success) {
       setPercentageData(percentageIncome?.data);
     }
-  }, [
-    isSuccess,
-    packageIncome,
-    setPackagesData,
-    success,
-    setPercentageData,
-    percentageIncome,
-  ]); 
+  }, [isSuccess, success]); 
+
+
   const column1 = [
     {
       title: t("TXN ID"),
@@ -65,22 +66,22 @@ const IncomeHistory = () => {
         return priceFormat(data);
       },
     },
-    {
-      title: t("Percentage"),
-      dataIndex: "adminAmount",
-      key: "Percentage",
-      render: (data: any) => {
-        return priceFormat(data);
-      },
-    },
-    {
-      title: t("Landlord Amount"),
-      dataIndex: "landlordAmount",
-      key: "amount",
-      render: (data: any) => {
-        return priceFormat(data);
-      },
-    },
+    // {
+    //   title: t("Percentage"),
+    //   dataIndex: "adminAmount",
+    //   key: "Percentage",
+    //   render: (data: any) => {
+    //     return priceFormat(data);
+    //   },
+    // },
+    // {
+    //   title: t("Landlord Amount"),
+    //   dataIndex: "landlordAmount",
+    //   key: "amount",
+    //   render: (data: any) => {
+    //     return priceFormat(data);
+    //   },
+    // },
     {
       title: t("Landlord"),
       dataIndex: "residenceAuthority",
@@ -99,7 +100,7 @@ const IncomeHistory = () => {
       key: "id",
     },
     {
-      title: t("Date"),
+      title: t("Pay At"),
       dataIndex: "transitionDate",
       key: "date",
       render: (data: any) => {
@@ -115,19 +116,19 @@ const IncomeHistory = () => {
       },
     },
     {
-      title: t("User"),
-      dataIndex: "user",
-      key: "sender",
+      title: t("StartAt"),
+      dataIndex: "details",
+      key: "details",
       render: (data: any) => {
-        return data?.name;
+        return moment(data?.startAt).format().slice(0,10);
       },
     },
     {
-      title: t("Package"),
+      title: t("StartAt"),
       dataIndex: "details",
-      key: "package",
+      key: "details",
       render: (data: any) => {
-        return data?.package?.name;
+        return moment(data?.endAt).format().slice(0,10);
       },
     },
   ];
@@ -136,7 +137,7 @@ const IncomeHistory = () => {
     <div className="container mx-auto">
       <Row gutter={16}>
         <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">{t("Percentage")}</h1>
+          <h1 className="text-gray font-500 text-20 mb-2">{t("Percentage Transitions")}</h1>
           <IncomeHistoryCard
             totalIncome={percentageData?.totalIncome}
             todayIncome={percentageData?.todayIncome}
@@ -153,7 +154,7 @@ const IncomeHistory = () => {
           </div>
         </Col>
         <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">{t("Packages")}</h1>
+          <h1 className="text-gray font-500 text-20 mb-2">{t("Ads Transitions")}</h1>
           <IncomeHistoryCard
             totalIncome={packagesData?.totalIncome}
             todayIncome={packagesData?.todayIncome}

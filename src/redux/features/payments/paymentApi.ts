@@ -68,6 +68,15 @@ const PaymentApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.payment],
     }),
+
+    getAllTransitions: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: "payments/all-transitions",
+        method: "Get",
+        params: arg,
+      }),
+      providesTags: [tagTypes.payment],
+    }),
   }),
 });
 
@@ -78,5 +87,6 @@ export const {
   usePackageStatisticsIncomeQuery,
   usePercentageStatisticsIncomeQuery,
   usePackageStatisticsIncomesQuery,
-  useTopLandlordIncomeQuery
+  useTopLandlordIncomeQuery,
+  useGetAllTransitionsQuery
 } = PaymentApi;

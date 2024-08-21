@@ -24,15 +24,15 @@ const AdverTisement = () => {
   if (category) {
     query["property.category.name"] = category;
   }
+  // query["status"] = "approved";
   query["limit"] = limit;
   query["page"] = page;
   // query["searchTerm"] = search;
-
-  const { data: data, isSuccess } = useGetAllAdsQuery({ ...query });
-
   categoryQuery["limit"] = 99999999999;
   const { data: categories } = useGetAllCategoriesQuery({ ...categoryQuery });
 
+  const { data: data, isSuccess } = useGetAllAdsQuery({ ...query }); 
+  
   const [modalData, setModalData] = useState({});
 
   useEffect(() => { 

@@ -63,15 +63,15 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
             <p>
               {t("Pricing")}:{" "}
               <span className="font-700 text-primary">
-                {priceFormat(parseInt(modalData?.perNightPrice))} / {t("night")}
+                {priceFormat(parseInt(modalData?.rent))} / {t("month")}
               </span>
             </p>
-            <p>
+            {/* <p>
               {t("Pricing")}:{" "}
               <span className="font-700 text-primary">
                 {priceFormat(parseInt(modalData?.perMonthPrice))} / {t("month")}
               </span>
-            </p>
+            </p> */}
           </div>
         </div>
         <div>

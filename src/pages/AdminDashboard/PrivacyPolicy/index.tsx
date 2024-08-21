@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
       setContent(data?.data?.data[0].privacyPolicy);
     }
   }, [isSuccess, data]);
-  if (isLoading) {
+  if (isLoading) { 
     toast.loading("Loading...", { id: "content" });
   }
   const onSubmit = async () => {

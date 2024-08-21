@@ -63,7 +63,7 @@ const Booking = () => {
       title: t("User Name"),
       dataIndex: "user",
       key: "user",
-      render: (data: any) => {
+      render: (data: any) => { 
         return data?.name;
       },
     },
@@ -77,10 +77,10 @@ const Booking = () => {
     },
     {
       title: t("Landlord Name"),
-      dataIndex: "residence",
-      key: "owner",
-      render: (data: any) => {
-        return data?.host?.name;
+      dataIndex: "author",
+      key: "author",
+      render: (data: any) => { 
+        return data?.name;
       },
     },
     {
@@ -99,6 +99,7 @@ const Booking = () => {
       },
     },
   ];
+  console.log("--------------",new Date());
 
   return (
     <div className="container mx-auto h-80 my-auto">
