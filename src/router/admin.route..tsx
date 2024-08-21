@@ -16,9 +16,9 @@ import Booking from "../pages/AdminDashboard/Booking";
 import Guest from "../pages/AdminDashboard/Guest";
 import Host from "../pages/AdminDashboard/Host";
 import IncomeHistory from "../pages/AdminDashboard/Income/IncomeHistory";
-import IncomeOverview from "../pages/AdminDashboard/Income/IncomeOverview";
 import PrivacyPolicy from "../pages/AdminDashboard/PrivacyPolicy";
 import Property from "../pages/AdminDashboard/Property";
+import CreateProperty from "../pages/AdminDashboard/Property/CreateProperty";
 import Support from "../pages/AdminDashboard/Support";
 import TermsAndConditions from "../pages/AdminDashboard/TermsAndCondition";
 import VerificationRequest from "../pages/AdminDashboard/VerificatationRequest";
@@ -75,6 +75,12 @@ export const adminRoutes = [
     path: "realState",
     icon: <FaRegBuilding />,
     element: <Property />,
+  },
+  {
+    // name: "Real Estate",
+    path: "realState/create",
+    icon: <FaRegBuilding />,
+    element: <CreateProperty />,
   },
   {
     name: "Income",

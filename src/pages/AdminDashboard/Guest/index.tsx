@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, Menu, MenuProps } from "antd";
-import { SearchProps } from "antd/es/input";
+import { Button, Dropdown, Input, Menu } from "antd";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CgUnblock } from "react-icons/cg";
 import { MdBlock } from "react-icons/md";
+import { toast } from "sonner";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 import ResConfirm from "../../../component/UI/PopConfirm";
-import { userData } from "../../../db";
-import GuestDetails from "./GuestDetails";
 import {
   useGetAllUserQuery,
   useUpdateUserMutation,
 } from "../../../redux/features/auth/authApi";
-import { toast } from "sonner";
-import ErrorResponse from "../../../component/UI/ErrorResponse";
-import moment from "moment";
 import { NumberFormat } from "../../../utils/Format";
-import { CgUnblock } from "react-icons/cg";
+import GuestDetails from "./GuestDetails";
 
 const Guest = () => {
   const query: Record<string, any> = {};
@@ -41,8 +39,13 @@ const Guest = () => {
   if (isVerified === true || isVerified === false) {
     query["isVerified"] = isVerified;
   }
- 
-  const { data: data, isSuccess } = useGetAllUserQuery({ ...query });
+
+  const {
+    data: data,
+    isSuccess,
+    isLoading,
+    isFetching,
+  } = useGetAllUserQuery({ ...query });
 
   const [modalData, setModalData] = useState({});
 
@@ -70,11 +73,12 @@ const Guest = () => {
         body: { status: "blocked" },
       }).unwrap();
 
-      if(res.success){
-
-        toast.success(t("user blocked success"), { id: "block", duration: 2000 });
-      }else{
-      
+      if (res.success) {
+        toast.success(t("user blocked success"), {
+          id: "block",
+          duration: 2000,
+        });
+      } else {
         toast.success(res.message, { id: "block", duration: 2000 });
       }
     } catch (error) {
@@ -90,10 +94,12 @@ const Guest = () => {
         body: { status: "active" },
       }).unwrap();
 
-      if(res.success){
-        toast.success(t("user unblock success"), { id: "active", duration: 2000 });
-      }else{
-  
+      if (res.success) {
+        toast.success(t("user unblock success"), {
+          id: "active",
+          duration: 2000,
+        });
+      } else {
         toast.success(res.message, { id: "active", duration: 2000 });
       }
     } catch (error) {
@@ -124,7 +130,7 @@ const Guest = () => {
       title: t("Contact No"),
       dataIndex: "phoneNumber",
       key: "number",
-      render: (data: any) => { 
+      render: (data: any) => {
         return data ? NumberFormat(data) : data;
       },
     },
@@ -229,6 +235,7 @@ const Guest = () => {
         </div>
       </div>
       <ResTable
+        loading={isLoading || isFetching}
         column={column}
         data={users}
         pagination={{

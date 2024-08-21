@@ -14,8 +14,10 @@
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.1",
     "antd": "^5.16.0",
+    "antd-country-phone-input": "^4.5.1",
     "country-flag-icons": "^1.5.12",
     "dayjs": "^1.11.10",
+    "generate-password": "^1.7.1",
     "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^8.0.0",
     "jodit-react": "^4.0.15",
@@ -33,6 +35,7 @@
     "socket.io-client": "^4.7.5",
     "sonner": "^1.4.41",
     "sweetalert2": "^11.6.13",
+    "world_countries_lists": "^2.9.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

@@ -14,6 +14,8 @@ interface SelectProps {
   size?: SizeType;
   options: OptionsProps[];
   defaultValue?: string;
+  mode?: any;
+  showSearch?: boolean;
 }
 
 const ResSelect = ({
@@ -23,6 +25,8 @@ const ResSelect = ({
   options,
   size,
   defaultValue,
+  mode,
+  showSearch = false,
 }: SelectProps) => {
   return (
     <Controller
@@ -34,6 +38,8 @@ const ResSelect = ({
           help={error ? error.message : ""}
         >
           <Select
+            mode={mode}
+            showSearch={showSearch}
             defaultValue={defaultValue}
             size={size}
             options={options}

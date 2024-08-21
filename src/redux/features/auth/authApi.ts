@@ -61,7 +61,7 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.user],
     }),
     getAllUser: builder.query({
-      query: (query:Record<string, any>) => ({
+      query: (query: Record<string, any>) => ({
         url: "/users",
         method: "GET",
         params: query,
@@ -85,6 +85,14 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    addLandlord: builder.mutation({
+      query: (data) => ({
+        url: `/users/admin-create-user`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -99,4 +107,5 @@ export const {
   useUpdateUserMutation,
   useGetAllUserQuery,
   useRejectIdVerificationMutation,
+  useAddLandlordMutation,
 } = authApi;

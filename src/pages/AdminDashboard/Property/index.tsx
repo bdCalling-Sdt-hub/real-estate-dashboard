@@ -3,14 +3,15 @@ import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Space } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
-import PropertyDetails from "./PropertyDetails";
+import { useGetAllCategoriesQuery } from "../../../redux/features/category/categoryApi";
 import { useGetAllPropertyQuery } from "../../../redux/features/property/propertyApi";
 import { priceFormat } from "../../../utils/Format";
-import { useGetAllCategoriesQuery } from "../../../redux/features/category/categoryApi";
+import PropertyDetails from "./PropertyDetails";
 
-const Property = () => { 
+const Property = () => {
   const [category, setCategory] = useState<string | null>(null);
   const query: Record<string, any> = {};
   const categoryQuery: Record<string, any> = {};
@@ -28,7 +29,7 @@ const Property = () => {
 
   categoryQuery["limit"] = 99999999999;
   const { data: categories } = useGetAllCategoriesQuery({ ...categoryQuery });
-
+  const navigate = useNavigate();
   const [modalData, setModalData] = useState({});
 
   useEffect(() => {
@@ -42,11 +43,10 @@ const Property = () => {
     setShow((prevShow) => !prevShow);
   };
 
-  const onPaginationChange = (page: any, pageSize: any) => { 
+  const onPaginationChange = (page: any, pageSize: any) => {
     setPage(page);
     setLimit(pageSize);
   };
-
 
   const column = [
     {
@@ -61,7 +61,7 @@ const Property = () => {
       render: (data: any) => {
         return priceFormat(data);
       },
-    }, 
+    },
     {
       title: t("Category"),
       dataIndex: "category",
@@ -69,7 +69,7 @@ const Property = () => {
       render: (data: any) => {
         return <p>{t(data?.name)}</p>;
       },
-    }, 
+    },
     {
       title: t("Landlord Name"),
       dataIndex: "host",
@@ -93,36 +93,45 @@ const Property = () => {
       },
     },
   ];
- 
+
   return (
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center">
         <h1 className="text-20 mb-2 font-500 text-gray">{t("Real Estate")}</h1>
-        <Space size="middle">
-          <Dropdown
-            overlay={
-              <Menu>
-                {categories?.data?.data?.length !== 0 &&
-                  categories?.data?.data?.map((item: any) => (
-                    <Menu.Item
-                      className={`${category === item?._id && "bg-primary"}`}
-                      onClick={() => setCategory(item?._id)}
-                      key={item?._id}
-                    >
-                      {t(item.name)}
-                    </Menu.Item>
-                  ))}
-              </Menu>
-            }
-          >
-            <Button
-              className="bg-primary text-white font-500 "
-              icon={<FilterOutlined />}
+
+        <div className="flex gap-x-4 mb-2">
+          <Space size="middle">
+            <Dropdown
+              overlay={
+                <Menu>
+                  {categories?.data?.data?.length !== 0 &&
+                    categories?.data?.data?.map((item: any) => (
+                      <Menu.Item
+                        className={`${category === item?._id && "bg-primary"}`}
+                        onClick={() => setCategory(item?._id)}
+                        key={item?._id}
+                      >
+                        {t(item.name)}
+                      </Menu.Item>
+                    ))}
+                </Menu>
+              }
             >
-              {t("Filter")}
-            </Button>
-          </Dropdown>
-        </Space>
+              <Button
+                className="bg-primary text-white font-500 "
+                icon={<FilterOutlined />}
+              >
+                {t("Filter")}
+              </Button>
+            </Dropdown>
+          </Space>
+          <Button
+            className="bg-primary text-white "
+            onClick={() => navigate("/admin/realState/create")}
+          >
+            Add real Estate
+          </Button>
+        </div>
       </div>
       <ResModal
         width={1000}

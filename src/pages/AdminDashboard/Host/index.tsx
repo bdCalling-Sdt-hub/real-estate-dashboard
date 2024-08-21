@@ -1,32 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Input, Menu, MenuProps } from "antd";
-import { SearchProps } from "antd/es/input";
+import { Button, Dropdown, Input, Menu } from "antd";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CgUnblock } from "react-icons/cg";
 import { MdBlock } from "react-icons/md";
+import { toast } from "sonner";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 import ResConfirm from "../../../component/UI/PopConfirm";
-import { hostData, userData } from "../../../db";
-import HostDetails from "./HostDetails";
 import {
   useGetAllUserQuery,
   useUpdateUserMutation,
 } from "../../../redux/features/auth/authApi";
-import { render } from "react-dom";
-import moment from "moment";
 import { NumberFormat } from "../../../utils/Format";
-import ErrorResponse from "../../../component/UI/ErrorResponse";
-import { toast } from "sonner";
-import { CgUnblock } from "react-icons/cg";
+import CreateHost from "./CreateHost";
+import HostDetails from "./HostDetails";
 
 const Host = () => {
   // useGetAllUserQuery;
 
   const query: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
+  const [showAddModal, setshowAddModal] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
@@ -38,16 +37,20 @@ const Host = () => {
 
   query["limit"] = limit;
   query["page"] = page;
-
   query["searchTerm"] = search;
-  
+
   query["role"] = "landlord";
 
   if (isVerified === true || isVerified === false) {
     query["isVerified"] = isVerified;
   }
 
-  const { data: data, isSuccess } = useGetAllUserQuery({ ...query });
+  const {
+    data: data,
+    isSuccess,
+    isLoading,
+    isFetching,
+  } = useGetAllUserQuery({ ...query });
 
   const [modalData, setModalData] = useState({});
 
@@ -74,13 +77,14 @@ const Host = () => {
         id,
         body: { status: "blocked" },
       }).unwrap();
-if(res.success){
-
-  toast.success(t("user blocked success"), { id: "block", duration: 2000 });
-}else{
-
-  toast.success(res.message, { id: "block", duration: 2000 });
-}
+      if (res.success) {
+        toast.success(t("user blocked success"), {
+          id: "block",
+          duration: 2000,
+        });
+      } else {
+        toast.success(res.message, { id: "block", duration: 2000 });
+      }
     } catch (error) {
       ErrorResponse(error, "block");
     }
@@ -93,12 +97,14 @@ if(res.success){
         id,
         body: { status: "active" },
       }).unwrap();
-    if(res.success){
-      toast.success(t("user unblock success"), { id: "active", duration: 2000 });
-    }else{
-
-      toast.success(res.message, { id: "active", duration: 2000 });
-    }
+      if (res.success) {
+        toast.success(t("user unblock success"), {
+          id: "active",
+          duration: 2000,
+        });
+      } else {
+        toast.success(res.message, { id: "active", duration: 2000 });
+      }
     } catch (error) {
       ErrorResponse(error, "active");
     }
@@ -189,6 +195,15 @@ if(res.success){
       >
         <HostDetails modalData={modalData} />
       </ResModal>
+      <ResModal
+        title="Create Landlord Account"
+        width={1000}
+        // title="Host"
+        setShowModal={setshowAddModal}
+        showModal={showAddModal}
+      >
+        <CreateHost />
+      </ResModal>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-20 font-500 text-gray">{t("Landlords List")}</h1>
         <div className="flex gap-x-2">
@@ -231,6 +246,13 @@ if(res.success){
               {t("Filter")}
             </Button>
           </Dropdown>
+
+          <Button
+            className="bg-primary text-white font-500"
+            onClick={() => setshowAddModal((prev) => !prev)}
+          >
+            Add Landlord
+          </Button>
           {/* <Dropdown menu={{ items }} placement="bottomLeft">
             <Button
               className="bg-primary text-white font-500 "
@@ -242,6 +264,7 @@ if(res.success){
         </div>
       </div>
       <ResTable
+        loading={isLoading || isFetching}
         column={column}
         data={Hosts}
         pagination={{
