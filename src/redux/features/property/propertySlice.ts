@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  count: 4,
+  count: 3,
   property: null,
 };
 const PropertySlice = createSlice({

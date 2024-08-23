@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from "antd";
-import { useTranslation } from "react-i18next";
-import IncomeHistoryCard from "../../../component/IncomeHistoryCard/IncomeHistoryCard";
-import ResTable from "../../../component/Table"; 
-import {
-  useGetAllTransitionsQuery,
-  useGetPackageIncomeQuery,
-  useGetPercentageIncomeQuery,
-} from "../../../redux/features/payments/paymentApi";
-import { useEffect, useState } from "react";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import info from "../../../assets/info.png";
+import IncomeHistoryCard from "../../../component/IncomeHistoryCard/IncomeHistoryCard";
+import ResTable from "../../../component/Table";
+import { useGetAllTransitionsQuery } from "../../../redux/features/payments/paymentApi";
 import { priceFormat } from "../../../utils/Format";
-
 const IncomeHistory = () => {
+  const [show, setshow] = useState(false);
+  const handleToggleModal = () => {
+    setshow(true);
+  };
+
   const { t } = useTranslation();
   const [packagesData, setPackagesData] = useState({
     totalIncome: 0,
@@ -25,14 +27,15 @@ const IncomeHistory = () => {
     totalPaymentsList: [],
   });
 
-  const percentageQuery:Record<string, any> = {}
-  const adsQuery:Record<string, any> = {}
-  percentageQuery["type"] = "BookingResidence"
-  adsQuery["type"] = "Ads"
+  const percentageQuery: Record<string, any> = {};
+  const adsQuery: Record<string, any> = {};
+  percentageQuery["type"] = "BookingResidence";
+  adsQuery["type"] = "Ads";
 
-  const { data: adsIncome, isSuccess } = useGetAllTransitionsQuery(adsQuery); 
-  const { data: percentageIncome, isSuccess:success } = useGetAllTransitionsQuery(percentageQuery);
- 
+  const { data: adsIncome, isSuccess } = useGetAllTransitionsQuery(adsQuery);
+  console.log(adsIncome);
+  const { data: percentageIncome, isSuccess: success } =
+    useGetAllTransitionsQuery(percentageQuery);
 
   useEffect(() => {
     if (isSuccess) {
@@ -41,8 +44,7 @@ const IncomeHistory = () => {
     if (success) {
       setPercentageData(percentageIncome?.data);
     }
-  }, [isSuccess, success]); 
-
+  }, [isSuccess, success]);
 
   const column1 = [
     {
@@ -83,12 +85,19 @@ const IncomeHistory = () => {
     //   },
     // },
     {
-      title: t("Landlord"),
-      dataIndex: "residenceAuthority",
-      key: "Landlord",
-      render: (data: any) => {
-        console.log("------------------------->>", percentageData)
-        return data?.name;
+      title: t("Action"),
+      render: (data: any, index: number) => {
+        return (
+          <div className="flex items-center gap-x-2">
+            <img
+              className="cursor-pointer"
+              src={info}
+              onClick={() => {
+                handleToggleModal();
+              }}
+            />
+          </div>
+        );
       },
     },
   ];
@@ -120,7 +129,7 @@ const IncomeHistory = () => {
       dataIndex: "details",
       key: "details",
       render: (data: any) => {
-        return moment(data?.startAt).format().slice(0,10);
+        return moment(data?.startAt).format().slice(0, 10);
       },
     },
     {
@@ -128,20 +137,22 @@ const IncomeHistory = () => {
       dataIndex: "details",
       key: "details",
       render: (data: any) => {
-        return moment(data?.endAt).format().slice(0,10);
+        return moment(data?.endAt).format().slice(0, 10);
       },
     },
   ];
 
   return (
     <div className="container mx-auto">
+      <h1 className="text-gray font-500 text-20 mb-2">
+        {t("Percentage Transitions")}
+      </h1>
+      <IncomeHistoryCard
+        totalIncome={percentageData?.totalIncome}
+        todayIncome={percentageData?.todayIncome}
+      />
       <Row gutter={16}>
-        <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">{t("Percentage Transitions")}</h1>
-          <IncomeHistoryCard
-            totalIncome={percentageData?.totalIncome}
-            todayIncome={percentageData?.todayIncome}
-          />
+        <Col span={24}>
           <div className="mt-2">
             <ResTable
               column={column1}
@@ -153,8 +164,10 @@ const IncomeHistory = () => {
             />
           </div>
         </Col>
-        <Col span={12}>
-          <h1 className="text-gray font-500 text-20 mb-2">{t("Ads Transitions")}</h1>
+        {/* <Col span={12}>
+          <h1 className="text-gray font-500 text-20 mb-2">
+            {t("Ads Transitions")}
+          </h1>
           <IncomeHistoryCard
             totalIncome={packagesData?.totalIncome}
             todayIncome={packagesData?.todayIncome}
@@ -169,7 +182,7 @@ const IncomeHistory = () => {
               }}
             />
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );

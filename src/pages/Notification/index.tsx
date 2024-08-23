@@ -3,19 +3,17 @@
 import { Button, Row } from "antd";
 import NotificationCard from "../../component/NotificationCom/NotificationCard";
 
-import GuruPagination from "../../component/UI/Pagination";
-import { notificationArray } from "../../db";
+import { useState } from "react";
+import { toast } from "sonner";
+import NoData from "../../component/NoData/NoData";
+import ErrorResponse from "../../component/UI/ErrorResponse";
+import ResPagination from "../../component/UI/Pagination";
+import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 import {
   useGetMyNotificationQuery,
   useMarkAsReadMutation,
 } from "../../redux/features/notification/notificationApi";
-import { toast } from "sonner";
-import ErrorResponse from "../../component/UI/ErrorResponse";
-import ResPagination from "../../component/UI/Pagination";
-import { useState } from "react";
-import NoData from "../../component/NoData/NoData";
 import { useAppSelector } from "../../redux/hooks";
-import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Notification = () => {
   const user: TUser | null = useAppSelector(useCurrentUser);
@@ -44,7 +42,6 @@ const Notification = () => {
     }
   };
 
-  console.log(notificationData);
   return (
     <div>
       <div className="flex justify-end">
@@ -55,9 +52,9 @@ const Notification = () => {
         )}
       </div>
       <div className="container mx-auto mt-4">
-        {notificationData?.data ? (
+        {notificationData?.data?.length > 0 ? (
           <Row gutter={[16, 16]}>
-            {notificationData.data.map((data: any, index: number) => (
+            {notificationData!.data.map((data: any, index: number) => (
               <NotificationCard key={index} data={data} />
             ))}
           </Row>

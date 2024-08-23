@@ -59,7 +59,7 @@ const HeaderLayout = () => {
             marginRight: "10px",
           }}
         />
-        <h1 className="text-white text-20">
+        <h1 className="text-black text-20 font-500">
           {/* {pathname
             .split(/[/ -]/)
             .map((part) => part.toUpperCase())

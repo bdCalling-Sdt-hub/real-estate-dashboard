@@ -34,10 +34,10 @@ const MainLayout = () => {
   return (
     <div>
       <ConfigProvider theme={sidebardThemes}>
-        <Layout style={{ minHeight: "100vh", backgroundColor: "#edf5ea" }}>
+        <Layout style={{ minHeight: "100vh", backgroundColor: "white" }}>
           <Sidebar />
           <Layout>
-            <Header className="sticky top-0 z-10 w-full bg-primary ">
+            <Header className="sticky top-0 z-10 w-full bg-[#A9C9FF] ">
               <HeaderLayout />
             </Header>
             <ConfigProvider theme={paginationTheme}>
@@ -56,7 +56,7 @@ const MainLayout = () => {
                   style={{
                     padding: 24,
                     height: "100%",
-                    backgroundColor: "#FEF4E6",
+                    backgroundColor: "#FAFAFA",
                   }}
                 >
                   <Outlet />

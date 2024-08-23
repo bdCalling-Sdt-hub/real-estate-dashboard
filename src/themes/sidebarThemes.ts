@@ -2,18 +2,18 @@ import { ThemeConfig } from "antd";
 export const sidebardThemes: ThemeConfig = {
   components: {
     Menu: {
-      itemSelectedBg: "#F39200",
-      itemSelectedColor: "white",
+      itemSelectedBg: "#A9C9FF",
+      itemSelectedColor: "black",
       itemColor: "black",
       borderRadiusLG: 0,
       itemMarginInline: 0,
     },
     Pagination: {
-      colorPrimary: "#edf5ea",
-      colorText: "black",
-      colorPrimaryBorder: "#F39200",
-      colorPrimaryHover: "#F39200",
-      itemActiveBg: "#F39200",
+      colorPrimary: "white",
+      colorText: "white",
+      colorPrimaryBorder: "#A9C9FF",
+      colorPrimaryHover: "#A9C9FF",
+      itemActiveBg: "#A9C9FF",
       itemActiveBgDisabled: "rgba(255, 255, 255, 0.15)",
     },
     // Table: {
@@ -23,7 +23,7 @@ export const sidebardThemes: ThemeConfig = {
     // },
   },
   token: {
-    colorPrimary: "#F39200",
+    colorPrimary: "#0052B4",
     colorInfo: "#0B835C",
     colorLink: "#0B835C",
     colorSuccess: "#0B835C",

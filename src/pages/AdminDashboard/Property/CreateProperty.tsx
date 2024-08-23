@@ -6,22 +6,22 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 const steps = [
   {
-    title: "First",
+    title: "Basic information",
     content: <PropertyBasicInformation />,
   },
   {
-    title: "Second",
+    title: "Images and videos",
     content: <h1>Second-content</h1>,
   },
   {
-    title: "Last",
+    title: "Address and documents",
     content: <h1>Last-content</h1>,
   },
 ];
 
 const CreateProperty: React.FC = () => {
   const { token } = theme.useToken();
-  const { count } = useAppSelector((state) => state.property.count);
+  const { count } = useAppSelector((state) => state.property);
   const dispatch = useAppDispatch();
   const next = () => {
     dispatch(setCount(Number(count) + 1));
@@ -44,22 +44,25 @@ const CreateProperty: React.FC = () => {
           borderRadius: 8,
         }}
       >
-        {steps[count].content}
+        {steps[count]?.content}
       </div>
-      <div>
-        {count < steps.length - 1 && (
-          <Button onClick={() => next()}>Next</Button>
-        )}
+      <div className="flex justify-end">
         {count === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
-            Done
-          </Button>
+          <div>
+            <Button
+              className="bg-primary text-white text-20 font-500 w-[100px] h-[44px]"
+              onClick={() => message.success("Processing complete!")}
+            >
+              Done
+            </Button>
+          </div>
         )}
         {count > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+          <Button
+            className="bg-primary text-white text-20 font-500 w-[150px] h-[44px]"
+            style={{ margin: "0 8px" }}
+            onClick={() => prev()}
+          >
             Previous
           </Button>
         )}

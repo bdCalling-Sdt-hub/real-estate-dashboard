@@ -96,12 +96,12 @@ const AdminDashboard = () => {
         {
           name: "Guest User",
           value: tenants,
-          color: "#F39200",
+          color: "#00c01F",
         },
         {
           name: "Host User",
           value: landlord,
-          color: "#925800",
+          color: "black",
         },
       ]);
     }
@@ -114,8 +114,7 @@ const AdminDashboard = () => {
     userSuccess,
     users,
   ]);
-  
-console.log(userRatio)
+
   return (
     <div className="container mx-auto">
       <Row gutter={[16, 16]}>
@@ -123,7 +122,7 @@ console.log(userRatio)
           <div className="mb-4">
             <DashboardCard incomeData={incomeData} />
           </div>
-          <div className="bg-white p-2 rounded">
+          <div className="bg-white p-2 rounded shadow-sm">
             <div className="flex items-center justify-between px-2 mb-4">
               <div>
                 <h1 className="text-black font-600 text-20 ">
@@ -186,15 +185,16 @@ console.log(userRatio)
             )}
             <div className="flex justify-between">
               <div className="flex items-center gap-x-2">
-                <div className="h-[20px] w-[20px] bg-primary"></div>
+                <div className="h-[20px] w-[20px] bg-[#00c01F]"></div>
                 <h1 className="text-16 font-500">
-                  {t("Tenants")} ({ userRatio?.length > 0 && userRatio[0].value })
+                  {t("Tenants")} ({userRatio?.length > 0 && userRatio[0].value})
                 </h1>
               </div>
               <div className="flex items-center gap-x-2">
-                <div className="h-[20px] w-[20px] bg-[#925800]"></div>
+                <div className="h-[20px] w-[20px] bg-[black]"></div>
                 <h1 className="text-16 font-500">
-                  {t("Landlords")} ({ userRatio?.length > 0 && userRatio[1].value })
+                  {t("Landlords")} (
+                  {userRatio?.length > 0 && userRatio[1].value})
                 </h1>
               </div>
             </div>

@@ -36,7 +36,7 @@ const ResTable = ({
                   {...props}
                   style={{
                     ...props.style,
-                    backgroundColor: "#F39200",
+                    backgroundColor: "#0052B4",
                     color: "white",
                   }}
                 />

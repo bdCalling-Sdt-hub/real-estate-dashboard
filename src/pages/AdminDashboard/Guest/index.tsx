@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
+import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, Menu } from "antd";
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CgUnblock } from "react-icons/cg";
 import { MdBlock } from "react-icons/md";
 import { toast } from "sonner";
+import eye from "../../../assets/eye.png";
+import info from "../../../assets/info.png";
+import unverified from "../../../assets/unverified.png";
+import verified from "../../../assets/verified.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
@@ -18,7 +21,6 @@ import {
 } from "../../../redux/features/auth/authApi";
 import { NumberFormat } from "../../../utils/Format";
 import GuestDetails from "./GuestDetails";
-
 const Guest = () => {
   const query: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
@@ -109,26 +111,23 @@ const Guest = () => {
 
   const column = [
     {
-      title: t("Name"),
+      title: t("Full Name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: t("Joining Date"),
-      dataIndex: "createdAt",
-      key: "date",
-      render: (data: any) => {
-        return moment(data).format("L");
-      },
+      title: t("Nationality"),
+      dataIndex: "nationality",
+      key: "nationality",
     },
     {
-      title: t("Email"),
-      dataIndex: "email",
+      title: t("Phone No."),
+      dataIndex: "phoneNumber",
       key: "email",
     },
     {
-      title: t("Contact No"),
-      dataIndex: "phoneNumber",
+      title: t("Income"),
+      dataIndex: "monthlyIncome",
       key: "number",
       render: (data: any) => {
         return data ? NumberFormat(data) : data;
@@ -148,11 +147,15 @@ const Guest = () => {
     //   },
     // },
     {
-      title: t("Account Status"),
-      dataIndex: "status",
-      key: "status",
+      title: t("Verification"),
+      dataIndex: "isVerified",
+      key: "isVerified",
       render: (data: any) => {
-        return data;
+        return data ? (
+          <img src={verified} alt="" />
+        ) : (
+          <img src={unverified} alt="" />
+        );
       },
     },
     {
@@ -160,8 +163,16 @@ const Guest = () => {
       render: (data: any, index: number) => {
         return (
           <div className="flex items-center gap-x-2">
-            <EyeOutlined
-              className="text-18 cursor-pointer"
+            <img
+              className="cursor-pointer"
+              src={eye}
+              onClick={() => {
+                handleToggleModal(data);
+              }}
+            />
+            <img
+              className="cursor-pointer"
+              src={info}
               onClick={() => {
                 handleToggleModal(data);
               }}
@@ -204,7 +215,7 @@ const Guest = () => {
             overlay={
               <Menu>
                 <Menu.Item
-                  className={`${isVerified === true && "bg-primary"}`}
+                  className={`${isVerified === true && "bg-"}`}
                   onClick={() => setIsVerified(true)}
                 >
                   {t("Verified")}
@@ -213,7 +224,7 @@ const Guest = () => {
                   onClick={() => setIsVerified(false)}
                   className={`${isVerified === false && "bg-primary"}`}
                 >
-                  {t("Not Verified")}
+                  {t("Unverified")}
                 </Menu.Item>
                 {/* <Menu.Item
                       className={`${category === item?._id && "bg-primary"}`}

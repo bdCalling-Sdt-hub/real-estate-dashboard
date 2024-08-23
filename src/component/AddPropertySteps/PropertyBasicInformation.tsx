@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Col, Row } from "antd";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Col, Row } from "antd";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
 import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
 import { useGetAllCategoriesQuery } from "../../redux/features/category/categoryApi";
+import {
+  setCount,
+  setProperty,
+} from "../../redux/features/property/propertySlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { propertyvalidation } from "../../schema/property.schema";
 import ResForm from "../Form/FormProvider";
 import ResInput from "../Form/ResInput";
 import ResSelect from "../Form/ResSelect";
 
 const PropertyBasicInformation = () => {
+  const { count } = useAppSelector((state) => state.property);
+  const dispatch = useAppDispatch();
   const { data: Landlorddata } = useGetAllUserQuery({
     role: "landlord",
     limit: 999999999,
   });
   const { data: categorydata } = useGetAllCategoriesQuery({});
-  console.log(categorydata);
-
   const landlordData = Landlorddata?.data?.data?.map((data: any) => {
     return {
       label: data?.username,
@@ -46,9 +53,15 @@ const PropertyBasicInformation = () => {
     { label: "Gym", value: "Gym" },
   ];
 
-  const onsubmit: SubmitErrorHandler<FieldValues> = async () => {};
+  const onsubmit: SubmitErrorHandler<FieldValues> = (data) => {
+    dispatch(setProperty(data));
+    dispatch(setCount(Number(count) + 1));
+  };
   return (
-    <ResForm onSubmit={onsubmit}>
+    <ResForm
+      onSubmit={onsubmit}
+      resolver={zodResolver(propertyvalidation.propertyInitalScema)}
+    >
       <Row gutter={[16, 16]}>
         <Col span={12}>
           <ResSelect
@@ -62,13 +75,6 @@ const PropertyBasicInformation = () => {
           <ResSelect
             name="category"
             label="Select category"
-            options={Categories}
-            placeholder="select category"
-            size="large"
-          />
-          <ResSelect
-            name="features"
-            label="Select Residence Type"
             options={Categories}
             placeholder="select category"
             size="large"
@@ -159,6 +165,15 @@ const PropertyBasicInformation = () => {
           />
         </Col>
       </Row>
+
+      <div className="flex justify-end">
+        <Button
+          htmlType="submit"
+          className="bg-primary text-white text-20 font-500 w-[100px] h-[44px]"
+        >
+          Next
+        </Button>
+      </div>
     </ResForm>
   );
 };
