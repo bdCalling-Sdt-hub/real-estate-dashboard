@@ -27,7 +27,7 @@ const Host = () => {
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
-  const [isVerified, setIsVerified] = useState<boolean | null>(true);
+  const [isVerified, setIsVerified] = useState<boolean | null>();
   const [updateUserFn] = useUpdateUserMutation();
 
   const [Hosts, setHosts] = useState([]);
@@ -237,7 +237,7 @@ const Host = () => {
                   onClick={() => setIsVerified(false)}
                   className={`${isVerified === false && "bg-primary"}`}
                 >
-                  {t("Not Verified")}
+                  {t("Unverified")}
                 </Menu.Item>
                 {/* <Menu.Item
                       className={`${category === item?._id && "bg-primary"}`}

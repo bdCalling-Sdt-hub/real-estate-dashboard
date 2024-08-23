@@ -29,10 +29,10 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
         <img src={modalData?.image} alt={modalData?.name} width={200} />
         <div>
           <h1 className="text-20 font-500">{modalData?.name}</h1>
+          <p>Total Properties: {modalData?.totalProperties ?? 0}</p>
           <p className="flex items-center gap-x-2 text-16 font-500">
             Verification Status:
             <span>
-              {" "}
               {modalData?.isVerified ? (
                 <img src={verified2} />
               ) : (

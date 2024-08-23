@@ -4,6 +4,20 @@ import { useTranslation } from "react-i18next";
 import unverified from "../../../assets/unverified.png";
 import verified2 from "../../../assets/verified2.png";
 import { NumberFormat } from "../../../utils/Format";
+const DetailItem = ({
+  label,
+  value,
+  labelStyle = "text-18 font-500",
+  valueStyle = "",
+}: any) => {
+  const { t } = useTranslation();
+  return (
+    <p className="my-1">
+      <span className={labelStyle}>{t(label)}:</span>{" "}
+      <span className={valueStyle}>{value}</span>
+    </p>
+  );
+};
 const GuestDetails = ({ modalData }: { modalData: any }) => {
   const { t } = useTranslation();
   return (
@@ -16,7 +30,7 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
         <div>
           <h1 className="text-20 font-500">{modalData?.name}</h1>
           <div className="flex items-center font-500 text-16 gap-x-2 text-black mt-2">
-            Booking Completed: 10
+            Booking Completed: 0
           </div>
           <div className="flex items-center font-500 text-16 gap-x-2 text-black mt-2">
             Verification Status:{" "}
@@ -34,36 +48,26 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
       <div className="flex justify-between">
         <div>
           <div className="mt-1 text-black font-500 text-16 flex flex-col gap-y-3">
-            <p>
-              {t("Username")}: {modalData?.username}
-            </p>
-            <p>
-              {t("Full name")}: {modalData?.name}
-            </p>
-            <p>
-              {t("Email")}: {modalData?.email}
-            </p>
-            <p className="my-1">
-              {t("Contact")}: {NumberFormat(modalData?.phoneNumber)}
-            </p>
-            <p>
-              {t("Nationality")}: {modalData?.nationality}
-            </p>
-            <p>
-              {t("Gender")}: {modalData?.gender}
-            </p>
-            <p>
-              {t("Marital Status")}: {modalData?.maritalStatus}
-            </p>
-            <p>
-              {t("Date of Birth")}: {modalData?.dateofBirth}
-            </p>
-            <p>
-              {t("Job Title")}: {modalData?.job}
-            </p>
-            <p>
-              {t("Income Bracket")}: {modalData?.monthlyIncome}
-            </p>
+            <DetailItem label="Username" value={modalData?.username} />
+            <DetailItem label="Full name" value={modalData?.name} />
+            <DetailItem label="Email" value={modalData?.email} />
+            <DetailItem
+              label="Contact"
+              value={NumberFormat(modalData?.phoneNumber)}
+              valueStyle="my-1"
+            />
+            <DetailItem label="Nationality" value={modalData?.nationality} />
+            <DetailItem label="Gender" value={modalData?.gender} />
+            <DetailItem
+              label="Marital Status"
+              value={modalData?.maritalStatus}
+            />
+            <DetailItem label="Date of Birth" value={modalData?.dateOfBirth} />
+            <DetailItem label="Job Title" value={modalData?.job} />
+            <DetailItem
+              label="Income Bracket"
+              value={modalData?.monthlyIncome}
+            />
           </div>
         </div>
         {/* <div>

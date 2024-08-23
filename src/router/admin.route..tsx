@@ -53,6 +53,12 @@ export const adminRoutes = [
     element: <Host />,
   },
   {
+    name: "Properties",
+    path: "realState",
+    icon: <FaRegBuilding />,
+    element: <Property />,
+  },
+  {
     name: "Verification",
     path: "verification",
     icon: <HiOutlineIdentification />,
@@ -70,12 +76,7 @@ export const adminRoutes = [
     icon: <TbBrandBooking />,
     element: <Booking />,
   },
-  {
-    name: "Real Estate",
-    path: "realState",
-    icon: <FaRegBuilding />,
-    element: <Property />,
-  },
+
   {
     // name: "Real Estate",
     path: "realState/create",
