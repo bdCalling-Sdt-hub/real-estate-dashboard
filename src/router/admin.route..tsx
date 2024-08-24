@@ -4,8 +4,8 @@ import ChangePasswordFrom from "../pages/ChangePasswordForm";
 import Notification from "../pages/Notification";
 import Setting from "../pages/Setting";
 
-import { TransactionOutlined, UserOutlined } from "@ant-design/icons";
-import { FaRegBuilding } from "react-icons/fa6";
+import { TransactionOutlined } from "@ant-design/icons";
+import { FaRegBuilding, FaRegUser } from "react-icons/fa6";
 import { HiOutlineIdentification } from "react-icons/hi";
 import { RiAdvertisementLine, RiSecurePaymentFill } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
@@ -30,7 +30,7 @@ export const adminRoutes = [
   {
     name: "Dashboard",
     path: "dashboard",
-    icon: <MdDashboard />,
+    icon: <MdDashboard color="#64B5F6" />,
     element: <AdminDashboard />,
   },
   // {
@@ -43,48 +43,48 @@ export const adminRoutes = [
   {
     name: "Tenants",
     path: "Tenants",
-    icon: <UserOutlined />,
+    icon: <FaRegUser color="#64B5F6" />,
     element: <Guest />,
   },
   {
     name: "Landlords",
     path: "landlords",
-    icon: <UserOutlined />,
+    icon: <FaRegUser color="#64B5F6" className="#64B5F6" />,
     element: <Host />,
   },
   {
     name: "Verification",
     path: "verification",
-    icon: <HiOutlineIdentification />,
+    icon: <HiOutlineIdentification color="#64B5F6" />,
     element: <VerificationRequest />,
   },
   {
     name: "Advertisements",
     path: "advertisement",
-    icon: <RiAdvertisementLine />,
+    icon: <RiAdvertisementLine color="#64B5F6" />,
     element: <AdverTisement />,
   },
   {
     name: "Reservations",
     path: "reservations",
-    icon: <TbBrandBooking />,
+    icon: <TbBrandBooking color="#64B5F6" />,
     element: <Booking />,
   },
   {
     name: "Real Estate",
     path: "realState",
-    icon: <FaRegBuilding />,
+    icon: <FaRegBuilding color="#64B5F6" />,
     element: <Property />,
   },
   {
     // name: "Real Estate",
     path: "realState/create",
-    icon: <FaRegBuilding />,
+    icon: <FaRegBuilding color="#64B5F6" />,
     element: <CreateProperty />,
   },
   {
     name: "Income",
-    icon: <RiSecurePaymentFill />,
+    icon: <RiSecurePaymentFill color="#64B5F6" />,
     children: [
       // {
       //   name: "Overview",
@@ -95,7 +95,7 @@ export const adminRoutes = [
       {
         name: "Transactions",
         path: "income/transaction",
-        icon: <TransactionOutlined />,
+        icon: <TransactionOutlined color="#64B5F6" />,
         element: <IncomeHistory />,
       },
     ],
@@ -128,7 +128,7 @@ export const adminRoutes = [
   {
     name: "Settings",
     path: "setting",
-    icon: <CiSettings />,
+    icon: <CiSettings color="#64B5F6" />,
     element: <Setting />,
   },
   {

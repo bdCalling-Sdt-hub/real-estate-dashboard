@@ -33,7 +33,6 @@ const IncomeHistory = () => {
   adsQuery["type"] = "Ads";
 
   const { data: adsIncome, isSuccess } = useGetAllTransitionsQuery(adsQuery);
-  console.log(adsIncome);
   const { data: percentageIncome, isSuccess: success } =
     useGetAllTransitionsQuery(percentageQuery);
 
