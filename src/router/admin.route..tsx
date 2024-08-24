@@ -53,6 +53,12 @@ export const adminRoutes = [
     element: <Host />,
   },
   {
+    name: "Properties",
+    path: "realState",
+    icon: <FaRegBuilding />,
+    element: <Property />,
+  },
+  {
     name: "Verification",
     path: "verification",
     icon: <HiOutlineIdentification color="#64B5F6" />,
@@ -69,12 +75,6 @@ export const adminRoutes = [
     path: "reservations",
     icon: <TbBrandBooking color="#64B5F6" />,
     element: <Booking />,
-  },
-  {
-    name: "Real Estate",
-    path: "realState",
-    icon: <FaRegBuilding color="#64B5F6" />,
-    element: <Property />,
   },
   {
     // name: "Real Estate",

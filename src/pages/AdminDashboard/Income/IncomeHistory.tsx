@@ -143,9 +143,7 @@ const IncomeHistory = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-gray font-500 text-20 mb-2">
-        {t("Percentage Transitions")}
-      </h1>
+      <h1 className="text-gray font-500 text-20 mb-2">{t("Service Fees")}</h1>
       <IncomeHistoryCard
         totalIncome={percentageData?.totalIncome}
         todayIncome={percentageData?.todayIncome}

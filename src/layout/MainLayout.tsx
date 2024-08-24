@@ -43,7 +43,7 @@ const MainLayout = () => {
             <ConfigProvider theme={paginationTheme}>
               <Content
                 style={{
-                  backgroundColor: "#FEF4E6",
+                  backgroundColor: "#FAFAFA",
                   ...(lang === "ar"
                     ? { paddingRight: collapsed ? "110px" : "215px" }
                     : { paddingLeft: collapsed ? "110px" : "215px" }),

@@ -37,10 +37,12 @@ const Profile = () => {
               image={profile?.data?.image}
             />
           </div>
-            <h1 className="text-24 w-full text-gray font-500">
-              {profile?.data?.name}
-            </h1>
-          <h1 className="text-20 text-gray font-600">{profile?.data?.phoneCode}{profile?.data?.phoneNumber}</h1>
+          <h1 className="text-24 w-full text-gray font-500">
+            {profile?.data?.name}
+          </h1>
+          <h1 className="text-20 text-gray font-600">
+            {profile?.data?.phoneCode}-{profile?.data?.phoneNumber}
+          </h1>
         </div>
         <div className="w-full mt-4">
           <ProfileForm

@@ -35,12 +35,16 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
           <h1 className="text-20 font-500">
             Property ID: #{modalData?._id.slice(0, 6)}
           </h1>
+          <h1 className="text-20 font-500">
+            Total Booking: {modalData?.totalBooking ?? 0}
+          </h1>
           <div className="flex items-center gap-x-2 text-gray mt-2">
             <h5 className="font-500 text-black"> Reviews:</h5>
             <span>
-              <StarFilled className="text-yellow" />
+              <StarFilled className="text-[#fbb606] text-18" />
             </span>
-            <p>({modalData?.averageRating})</p>
+            <p>{modalData?.averageRating}</p>
+            <p>({modalData?.totalReviews ?? 0})</p>
           </div>
           <div className="flex items-center gap-x-2 text-16 text-gray mt-2">
             <h5 className="font-500 text-black">Owner:</h5>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Space } from "antd";
@@ -49,6 +50,14 @@ const Property = () => {
   };
 
   const column = [
+    {
+      title: t("Property ID"),
+      dataIndex: "_id",
+      key: "_id",
+      render: (data: any) => {
+        return <p>#{t(data?.slice(0, 6))}</p>;
+      },
+    },
     {
       title: t("Property Name"),
       dataIndex: "propertyName",
@@ -164,7 +173,7 @@ const Property = () => {
       </div>
       <ResModal
         width={1000}
-        title={t("Real estate details")}
+        // title={t("Real estate details")}
         setShowModal={setShow}
         showModal={show}
       >

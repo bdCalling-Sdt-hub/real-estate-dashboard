@@ -97,7 +97,7 @@ const Guest = () => {
       }).unwrap();
 
       if (res.success) {
-        toast.success(t("user unblock success"), {
+        toast.success(t("user succesfully unblocked"), {
           id: "active",
           duration: 2000,
         });
