@@ -4,9 +4,8 @@ import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CgUnblock } from "react-icons/cg";
-import { MdBlock } from "react-icons/md";
 import { toast } from "sonner";
+import block from "../../../assets/block.svg";
 import eye from "../../../assets/eye.png";
 import info from "../../../assets/info.png";
 import unverified from "../../../assets/unverified.png";
@@ -14,7 +13,6 @@ import verified from "../../../assets/verified.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
-import ResConfirm from "../../../component/UI/PopConfirm";
 import {
   useGetAllUserQuery,
   useUpdateUserMutation,
@@ -28,7 +26,9 @@ const Guest = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isVerified, setIsVerified] = useState<boolean | null>(null);
+  const [blockModal, setBlockModal] = useState(false);
   const [updateUserFn] = useUpdateUserMutation();
+  const [id, setid] = useState();
   // import block from "../../../assets/block.svg"
   const [users, setUsers] = useState([]);
   const { t } = useTranslation();
@@ -67,7 +67,7 @@ const Guest = () => {
     setLimit(pageSize);
   };
 
-  const handelToBlock = async (id: string) => {
+  const handelToBlock = async () => {
     toast.loading("Blocking...", { id: "block", duration: 2000 });
     try {
       const res: any = await updateUserFn({
@@ -83,13 +83,14 @@ const Guest = () => {
       } else {
         toast.success(res.message, { id: "block", duration: 2000 });
       }
+      setBlockModal((prev) => !prev);
     } catch (error) {
       ErrorResponse(error, "block");
     }
   };
 
   const handelToUnBlock = async (id: string) => {
-    toast.loading("Blocking...", { id: "active", duration: 2000 });
+    toast.loading("Unblocking...", { id: "active", duration: 2000 });
     try {
       const res: any = await updateUserFn({
         id,
@@ -163,13 +164,31 @@ const Guest = () => {
       render: (data: any, index: number) => {
         return (
           <div className="flex items-center gap-x-2">
-            <img
+            {/* <img
               className="cursor-pointer"
-              src={eye}
+              src={}
               onClick={() => {
                 handleToggleModal(data);
               }}
-            />
+            /> */}
+
+            {data?.status === "blocked" ? (
+              <img
+                className="cursor-pointer"
+                src={block}
+                alt=""
+                onClick={() => handelToUnBlock(data?._id)}
+              />
+            ) : (
+              <img
+                className="cursor-pointer"
+                src={eye}
+                alt=""
+                onClick={() => {
+                  setid(data?._id), setBlockModal((prev) => !prev);
+                }}
+              />
+            )}
             <img
               className="cursor-pointer"
               src={info}
@@ -177,15 +196,6 @@ const Guest = () => {
                 handleToggleModal(data);
               }}
             />
-            {data?.status === "blocked" ? (
-              <ResConfirm handleOk={() => handelToUnBlock(data?._id)}>
-                <MdBlock className="text-18 cursor-pointer " color="red" />
-              </ResConfirm>
-            ) : (
-              <ResConfirm handleOk={() => handelToBlock(data?._id)}>
-                <CgUnblock className="text-18 cursor-pointer" color="green" />
-              </ResConfirm>
-            )}
           </div>
         );
       },
@@ -194,6 +204,25 @@ const Guest = () => {
 
   return (
     <div className="container mx-auto">
+      <ResModal showModal={blockModal} setShowModal={setBlockModal}>
+        <div className="flex flex-col items-center justify-center h-[200px]">
+          <h1 className="text-20 font-500">
+            Sure you want to suspend this user?
+          </h1>
+
+          <div className="flex gap-x-6 mt-8">
+            <Button className="border text-20 h-[50px] w-[200px] font-500  border-[#64B5F6] rounded-full">
+              No
+            </Button>
+            <Button
+              onClick={() => handelToBlock()}
+              className="border text-20 h-[50px] w-[200px] font-500  bg-[#64B5F6] border-[#64B5F6] rounded-full text-white"
+            >
+              Yes
+            </Button>
+          </div>
+        </div>
+      </ResModal>
       <ResModal
         width={1000}
         // title="Booking Details"
