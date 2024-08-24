@@ -7,6 +7,7 @@ import FileUpload from "../../component/FileUpload";
 import ProfileForm from "../../component/ProfileForm";
 import UseImageUpload from "../../hooks/useImageUpload";
 import { useProfileQuery } from "../../redux/features/auth/authApi";
+import { profileUpload } from "../../themes/uploadTheme";
 const Profile = () => {
   const { data: profile, refetch } = useProfileQuery(undefined);
   const { t } = useTranslation();
@@ -32,6 +33,7 @@ const Profile = () => {
         <div className="flex flex-col  gap-x-4 text-white ">
           <div className="flex items-center gap-x-4">
             <FileUpload
+              theme={profileUpload}
               setSelectedFile={setFile}
               imageUrl={imageUrl}
               image={profile?.data?.image}

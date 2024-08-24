@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Space } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import eye from "../../../assets/eye.png";
@@ -19,25 +19,21 @@ const Property = () => {
   const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
-  const [property, setProperty] = useState([]);
   const { t } = useTranslation();
   if (category) {
     query["category"] = category;
   }
   query["limit"] = limit;
   query["page"] = page;
-  const { data: data, isSuccess } = useGetAllPropertyQuery({ ...query });
-
+  const {
+    data: data,
+    isLoading,
+    isFetching,
+  } = useGetAllPropertyQuery({ ...query });
   categoryQuery["limit"] = 99999999999;
   const { data: categories } = useGetAllCategoriesQuery({ ...categoryQuery });
   const navigate = useNavigate();
   const [modalData, setModalData] = useState({});
-
-  useEffect(() => {
-    if (isSuccess) {
-      setProperty(data?.data?.allResidence);
-    }
-  }, [isSuccess, data]);
 
   const handleToggleModal = (data: any) => {
     setModalData(data);
@@ -173,15 +169,16 @@ const Property = () => {
       </div>
       <ResModal
         width={1000}
-        // title={t("Real estate details")}
+        title={t("Real estate details")}
         setShowModal={setShow}
         showModal={show}
       >
         <PropertyDetails modalData={modalData} />
       </ResModal>
       <ResTable
+        loading={isFetching || isLoading}
         column={column}
-        data={property}
+        data={data?.data?.allResidence}
         // onTableChange={}
         pagination={{
           total: data?.data?.meta?.total || 0,

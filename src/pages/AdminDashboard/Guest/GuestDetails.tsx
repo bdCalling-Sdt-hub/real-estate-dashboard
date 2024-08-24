@@ -3,6 +3,7 @@ import { Divider } from "antd";
 import { useTranslation } from "react-i18next";
 import unverified from "../../../assets/unverified.png";
 import verified2 from "../../../assets/verified2.png";
+
 import { NumberFormat } from "../../../utils/Format";
 const DetailItem = ({
   label,

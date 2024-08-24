@@ -130,11 +130,8 @@ const Host = () => {
     },
     {
       title: t("Tenants"),
-      dataIndex: "",
-      key: "number",
-      render: (data: any) => {
-        return 3;
-      },
+      dataIndex: "tenants",
+      key: "tenants",
     },
     {
       title: t("Verification"),

@@ -11,6 +11,7 @@ const FileUpload = ({
   listType = "picture-card",
   imageUrl,
   image,
+  theme,
 }: any) => {
   const customRequest = ({ file }: { file: File | null }) => {
     setSelectedFile(file);
@@ -22,6 +23,7 @@ const FileUpload = ({
     imageUrl: imageUrl,
     multiple: false,
     showUploadList: false,
+    theme: {},
     customRequest: customRequest,
   };
   const handleButton = (e: MouseEvent<HTMLButtonElement>) => {
@@ -30,7 +32,6 @@ const FileUpload = ({
   const uploadButton = (
     <button
       style={{ border: 0, background: "none" }}
-      type="button"
       onClick={(e) => handleButton(e)}
     >
       <PlusOutlined className="text-primary" />
@@ -38,9 +39,9 @@ const FileUpload = ({
         Upload
       </div>
     </button>
-  ); 
+  );
   return (
-    <ConfigProvider theme={multiUpload}>
+    <ConfigProvider theme={theme ?? multiUpload}>
       <Upload {...props}>
         {image || imageUrl ? (
           <img

@@ -50,7 +50,7 @@ const ResForm = ({
     //   return;
     // }
     onSubmit(data);
-    // methods.reset();
+    methods.reset();
   };
 
   return (
