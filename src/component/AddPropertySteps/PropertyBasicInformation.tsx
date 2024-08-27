@@ -15,7 +15,8 @@ import ResInput from "../Form/ResInput";
 import ResSelect from "../Form/ResSelect";
 
 const PropertyBasicInformation = () => {
-  const { count } = useAppSelector((state) => state.property);
+  const { count, property }: any = useAppSelector((state) => state.property);
+  console.log(property);
   const dispatch = useAppDispatch();
   const { data: Landlorddata } = useGetAllUserQuery({
     role: "landlord",
@@ -60,19 +61,22 @@ const PropertyBasicInformation = () => {
   return (
     <ResForm
       onSubmit={onsubmit}
+      defaultValues={property!}
       resolver={zodResolver(propertyvalidation.propertyInitalScema)}
     >
       <Row gutter={[16, 16]}>
         <Col span={12}>
           <ResSelect
+            defaultValue={property?.host}
             showSearch
-            name="owner"
+            name="host"
             label="Select Landlord name"
             options={landlordData}
             placeholder="select landlord"
             size="large"
           />
           <ResSelect
+            defaultValue={property?.category}
             name="category"
             label="Select category"
             options={Categories}
@@ -110,6 +114,7 @@ const PropertyBasicInformation = () => {
         </Col>
         <Col span={12}>
           <ResSelect
+            defaultValue={property?.residenceType}
             mode="Select Residence Type"
             name="residenceType"
             label="Select Residence Type"
@@ -122,6 +127,7 @@ const PropertyBasicInformation = () => {
           />
           <ResSelect
             mode="multiple"
+            defaultValue={property?.features}
             showSearch
             name="features"
             label="Select features"
@@ -131,6 +137,7 @@ const PropertyBasicInformation = () => {
           />
           <ResSelect
             name="rentType"
+            defaultValue={property?.rentType}
             label="Select rent type"
             options={[
               { label: "Short Term", value: "Short Term" },
@@ -141,6 +148,7 @@ const PropertyBasicInformation = () => {
           />
           <ResSelect
             name="paymentType"
+            defaultValue={property?.paymentType}
             label="Select payment type"
             options={[
               { label: "Per Night", value: "Per Night" },

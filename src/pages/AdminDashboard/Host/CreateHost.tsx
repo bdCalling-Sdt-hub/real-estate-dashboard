@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
 
@@ -11,7 +12,7 @@ import ErrorResponse from "../../../component/UI/ErrorResponse";
 import UseImageUpload from "../../../hooks/useImageUpload";
 import { useAddLandlordMutation } from "../../../redux/features/auth/authApi";
 import { landlordSchema } from "../../../schema/host.schema";
-const CreateHost = () => {
+const CreateHost = ({ setshow }) => {
   const { imageUrl, imageFile, setFile } = UseImageUpload();
   const [createLandlord] = useAddLandlordMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -26,21 +27,22 @@ const CreateHost = () => {
       formData.append("image", imageFile!);
       formData.append("data", JSON.stringify(formatedData));
       await createLandlord(formData).unwrap();
-      toast.success("Landlord added successfully.");
+      toast.success("Landlord added successfully.", {
+        id: toastId,
+        duration: 2000,
+      });
+      setshow((prev: boolean) => !prev);
     } catch (error) {
       ErrorResponse(error, toastId);
     }
   };
 
   return (
-    <div className="flex flex-wrap gap-4 items-center p-10">
-      <div className="flex-1 text-center">
-        <h1 className="text-500 text-20 font-500 text-primary mb-2">
-          Add image
-        </h1>
-        <FileUpload setSelectedFile={setFile} imageUrl={imageUrl} />
-      </div>
-      <div className="flex-1">
+    <div className="">
+      <div>
+        <div className="text-center">
+          <FileUpload setSelectedFile={setFile} imageUrl={imageUrl} />
+        </div>
         <ResForm
           onSubmit={onSubmit}
           resolver={zodResolver(landlordSchema.createLandlord)}

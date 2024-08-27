@@ -5,7 +5,7 @@ import { Button, Dropdown, Input, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import block from "../../../assets/block.svg";
+import block from "../../../assets/block.png";
 import eye from "../../../assets/eye.png";
 import info from "../../../assets/info.png";
 import unverified from "../../../assets/unverified.png";
@@ -177,6 +177,7 @@ const Guest = () => {
                 className="cursor-pointer"
                 src={block}
                 alt=""
+                width={35}
                 onClick={() => handelToUnBlock(data?._id)}
               />
             ) : (

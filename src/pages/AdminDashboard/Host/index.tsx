@@ -5,7 +5,7 @@ import { Button, Dropdown, Input, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import block from "../../../assets/block.svg";
+import block from "../../../assets/block.png";
 import eye from "../../../assets/eye.png";
 import info from "../../../assets/info.png";
 import unverified from "../../../assets/unverified.png";
@@ -21,8 +21,6 @@ import CreateHost from "./CreateHost";
 import HostDetails from "./HostDetails";
 
 const Host = () => {
-  // useGetAllUserQuery;
-
   const query: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
   const [showAddModal, setshowAddModal] = useState<boolean>(false);
@@ -35,7 +33,6 @@ const Host = () => {
   const [id, setid] = useState();
   const [Hosts, setHosts] = useState([]);
   const { t } = useTranslation();
-
   query["limit"] = limit;
   query["page"] = page;
   query["searchTerm"] = search;
@@ -178,6 +175,7 @@ const Host = () => {
               <img
                 className="cursor-pointer"
                 src={block}
+                width={35}
                 alt=""
                 onClick={() => handelToUnBlock(data?._id)}
               />
@@ -235,12 +233,12 @@ const Host = () => {
       </ResModal>
       <ResModal
         title="Create Landlord Account"
-        width={1000}
+        width={600}
         // title="Host"
         setShowModal={setshowAddModal}
         showModal={showAddModal}
       >
-        <CreateHost />
+        <CreateHost setshow={setshowAddModal} />
       </ResModal>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-20 font-500 text-gray">{t("Landlords List")}</h1>

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const propertyInitalScema = z.object({
-  owner: z
+  host: z
     .string({ required_error: "Landlord name is required" })
     .min(1, "Landlord name is required"),
   category: z
@@ -41,6 +41,63 @@ const propertyInitalScema = z.object({
     .regex(/^[0-9]+$/, { message: "Rental price is required" }),
 });
 
+const proeprtyAddresschema = z.object({
+  propertyAbout: z
+    .string({
+      required_error: "Description is required",
+    })
+    .min(1, "Description is required"),
+  address: z.object({
+    governorate: z
+      .string({
+        required_error: "Governorate is required",
+      })
+      .min(1, "Governorate is required"),
+    area: z
+      .string({
+        required_error: "Area is required",
+      })
+      .min(1, "Area is required"),
+    // building: z
+    //   .string({
+    //     required_error: "Building number is required",
+    //   })
+    //   .min(1, "Building number is required"),
+    house: z
+      .string({
+        required_error: "House no is required",
+      })
+      .min(1, "House no is required"),
+    apartment: z
+      .string({
+        required_error: "Apartment number is required",
+      })
+      .min(1, "Apartment number is required"),
+    floor: z
+      .string({
+        required_error: "Floor number is required",
+      })
+      .min(1, "Floor number is required"),
+    street: z
+      .string({
+        required_error: "Street name/number is required",
+      })
+      .min(1, "Street name/number is required"),
+    block: z
+      .string({
+        required_error: "Block number is required",
+      })
+      .min(1, "Block number is required"),
+    avenue: z.string().optional(), // Avenue is optional
+    additionalDirections: z
+      .string({
+        required_error: "Additional directions are required",
+      })
+      .min(1, "Additional directions are required"),
+  }),
+});
+
 export const propertyvalidation = {
   propertyInitalScema,
+  proeprtyAddresschema,
 };

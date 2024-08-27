@@ -4,13 +4,13 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDoneOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 import {
   useGetContentsQuery,
   useUpdateContentMutation,
 } from "../../../redux/features/content/contentApi";
-import ErrorResponse from "../../../component/UI/ErrorResponse";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ const AboutUs = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setContent(data?.data?.data[0].aboutUs);
+      setContent(data?.data?.data[0]?.aboutUs);
     }
   }, [isSuccess, data]);
   if (isLoading) {

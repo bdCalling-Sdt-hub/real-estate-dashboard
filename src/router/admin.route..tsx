@@ -54,7 +54,7 @@ export const adminRoutes = [
   },
   {
     name: "Properties",
-    path: "realState",
+    path: "properties",
     icon: <FaRegBuilding color="#64B5F6" />,
     element: <Property />,
   },

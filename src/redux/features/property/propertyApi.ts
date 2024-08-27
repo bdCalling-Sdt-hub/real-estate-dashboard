@@ -6,7 +6,7 @@ const propertyApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createProperty: builder.mutation({
       query: (data) => ({
-        url: "/otp/verify-otp",
+        url: "/residences/create-residence",
         method: "POST",
         body: data,
       }),
@@ -16,7 +16,7 @@ const propertyApi = baseApi.injectEndpoints({
       query: (arg: Record<string, any>) => ({
         url: "/residences",
         method: "Get",
-      params: arg
+        params: arg,
         // params: arg,
       }),
       providesTags: [tagTypes.property],

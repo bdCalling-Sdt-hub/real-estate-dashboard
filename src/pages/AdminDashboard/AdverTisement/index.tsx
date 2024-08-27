@@ -4,8 +4,8 @@ import { Button } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import deleteIcon from "../../../assets/Delete.svg";
-import editIcon from "../../../assets/Edit.svg";
+import deleteIcon from "../../../assets/delete.png";
+import editIcon from "../../../assets/edit.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
@@ -41,7 +41,7 @@ const AdverTisement = () => {
       title: t("Banner"),
       dataIndex: "banner",
       key: "banner",
-      render: (data: string) => <img src={data} alt="" />,
+      render: (data: string) => <img width={100} src={data} alt="" />,
     },
     {
       title: t("Link"),
