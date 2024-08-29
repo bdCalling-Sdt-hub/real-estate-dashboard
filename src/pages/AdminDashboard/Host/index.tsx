@@ -287,7 +287,7 @@ const Host = () => {
             className="bg-primary text-white font-500"
             onClick={() => setshowAddModal((prev) => !prev)}
           >
-            Add Landlord
+            {t("Add Landlord")}
           </Button>
           {/* <Dropdown menu={{ items }} placement="bottomLeft">
             <Button

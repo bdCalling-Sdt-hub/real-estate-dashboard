@@ -1,7 +1,7 @@
 import { Divider } from "antd";
+import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { IoLocateOutline } from "react-icons/io5";
-import moment from "moment";
 import { NumberFormat, priceFormat } from "../../../utils/Format";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const BookingDetails = ({ modalData }: { modalData: any }) => {
@@ -9,7 +9,7 @@ const BookingDetails = ({ modalData }: { modalData: any }) => {
   return (
     <div>
       <h1 className="text-30 font-500">
-        {t("Booking Id")}: #{modalData?._id}
+        {t("Booking Id")}: #{modalData?._id?.slice(modalData?._id?.length - 8)}
       </h1>
       <Divider />
       {/* section 2 */}
@@ -49,7 +49,10 @@ const BookingDetails = ({ modalData }: { modalData: any }) => {
               {t("Name")}: {modalData?.user?.name}
             </p>
             <p>
-              {t("Total Amount")}: {modalData?.totalPrice? priceFormat(modalData?.totalPrice):modalData?.totalPrice}
+              {t("Total Amount")}:{" "}
+              {modalData?.totalPrice
+                ? priceFormat(modalData?.totalPrice)
+                : modalData?.totalPrice}
             </p>
           </div>
         </div>
@@ -60,7 +63,10 @@ const BookingDetails = ({ modalData }: { modalData: any }) => {
               {t("Name")}: {modalData?.author?.name}
             </p>
             <p className="mt-1">
-              {t("Contact")}: { modalData?.residence?.host?.phoneNumber? NumberFormat(modalData?.residence?.host?.phoneNumber):modalData?.residence?.host?.phoneNumber}
+              {t("Contact")}:{" "}
+              {modalData?.residence?.host?.phoneNumber
+                ? NumberFormat(modalData?.residence?.host?.phoneNumber)
+                : modalData?.residence?.host?.phoneNumber}
             </p>
           </div>
         </div>

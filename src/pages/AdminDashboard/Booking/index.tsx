@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EyeOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import moment from "moment";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import info from "../../../assets/info.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
-import BookingDetails from "./BookingDetails";
 import { useGetAllBookingQuery } from "../../../redux/features/booking/bookingApi";
-import moment from "moment";
-import { render } from "react-dom";
-import { CgLayoutGrid } from "react-icons/cg";
-
+import BookingDetails from "./BookingDetails";
 const Booking = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
@@ -20,21 +17,17 @@ const Booking = () => {
   const query: Record<string, any> = {};
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
-  const [bookings, setBookings] = useState([]);
-
   query["limit"] = limit;
   query["page"] = page;
   query["isPaid"] = true;
-  const { data: data, isSuccess } = useGetAllBookingQuery({ ...query });
-
+  const {
+    data: data,
+    isFetching,
+    isLoading,
+  } = useGetAllBookingQuery({ ...query });
   const [modalData, setModalData] = useState({});
   const startIndex = (page - 1) * limit;
-  useEffect(() => {
-    if (isSuccess) {
-      setBookings(data?.data?.data);
-    }
-  }, [isSuccess, data]);
-
+  console.log(data);
   const onPaginationChange = (page: any, pageSize: any) => {
     setPage(page);
     setLimit(pageSize);
@@ -44,11 +37,9 @@ const Booking = () => {
     {
       title: t("ID"),
 
-      dataIndex: "key",
-
       key: "id",
-      render:(data:any, record:any, index:any)=>{   
-        return startIndex + index + 1
+      render: (data: any) => {
+        return <p>#{data?._id.slice(data?._id?.length - 8)}</p>;
       },
     },
     {
@@ -63,7 +54,7 @@ const Booking = () => {
       title: t("User Name"),
       dataIndex: "user",
       key: "user",
-      render: (data: any) => { 
+      render: (data: any) => {
         return data?.name;
       },
     },
@@ -77,21 +68,23 @@ const Booking = () => {
     },
     {
       title: t("Landlord Name"),
-      dataIndex: "author",
-      key: "author",
-      render: (data: any) => { 
-        return data?.name;
+      dataIndex: "residence",
+      key: "residence",
+      render: (data: any) => {
+        return data?.host?.name;
       },
     },
     {
       title: t("Action"),
       key: "action",
       render: (data: any) => {
-        setModalData(data); 
+        setModalData(data);
         return (
           <div>
-            <EyeOutlined
+            <img
               className="text-18 cursor-pointer"
+              src={info}
+              alt=""
               onClick={handleToggleModal}
             />
           </div>
@@ -99,8 +92,6 @@ const Booking = () => {
       },
     },
   ];
-  console.log("--------------",new Date());
-
   return (
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center">
@@ -117,8 +108,9 @@ const Booking = () => {
         <BookingDetails modalData={modalData} />
       </ResModal>
       <ResTable
+        loading={isFetching || isLoading}
         column={column}
-        data={bookings}
+        data={data?.data?.data}
         pagination={{
           total: data?.data?.meta?.total || 0,
           pageSize: limit || 10,

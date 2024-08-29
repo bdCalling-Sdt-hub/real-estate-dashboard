@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import info from "../../../assets/info.png";
 import IncomeHistoryCard from "../../../component/IncomeHistoryCard/IncomeHistoryCard";
+import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { useGetAllTransitionsQuery } from "../../../redux/features/payments/paymentApi";
 import { priceFormat } from "../../../utils/Format";
+import IncomeDetails from "./IncomeDetails";
 const IncomeHistory = () => {
   const [show, setshow] = useState(false);
-  const handleToggleModal = () => {
+  const [tenantsData, setTenantsData] = useState({});
+  const handleToggleModal = (data: any) => {
+    setTenantsData(data);
     setshow(true);
   };
 
@@ -33,8 +37,12 @@ const IncomeHistory = () => {
   adsQuery["type"] = "Ads";
 
   const { data: adsIncome, isSuccess } = useGetAllTransitionsQuery(adsQuery);
-  const { data: percentageIncome, isSuccess: success } =
-    useGetAllTransitionsQuery(percentageQuery);
+  const {
+    data: percentageIncome,
+    isSuccess: success,
+    isLoading,
+    isFetching,
+  } = useGetAllTransitionsQuery(percentageQuery);
 
   useEffect(() => {
     if (isSuccess) {
@@ -44,7 +52,6 @@ const IncomeHistory = () => {
       setPercentageData(percentageIncome?.data);
     }
   }, [isSuccess, success]);
-
   const column1 = [
     {
       title: t("TXN ID"),
@@ -92,7 +99,7 @@ const IncomeHistory = () => {
               className="cursor-pointer"
               src={info}
               onClick={() => {
-                handleToggleModal();
+                handleToggleModal(data);
               }}
             />
           </div>
@@ -143,6 +150,9 @@ const IncomeHistory = () => {
 
   return (
     <div className="container mx-auto">
+      <ResModal showModal={show} setShowModal={setshow} width={1000}>
+        <IncomeDetails modalData={tenantsData} />
+      </ResModal>
       <h1 className="text-gray font-500 text-20 mb-2">{t("Service Fees")}</h1>
       <IncomeHistoryCard
         totalIncome={percentageData?.totalIncome}
@@ -152,6 +162,7 @@ const IncomeHistory = () => {
         <Col span={24}>
           <div className="mt-2">
             <ResTable
+              loading={isLoading ?? isFetching}
               column={column1}
               data={percentageData?.totalPaymentsList}
               pagination={{

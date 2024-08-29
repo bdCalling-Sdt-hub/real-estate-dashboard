@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Row } from "antd";
+import { Button, Row, Spin } from "antd";
 import NotificationCard from "../../component/NotificationCom/NotificationCard";
 
 import { useState } from "react";
@@ -22,7 +22,8 @@ const Notification = () => {
   const query: Record<string, any> = {};
   if (page) query["page"] = page;
   query["limit"] = 10;
-  const { data: notificationData } = useGetMyNotificationQuery(query);
+  const { data: notificationData, isLoading } =
+    useGetMyNotificationQuery(query);
 
   const onChange = (page: number, pageSize: number) => {
     setPage(page);
@@ -52,26 +53,34 @@ const Notification = () => {
         )}
       </div>
       <div className="container mx-auto mt-4">
-        {notificationData?.data?.length > 0 ? (
-          <Row gutter={[16, 16]}>
-            {notificationData!.data.map((data: any, index: number) => (
-              <NotificationCard key={index} data={data} />
-            ))}
-          </Row>
-        ) : (
-          <div className="flex justify-center items-center">
-            <NoData />
+        {isLoading ? (
+          <div className="flex justify-center items-center ">
+            <Spin tip="Loading" size="large"></Spin>
           </div>
-        )}
+        ) : (
+          <>
+            {notificationData?.data?.length > 0 ? (
+              <Row gutter={[16, 16]}>
+                {notificationData?.data?.map((data: any, index: number) => (
+                  <NotificationCard key={index} data={data} />
+                ))}
+              </Row>
+            ) : (
+              <div className="flex justify-center items-center">
+                <NoData />
+              </div>
+            )}
 
-        <div className=" text-end mt-4">
-          {notificationData?.data && (
-            <ResPagination
-              total={notificationData?.meta?.total as number}
-              onChange={onChange}
-            />
-          )}
-        </div>
+            <div className="text-end mt-4">
+              {notificationData?.data && (
+                <ResPagination
+                  total={notificationData?.meta?.total as number}
+                  onChange={onChange}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
