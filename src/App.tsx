@@ -14,7 +14,7 @@ import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
 import PrivateRoute from "./router/PrivateRoutes";
 
-const URL = "http://115.127.156.14:9001";
+const URL = "http://sestate.mamnon.de/";
 
 function App() {
   const token: string | null = useAppSelector(useCurrentToken);

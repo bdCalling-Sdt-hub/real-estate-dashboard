@@ -67,7 +67,7 @@ const ProfileForm = ({ ProfileData, imageFile, toggleEdit, refetch }: any) => {
       <div className="flex items-center gap-x-2">
         <Button
           htmlType="submit"
-          className="bg-primary w-full flex justify-center items-center font-600 text-18 "
+          className="bg-primary text-white w-full flex justify-center items-center font-600 text-18 "
           icon={<MdEditSquare />}
         >
           {t("Submit")}

@@ -2,20 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Col, Input, InputRef, Row } from "antd";
 import { useRef, useState } from "react";
-import style from "./otpForm.module.css";
 import { useNavigate } from "react-router-dom";
-import {
-  useProfileQuery,
-  useResetPasswordMutation,
-} from "../../redux/features/auth/authApi";
+import { toast } from "sonner";
+import { useProfileQuery } from "../../redux/features/auth/authApi";
+import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 import {
   useResendOtpMutation,
   useVerifyOtpMutation,
 } from "../../redux/features/otp/otpApi";
-import { toast } from "sonner";
-import ErrorResponse from "../UI/ErrorResponse";
 import { useAppSelector } from "../../redux/hooks";
-import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
+import ErrorResponse from "../UI/ErrorResponse";
+import style from "./otpForm.module.css";
 interface IotpForm {
   type?: string;
   onSubmit?: (otp: string) => void;
@@ -66,7 +63,7 @@ const OtpForm = ({ type }: IotpForm) => {
     }
   };
   const handleResendOtp = async () => {
-    console.log(profileData)
+    console.log(profileData);
     const toastId = toast.loading("Resending");
     try {
       const res = await resendOtp(profileData?.data).unwrap();
@@ -80,7 +77,7 @@ const OtpForm = ({ type }: IotpForm) => {
     <div className={` mt-2  flex flex-col`} style={{ height: "300px" }}>
       <Row>
         {otp.map((digit, index) => (
-          <Col lg={6} className="flex justify-center">
+          <Col span={4} className="flex justify-center">
             <Input
               key={index}
               value={digit}

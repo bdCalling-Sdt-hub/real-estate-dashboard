@@ -4,40 +4,45 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDoneOutline } from "react-icons/md";
-import { useGetContentsQuery, useUpdateContentMutation } from "../../../redux/features/content/contentApi";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
-import { useNavigate } from "react-router-dom";
+import {
+  useGetContentsQuery,
+  useUpdateContentMutation,
+} from "../../../redux/features/content/contentApi";
 
 const TermsAndConditions = () => {
   const { t } = useTranslation();
   const editor = useRef(null);
-  const { data: data, isSuccess } = useGetContentsQuery({})
-  const [updateAboutFn, { isLoading }] = useUpdateContentMutation()
+  const { data: data, isSuccess } = useGetContentsQuery({});
+  const [updateAboutFn, { isLoading }] = useUpdateContentMutation();
   const [content, setContent] = useState("");
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-
     if (isSuccess) {
-      setContent(data?.data?.data[0].termsAndConditions
-      )
+      setContent(data?.data?.data[0]?.termsAndConditions);
     }
-  }, [isSuccess, data])
+  }, [isSuccess, data]);
   if (isLoading) {
-    toast.loading("Loading...", { id: "content" })
+    toast.loading("Loading...", { id: "content" });
   }
   const onSubmit = async () => {
     try {
-      const res: any = await updateAboutFn({ termsAndConditions: content }).unwrap()
+      const res: any = await updateAboutFn({
+        termsAndConditions: content,
+      }).unwrap();
       if (res?.success) {
-        toast.success("terms and conditions policy is updated", { id: "content" });
+        toast.success("terms and conditions policy is updated", {
+          id: "content",
+        });
         navigate("/admin/setting");
-      }else{
+      } else {
         toast.success(res?.message, { id: "content" });
       }
     } catch (error) {
-      ErrorResponse(error, "content")
+      ErrorResponse(error, "content");
     }
   };
   return (

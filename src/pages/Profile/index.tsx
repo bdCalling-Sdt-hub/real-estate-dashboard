@@ -23,7 +23,7 @@ const Profile = () => {
         <div className="flex justify-end">
           <Button
             htmlType="submit"
-            className={`bg-primary flex items-center font-500`}
+            className={`bg-primary text-white flex items-center font-500`}
             icon={toggleEdit ? <MdEditSquare /> : <IoMdClose />}
             onClick={() => setToggleEdit(!toggleEdit)}
           >
@@ -33,6 +33,7 @@ const Profile = () => {
         <div className="flex flex-col  gap-x-4 text-white ">
           <div className="flex items-center gap-x-4">
             <FileUpload
+              disabled={toggleEdit}
               theme={profileUpload}
               setSelectedFile={setFile}
               imageUrl={imageUrl}

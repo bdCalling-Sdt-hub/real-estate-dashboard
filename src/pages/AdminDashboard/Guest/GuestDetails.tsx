@@ -20,6 +20,7 @@ const DetailItem = ({
   );
 };
 const GuestDetails = ({ modalData }: { modalData: any }) => {
+  console.log(modalData);
   const { t } = useTranslation();
   return (
     <div>
@@ -49,7 +50,7 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
       <div className="flex justify-between">
         <div>
           <div className="mt-1 text-black font-500 text-16 flex flex-col gap-y-3">
-            <DetailItem label="Username" value={modalData?.username} />
+            {/* <DetailItem label="Username" value={modalData?.userName} /> */}
             <DetailItem label="Full name" value={modalData?.name} />
             <DetailItem label="Email" value={modalData?.email} />
             <DetailItem

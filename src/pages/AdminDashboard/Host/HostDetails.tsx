@@ -49,7 +49,7 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
         <div>
           <h1 className="text-20 font-500">{t("Personal Details")}</h1>
           <div className="mt-1 text-gray">
-            <DetailItem label="Username" value={modalData?.username} />
+            {/* <DetailItem label="Username" value={modalData?.username} /> */}
             <DetailItem label="Full Name" value={modalData?.name} />
             <DetailItem
               label="Phone No."

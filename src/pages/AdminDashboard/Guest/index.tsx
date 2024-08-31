@@ -206,7 +206,7 @@ const Guest = () => {
   return (
     <div className="container mx-auto">
       <ResModal showModal={blockModal} setShowModal={setBlockModal}>
-        <div className="flex flex-col items-center justify-center h-[200px]">
+        <div className="flex flex-col items-center justify-center  my-10">
           <h1 className="text-20 font-500">
             Sure you want to suspend this user?
           </h1>
