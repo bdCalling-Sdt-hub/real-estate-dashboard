@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
@@ -12,7 +13,7 @@ import ErrorResponse from "../../../component/UI/ErrorResponse";
 import UseImageUpload from "../../../hooks/useImageUpload";
 import { useAddLandlordMutation } from "../../../redux/features/auth/authApi";
 import { landlordSchema } from "../../../schema/host.schema";
-const CreateHost = ({ setshow }) => {
+const CreateHost = ({ setshow }: any) => {
   const { imageUrl, imageFile, setFile } = UseImageUpload();
   const [createLandlord] = useAddLandlordMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
@@ -64,12 +65,14 @@ const ImagesAndVideos = () => {
       setSelectedPosition({ lat, lng });
 
       if (marker) {
+        // @ts-ignore
         marker.setPosition({ lat, lng });
       } else {
         const newMarker = new window.google.maps.Marker({
           position: { lat, lng },
           map: map,
         });
+        // @ts-ignore
         setMarker(newMarker);
       }
     },
@@ -82,12 +85,14 @@ const ImagesAndVideos = () => {
       position: center,
       map: map,
     });
+    // @ts-ignore
     setMarker(initialMarker);
   }, []);
 
   const onUnmount = useCallback(() => {
     setMap(null);
     if (marker) {
+      // @ts-ignore
       marker.setMap(null);
     }
   }, [marker]);
