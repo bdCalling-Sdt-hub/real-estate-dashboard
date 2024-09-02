@@ -26,8 +26,8 @@ const Login = () => {
     const toastId = toast.loading("Logging in..");
     // navigate("/dashboard");
     try {
-      console.log(data)
-      const res: any = await login(data).unwrap(); 
+      console.log(data);
+      const res: any = await login(data).unwrap();
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 2000 });
@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen flex items-center justify-center" >
+    <div className="container mx-auto h-screen flex items-center justify-center">
       <Row align="middle" justify="center" gutter={16}>
         <Col span={12}>
           <img src={logo} alt="Logo" />
@@ -67,14 +67,14 @@ const Login = () => {
                     type="email"
                     name="email"
                     label={t("Email")}
-                    placeholder="Enter your email"
+                    placeholder={t("Enter your email")}
                   />
                   <ResInput
                     type="password"
                     size="large"
                     name="password"
                     label={t("Password")}
-                    placeholder="Enter your password"
+                    placeholder={t("Enter your password")}
                   />
                   <NavLink to="/forgot-password">
                     <h5 className="text-18 text-gray text-end font-600 cursor-pointer">
