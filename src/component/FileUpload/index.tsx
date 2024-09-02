@@ -3,6 +3,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { ConfigProvider, Upload } from "antd";
 import { MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { multiUpload } from "../../themes/uploadTheme";
 
 const FileUpload = ({
@@ -16,6 +17,7 @@ const FileUpload = ({
   const customRequest = ({ file }: { file: File | null }) => {
     setSelectedFile(file);
   };
+  const { t } = useTranslation();
   const props: any = {
     name: "file",
     disabled: disabled,
@@ -36,7 +38,7 @@ const FileUpload = ({
     >
       <PlusOutlined className="text-primary" />
       <div style={{ marginTop: 8 }} className="text-primary">
-        Upload
+        {t("Upload")}
       </div>
     </button>
   );

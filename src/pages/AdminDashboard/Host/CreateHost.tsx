@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import FileUpload from "../../../component/FileUpload";
 import ResForm from "../../../component/Form/FormProvider";
@@ -15,6 +16,7 @@ import { useAddLandlordMutation } from "../../../redux/features/auth/authApi";
 import { landlordSchema } from "../../../schema/host.schema";
 const CreateHost = ({ setshow }: any) => {
   const { imageUrl, imageFile, setFile } = UseImageUpload();
+  const { t } = useTranslation();
   const [createLandlord] = useAddLandlordMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formatedData = {
@@ -52,77 +54,70 @@ const CreateHost = ({ setshow }: any) => {
             size="large"
             type="text"
             name="username"
-            placeholder="enter user name"
-            label="Enter user name"
+            placeholder={t("Enter user name")}
+            label={t("Enter user name")}
           />
           <ResInput
             size="large"
             type="text"
             name="name"
-            placeholder="enter full name"
-            label="Enter full name"
+            placeholder={t("Enter full name")}
+            label={t("Enter full name")}
           />
           <ResInput
             size="large"
             type="email"
             name="email"
-            placeholder="enter email"
-            label="Enter email"
+            placeholder={t("Enter email")}
+            label={t("Enter email")}
           />
           <ResInput
             size="large"
             type="number"
             name="phoneNumber"
-            placeholder="enter phone number"
-            label="Enter phone number"
+            placeholder={t("Enter phone number")}
+            label={t("Enter phone number")}
           />
           <ResSelect
             size="large"
             options={[
-              { label: "Male", value: "Male" },
-              { label: "Female", value: "Female" },
+              { label: t("Male"), value: "Male" },
+              { label: t("Female"), value: "Female" },
             ]}
             name="gender"
-            placeholder="select gender"
-            label="Select gender"
+            placeholder={t("Select gender")}
+            label={t("Select gender")}
           />
           <ResSelect
             size="large"
             options={[
-              { label: "Under 800 KD", value: "Under 800 KD" },
+              { label: t("Under 800 KD"), value: "Under 800 KD" },
               {
-                label: "Between 800 - 1499 KD",
+                label: t("Between 800 - 1499 KD"),
                 value: "Between 800 - 1499 KD",
               },
               {
-                label: "Between 1500 - 3000 KD",
+                label: t("Between 1500 - 3000 KD"),
                 value: "Between 1500 - 3000 KD",
               },
-              {
-                label: "Between 1500 - 3000 KD",
-                value: "Between 1500 - 3000 KD",
-              },
-              {
-                label: "Over 3000 KD",
-                value: "Over 3000 KD",
-              },
+              { label: t("Over 3000 KD"), value: "Over 3000 KD" },
             ]}
             name="monthlyIncome"
-            placeholder="select monthly income"
-            label="Select monthly income"
+            placeholder={t("Select monthly income")}
+            label={t("Select monthly income")}
           />
           <ResInput
             size="large"
             type="text"
             name="password"
-            placeholder="enter password"
-            label="Enter password"
+            placeholder={t("Enter password")}
+            label={t("Enter password")}
           />
           <Button
             htmlType="submit"
             className="w-full bg-primary text-white font-medium h-[40px]"
           >
-            SUBMIT
+            {t("Submit")}
           </Button>
         </ResForm>
       </div>

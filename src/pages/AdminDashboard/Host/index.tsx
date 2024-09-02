@@ -121,7 +121,7 @@ const Host = () => {
       key: "nationality",
     },
     {
-      title: t("Phone No."),
+      title: t("Phone Number"),
       dataIndex: "phoneNumber",
       key: "phoneNumber",
     },
@@ -207,18 +207,18 @@ const Host = () => {
       <ResModal showModal={blockModal} setShowModal={setBlockModal}>
         <div className="flex flex-col items-center justify-center h-[200px]">
           <h1 className="text-20 font-500">
-            Sure you want to suspend this user?
+            {t("Sure you want to suspend this user?")}
           </h1>
 
           <div className="flex gap-x-6 mt-8">
             <Button className="border text-20 h-[50px] w-[200px] font-500  border-[#64B5F6] rounded-full">
-              No
+              {t("No")}
             </Button>
             <Button
               onClick={() => handleToBlock()}
               className="border text-20 h-[50px] w-[200px] font-500  bg-[#64B5F6] border-[#64B5F6] rounded-full text-white"
             >
-              Yes
+              {t("Yes")}
             </Button>
           </div>
         </div>
@@ -232,7 +232,7 @@ const Host = () => {
         <HostDetails modalData={modalData} />
       </ResModal>
       <ResModal
-        title="Create Landlord Account"
+        title={t("Create Landlord Account")}
         width={600}
         // title="Host"
         setShowModal={setshowAddModal}
@@ -245,7 +245,7 @@ const Host = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder={t("search")}
+            placeholder={t("Search")}
             allowClear
             onChange={(e) => setSearch(e.target.value)}
           />

@@ -130,7 +130,7 @@ const AdverTisement = () => {
           onClick={() => setShow((prev) => !prev)}
           className="bg-primary text-white "
         >
-          Create Ads
+          {t("Create Ads")}
         </Button>
       </div>
       <ResModal setShowModal={setShow} showModal={show}>

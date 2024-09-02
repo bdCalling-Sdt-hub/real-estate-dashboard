@@ -55,7 +55,7 @@ const VerificatonDetails = ({
       <h1 className="text-30 font-500">{t("Verification Details")}</h1>
       <Divider />
       {/* section 2 */}
-      <h1 className="text-32 font-semibold my-4">Selfie</h1>
+      <h1 className="text-32 font-semibold my-4">{t("Selfie")}</h1>
       <Image
         className="object-cover"
         height={200}
@@ -63,7 +63,7 @@ const VerificatonDetails = ({
         alt="civilId frontSide"
       />
 
-      <h1 className="text-32 font-semibold my-4">Documents</h1>
+      <h1 className="text-32 font-semibold my-4">{t("Documents")}</h1>
       <div className="flex gap-x-4">
         {modalData?.documents?.documents?.length > 0 &&
           modalData?.documents?.documents?.map((doc: any) => (

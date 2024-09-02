@@ -29,9 +29,11 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
         <img src={modalData?.image} alt={modalData?.name} width={200} />
         <div>
           <h1 className="text-20 font-500">{modalData?.name}</h1>
-          <p>Total Properties: {modalData?.totalProperties ?? 0}</p>
+          <p>
+            {t("Total Properties")}: {modalData?.totalProperties ?? 0}
+          </p>
           <p className="flex items-center gap-x-2 text-16 font-500">
-            Verification Status:
+            {t("Verification Status")}:
             <span>
               {modalData?.isVerified ? (
                 <img src={verified2} />
@@ -47,12 +49,12 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
       {/* section 3 */}
       <div className="flex justify-between">
         <div>
-          <h1 className="text-20 font-500">{t("Personal Details")}</h1>
+          <h1 className="text-20 font-500">{t("Personal Information")}</h1>
           <div className="mt-1 text-gray">
             {/* <DetailItem label="Username" value={modalData?.username} /> */}
             <DetailItem label="Full Name" value={modalData?.name} />
             <DetailItem
-              label="Phone No."
+              label={t("Phone Number")}
               value={
                 modalData?.phoneNumber
                   ? NumberFormat(modalData?.phoneNumber)
@@ -66,7 +68,7 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
           </div>
         </div>
         <div>
-          <h1 className="text-20 font-500">{t("Bank Details")}</h1>
+          <h1 className="text-20 font-500">{t("Bank Information")}</h1>
           <div className="mt-1 text-gray">
             <DetailItem label="Country" value={modalData?.bankInfo?.country} />
             <DetailItem

@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import FileUpload from "../../../component/FileUpload";
 import ResForm from "../../../component/Form/FormProvider";
@@ -17,6 +18,7 @@ import { adsVelidation } from "../../../schema/ads.schema";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const CreateAds = ({ setShow }: any) => {
+  const { t } = useTranslation();
   const { setFile, imageUrl, imageFile } = UseImageUpload();
   const [createAds] = useCreateadsMutation();
   const { data: adsCategoryData } = useGetAdsCategoriesQuery({});
@@ -60,23 +62,23 @@ const CreateAds = ({ setShow }: any) => {
         <ResSelect
           size="large"
           options={categorydata}
-          label="Select category"
-          placeholder="select category"
+          label={t("Select category")}
+          placeholder={t("Select category")}
           name="category"
         />
         <ResInput
           type="text"
           size="large"
           name="contactLink"
-          placeholder="enter url link"
-          label="Enter Url"
+          placeholder={t("Enter url")}
+          label={t("Enter url")}
         />
 
         <Button
           htmlType="submit"
           className="bg-primary text-white w-full h-[40px]"
         >
-          SUBMIT
+          {t("Submit")}
         </Button>
       </ResForm>
     </div>

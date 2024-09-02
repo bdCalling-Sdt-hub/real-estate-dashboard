@@ -29,7 +29,7 @@ const IncomeDetails = ({ modalData }: { modalData: any }) => {
         <div>
           <h1 className="text-20 font-500">{modalData?.user?.name}</h1>
           <div className="flex gap-x-2 items-center">
-            <p className="text-gray font-700 text-16">Tenant:</p>
+            <p className="text-gray font-700 text-16">{t("Tenant")}:</p>
             <p className="bg-[#64B5F6] flex gap-x-2 text-white px-4 rounded">
               <EyeOutlined />
               <span>view profile</span>

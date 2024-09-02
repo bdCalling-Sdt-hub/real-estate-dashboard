@@ -162,7 +162,7 @@ const VerificationRequest = () => {
         showModal={show}
         setShowModal={setShow}
         width={1000}
-        title="Verification Information"
+        title={t("Verification Information")}
       >
         <VerificatonDetails modalData={modalData} setShow={setShow} />
       </ResModal>

@@ -32,10 +32,10 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
         <div>
           <h1 className="text-20 font-500">{modalData?.name}</h1>
           <div className="flex items-center font-500 text-16 gap-x-2 text-black mt-2">
-            Booking Completed: 0
+            {t("Booking Completed")}: 0
           </div>
           <div className="flex items-center font-500 text-16 gap-x-2 text-black mt-2">
-            Verification Status:{" "}
+            {t("Verification Status")}:{" "}
             {modalData?.isVerified ? (
               <img src={verified2} />
             ) : (
@@ -51,7 +51,7 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
         <div>
           <div className="mt-1 text-black font-500 text-16 flex flex-col gap-y-3">
             {/* <DetailItem label="Username" value={modalData?.userName} /> */}
-            <DetailItem label="Full name" value={modalData?.name} />
+            <DetailItem label="Full Name" value={modalData?.name} />
             <DetailItem label="Email" value={modalData?.email} />
             <DetailItem
               label="Contact"
