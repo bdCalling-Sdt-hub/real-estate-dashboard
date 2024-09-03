@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Col, Row } from "antd";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
 import { useGetAllCategoriesQuery } from "../../redux/features/category/categoryApi";
 import {
@@ -16,7 +17,7 @@ import ResSelect from "../Form/ResSelect";
 
 const PropertyBasicInformation = () => {
   const { count, property }: any = useAppSelector((state) => state.property);
-  console.log(property);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: Landlorddata } = useGetAllUserQuery({
     role: "landlord",
@@ -70,59 +71,58 @@ const PropertyBasicInformation = () => {
             defaultValue={property?.host}
             showSearch
             name="host"
-            label="Select Landlord name"
+            label={t("Select landlord name")}
             options={landlordData}
-            placeholder="select landlord"
+            placeholder={t("Select landlord name")}
             size="large"
           />
           <ResSelect
             defaultValue={property?.category}
             name="category"
-            label="Select category"
+            label={t("Select category")}
             options={Categories}
-            placeholder="select category"
+            placeholder={t("Select category")}
             size="large"
           />
           <ResInput
             type="text"
             name="propertyName"
-            label="Enter PropertyName"
-            placeholder="select PropertyName"
+            label={t("Enter property title")}
+            placeholder={t("Enter property title")}
             size="large"
           />
           <ResInput
             type="text"
             name="squareFeet"
-            label="Enter squareFeet"
-            placeholder="select squareFeet"
+            label={t("Enter squareFeet")}
+            placeholder={t("Enter squareFeet")}
             size="large"
           />
           <ResInput
             type="number"
             name="bedrooms"
-            label="Enter number of bedrooms"
-            placeholder="enter number of bedrooms"
+            label={t("Enter number of bedrooms")}
+            placeholder={t("Enter number of bedrooms")}
             size="large"
           />
           <ResInput
             type="number"
             name="bathrooms"
-            label="Enter number of bathrooms"
-            placeholder="enter number of bathrooms"
+            label={t("Enter number of bathrooms")}
+            placeholder={t("Enter number of bathrooms")}
             size="large"
           />
         </Col>
         <Col span={12}>
           <ResSelect
             defaultValue={property?.residenceType}
-            mode="Select Residence Type"
             name="residenceType"
-            label="Select Residence Type"
+            label={t("Select residence type")}
             options={[
               { label: "Condominium", value: "Condominium" },
               { label: "Private", value: "Private" },
             ]}
-            placeholder="select residenceType"
+            placeholder={t("Select residence type")}
             size="large"
           />
           <ResSelect
@@ -130,45 +130,45 @@ const PropertyBasicInformation = () => {
             defaultValue={property?.features}
             showSearch
             name="features"
-            label="Select features"
+            label={t("Select features")}
             options={features}
-            placeholder="select features"
+            placeholder={t("Select features")}
             size="large"
           />
           <ResSelect
             name="rentType"
             defaultValue={property?.rentType}
-            label="Select rent type"
+            label={t("Select rent type")}
             options={[
               { label: "Short Term", value: "Short Term" },
               { label: "Long Term", value: "Long Term" },
             ]}
-            placeholder="select rent type"
+            placeholder={t("Select rent type")}
             size="large"
           />
           <ResSelect
             name="paymentType"
             defaultValue={property?.paymentType}
-            label="Select payment type"
+            label={t("Select payment type")}
             options={[
               { label: "Per Night", value: "Per Night" },
               { label: "Per Month", value: "Per Month" },
             ]}
-            placeholder="select rent type"
+            placeholder={t("Select payment type")}
             size="large"
           />
           <ResInput
             type="number"
             name="deposit"
-            label="Enter deposit amount"
-            placeholder="enter deposit amount"
+            label={t("Enter deposit amount")}
+            placeholder={t("Enter deposit amount")}
             size="large"
           />
           <ResInput
             type="number"
             name="rent"
-            label="Enter rental price"
-            placeholder="enter rental price"
+            label={t("Enter rental price")}
+            placeholder={t("Enter rental price")}
             size="large"
           />
         </Col>
@@ -179,7 +179,7 @@ const PropertyBasicInformation = () => {
           htmlType="submit"
           className="bg-primary text-white text-20 font-500 w-[100px] h-[44px]"
         >
-          Next
+          {t("Next")}
         </Button>
       </div>
     </ResForm>

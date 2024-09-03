@@ -1,27 +1,31 @@
-import { Steps, theme } from "antd";
+import { Steps as Antsteps, theme } from "antd";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ImagesAndVideos from "../../../component/AddPropertySteps/ImagesAndVideos";
 import PropertyBasicInformation from "../../../component/AddPropertySteps/PropertyBasicInformation";
 import { useAppSelector } from "../../../redux/hooks";
 
-const steps = [
-  {
-    title: "Basic information",
-    content: <PropertyBasicInformation />,
-  },
-  {
-    title: "Address and documents",
-    content: <ImagesAndVideos />,
-  },
-];
+const Steps = () => {
+  const { t } = useTranslation();
+  return [
+    {
+      title: t("Basic information"),
+      content: <PropertyBasicInformation />,
+    },
+    {
+      title: t("Address and documents"),
+      content: <ImagesAndVideos />,
+    },
+  ];
+};
 
 const CreateProperty: React.FC = () => {
   const { token } = theme.useToken();
   const { count } = useAppSelector((state) => state.property);
-  const items = steps.map((item) => ({ key: item.title, title: item.title }));
+  const items = Steps().map((item) => ({ key: item.title, title: item.title }));
   return (
     <>
-      <Steps current={count} items={items} />
+      <Antsteps current={count} items={items} />
       <div
         style={{
           marginTop: 16,
@@ -30,7 +34,7 @@ const CreateProperty: React.FC = () => {
           borderRadius: 8,
         }}
       >
-        {steps[count]?.content}
+        {Steps()[count]?.content}
       </div>
     </>
   );

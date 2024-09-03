@@ -163,7 +163,7 @@ const Property = () => {
             className="bg-primary text-white "
             onClick={() => navigate("/admin/realState/create")}
           >
-            Add real Estate
+            {t("Add Property")}
           </Button>
         </div>
       </div>

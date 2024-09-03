@@ -5,6 +5,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { Button, Col, Row, Switch } from "antd";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { governorates } from "../../db";
@@ -32,14 +33,16 @@ const center = {
   lng: 47.9774, // Default longitude for Kuwait
 };
 const DocumentSwitch = ({ label, defaultChecked, onChange }: any) => {
+  const { t } = useTranslation();
   return (
     <div className="flex items-center gap-x-4">
-      <p className="text-16 font-500">{label}</p>
+      <p className="text-16 font-500">{t(label)}</p>
       <Switch defaultChecked={defaultChecked} onChange={onChange} />
     </div>
   );
 };
 const ImagesAndVideos = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [imageFiles, setImageFile] = useState([]);
   const [videoFiles, setVideoFile] = useState([]);
@@ -116,7 +119,6 @@ const ImagesAndVideos = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Uploading Property...");
-    console.log(imageFiles.length);
     if (imageFiles.length <= 0) {
       toast.error("Please select at least 1 image.", {
         id: toastId,
@@ -158,7 +160,7 @@ const ImagesAndVideos = () => {
         <div className="flex ">
           <div>
             <label htmlFor="" className="mb-1">
-              Upload images
+              {t("Upload images")}
             </label>
             {/* <div className="flex gap-x-2 items-center my-auto"> */}
             {/* <img width={40} src={deleteIcon} alt="" /> */}
@@ -174,7 +176,7 @@ const ImagesAndVideos = () => {
 
           <div>
             <label htmlFor="" className="mb-1">
-              Upload videos
+              {t("Upload videos")}
             </label>
             <input
               type="file"
@@ -187,7 +189,9 @@ const ImagesAndVideos = () => {
         </div>
 
         <div>
-          <h5 className="text-20 mb-2 text-center">Required Documents</h5>
+          <h5 className="text-20 mb-2 text-center">
+            {t("Required Documents")}
+          </h5>
           <div className="flex justify-around gap-x-4">
             <DocumentSwitch
               label="Marriage Certificate"
@@ -229,39 +233,39 @@ const ImagesAndVideos = () => {
           <Col lg={12}>
             <ResTextArea
               size="large"
-              placeholder="Enter Description"
+              placeholder={t("Enter description")}
               name="propertyAbout"
-              label="Enter Description"
+              label={t("Enter description")}
             />
             <ResSelect
               defaultValue={property?.address?.governorate}
               options={governorates?.map((data: string) => {
-                return { label: data, value: data };
+                return { label: t(data), value: data };
               })}
               value={governorate}
               onChange={handleSelectChange}
               size="large"
-              placeholder="Select governorate"
+              placeholder={t("Select governorate")}
               name="address.governorate"
-              label="Select governorate"
+              label={t("Select governorate")}
             />
             <ResSelect
               defaultValue={property?.address?.area}
               options={areas?.map((data: string) => {
-                return { label: data, value: data };
+                return { label: t(data), value: data };
               })}
               size="large"
-              placeholder="Select area"
+              placeholder={t("Select area")}
               name="address.area"
-              label="Select area"
+              label={t("Select area")}
             />
 
             <ResInput
               type="text"
               size="large"
-              placeholder="Enter building no"
+              placeholder={t("Enter building number")}
               name="address.house"
-              label="Enter house no"
+              label={t("Enter building number")}
             />
 
             <div className="flex">
@@ -269,18 +273,18 @@ const ImagesAndVideos = () => {
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter apartment no"
+                  placeholder={t("Enter apartment no")}
                   name="address.apartment"
-                  label="Enter apartment no"
+                  label={t("Enter apartment no")}
                 />
               </Col>
               <Col lg={12}>
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter floor no"
+                  placeholder={t("Enter floor no")}
                   name="address.floor"
-                  label="Enter floor no"
+                  label={t("Enter floor no")}
                 />
               </Col>
             </div>
@@ -289,18 +293,18 @@ const ImagesAndVideos = () => {
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter street Name/number"
+                  placeholder={t("Enter street name/number")}
                   name="address.street"
-                  label="Enter street Name/number"
+                  label={t("Enter street name/number")}
                 />
               </Col>
               <Col lg={12}>
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter block no."
+                  placeholder={t("Enter block no")}
                   name="address.block"
-                  label="Enter block no"
+                  label={t("Enter block no")}
                 />
               </Col>
             </div>
@@ -310,18 +314,18 @@ const ImagesAndVideos = () => {
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter aveneu"
+                  placeholder={t("Enter avenue (optional)")}
                   name="address.aveneu"
-                  label="Enter aveneu(optional)"
+                  label={t("Enter avenue (optional)")}
                 />
               </Col>
               <Col lg={12}>
                 <ResInput
                   type="text"
                   size="large"
-                  placeholder="Enter additional directions"
+                  placeholder={t("Enter additional directions")}
                   name="address.additionalDirections"
-                  label="Enter additional directions"
+                  label={t("Enter additional directions")}
                 />
               </Col>
             </div>
@@ -345,18 +349,19 @@ const ImagesAndVideos = () => {
             )}
           </Col>
         </Row>
+
         <div className="flex justify-end gap-x-4">
           <Button
             onClick={() => dispatch(setCount(count - 1))}
             className="  text-primary border border-primary text-20 font-500 w-[150px] h-[44px]"
           >
-            previous
+            {t("Previous")}
           </Button>
           <Button
             htmlType="submit"
             className="bg-primary text-white text-20 font-500 w-[150px] h-[44px]"
           >
-            Submit
+            {t("Submit")}
           </Button>
         </div>
       </ResForm>
