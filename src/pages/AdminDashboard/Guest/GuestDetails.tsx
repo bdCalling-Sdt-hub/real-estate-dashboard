@@ -20,7 +20,6 @@ const DetailItem = ({
   );
 };
 const GuestDetails = ({ modalData }: { modalData: any }) => {
-  console.log(modalData);
   const { t } = useTranslation();
   return (
     <div>

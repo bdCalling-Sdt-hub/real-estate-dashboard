@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EyeOutlined } from "@ant-design/icons";
 import { Divider } from "antd";
 import { useTranslation } from "react-i18next";
 const DetailItem = ({
@@ -30,10 +29,10 @@ const IncomeDetails = ({ modalData }: { modalData: any }) => {
           <h1 className="text-20 font-500">{modalData?.user?.name}</h1>
           <div className="flex gap-x-2 items-center">
             <p className="text-gray font-700 text-16">{t("Tenant")}:</p>
-            <p className="bg-[#64B5F6] flex gap-x-2 text-white px-4 rounded">
+            {/* <p className="bg-[#64B5F6] flex gap-x-2 text-white px-4 rounded">
               <EyeOutlined />
               <span>view profile</span>
-            </p>
+            </p> */}
           </div>
           {/* <div className="flex gap-x-2">
             <p className="text-gray font-700 text-16">Property ID:</p>

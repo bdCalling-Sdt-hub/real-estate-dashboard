@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
+import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -25,10 +26,13 @@ const AdverTisement = () => {
   const { data: adsData } = useGetAllAdsQuery({ limit: 99999 });
   const [deleteAds] = useDeleteAdsMutation();
   const handleDelete = async () => {
-    const toastId = toast.loading("Deleting...");
+    const toastId = toast.loading(t("Deleting..."));
     try {
       await deleteAds(id).unwrap();
-      toast.success("Ads deleted succesfully", { id: toastId, duration: 2000 });
+      toast.success(t("Ads deleted successfully"), {
+        id: toastId,
+        duration: 2000,
+      });
       setdeletemodal((prev: boolean) => !prev);
     } catch (error) {
       setdeletemodal((prev: boolean) => !prev);
@@ -47,6 +51,12 @@ const AdverTisement = () => {
       title: t("Link"),
       dataIndex: "contactLink",
       key: "contactLink",
+    },
+    {
+      title: t("Expire Date"),
+      dataIndex: "expireDate",
+      key: "expireDate",
+      render: (text: string) => moment(text).format("YYYY-MM-DD"),
     },
     {
       title: t("Category"),
@@ -103,18 +113,18 @@ const AdverTisement = () => {
       <ResModal showModal={deleteModal} setShowModal={setdeletemodal}>
         <div className="flex flex-col items-center  justify-center ">
           <h1 className="text-20 font-500 mt-10">
-            Sure you want to delete this Ads?
+            {t("Sure you want to delete this Ads")}
           </h1>
 
           <div className="flex gap-x-6 mt-10">
             <Button className="border text-20 h-[50px] w-[200px] font-500  border-[#64B5F6] rounded-full">
-              No
+              {t("No")}
             </Button>
             <Button
               onClick={() => handleDelete()}
               className="border text-20 h-[50px] w-[200px] font-500  bg-[#64B5F6] border-[#64B5F6] rounded-full text-white"
             >
-              Yes
+              {t("No")}
             </Button>
           </div>
         </div>

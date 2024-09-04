@@ -15,7 +15,7 @@ import {
   useGetSingleAdsQuery,
   useUpdateAdsMutation,
 } from "../../../redux/features/ads/adsApi";
-import { adsVelidation } from "../../../schema/ads.schema";
+import { adsValidation } from "../../../schema/ads.schema";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const EditAds = ({ setShow, id }: any) => {
@@ -32,14 +32,17 @@ const EditAds = ({ setShow, id }: any) => {
   });
 
   const onsubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Creating....");
+    const toastId = toast.loading(t("Creating...."));
     const formData = new FormData();
 
     try {
       formData.append("banner", imageFile as File);
       formData.append("data", JSON.stringify(data));
+
+      // Add the calculated expire date to the data
+
       await updateAds({ id: singleAds?.data?._id, body: formData }).unwrap();
-      toast.success("Ads edited successfully", {
+      toast.success(t("Ads edited successfully"), {
         id: toastId,
         duration: 2000,
       });
@@ -48,6 +51,7 @@ const EditAds = ({ setShow, id }: any) => {
       ErrorResponse(error, toastId);
     }
   };
+
   return (
     <div>
       <div className="text-center">
@@ -59,7 +63,7 @@ const EditAds = ({ setShow, id }: any) => {
       <ResForm
         onSubmit={onsubmit}
         defaultValues={singleAds?.data}
-        resolver={zodResolver(adsVelidation.editschema)}
+        resolver={zodResolver(adsValidation.editschema)}
       >
         <ResSelect
           size="large"

@@ -1,31 +1,34 @@
+import { t } from "i18next"; // Assuming you're using i18next for localization
 import { z } from "zod";
 
 const createLandlord = z.object({
   username: z
-    .string({ required_error: "Username is required" })
-    .min(1, { message: "Username is required" }),
+    .string({ required_error: t("Username is required") })
+    .min(1, { message: t("Username is required") }),
   name: z
-    .string({ required_error: "Full name is required" })
-    .min(1, { message: "Full name is required" }),
+    .string({ required_error: t("Full name is required") })
+    .min(1, { message: t("Full name is required") }),
   email: z
-    .string({ required_error: "Email is required" })
-    .email({ message: "Invalid email address" }),
+    .string({ required_error: t("Email is required") })
+    .email({ message: t("Invalid email address") }),
   phoneNumber: z
-    .string({ required_error: "Phone number is required" })
-    .min(1, { message: "Phone number is required" })
-    .regex(/^[0-9]+$/, { message: "Phone number must be numeric" }),
-  gender: z.enum(["Male", "Female"], { required_error: "Gender is required" }),
+    .string({ required_error: t("Phone number is required") })
+    .min(1, { message: t("Phone number is required") })
+    .regex(/^[0-9]+$/, { message: t("Phone number must be numeric") }),
+  gender: z.enum(["Male", "Female"], {
+    required_error: t("Gender is required"),
+  }),
   password: z
-    .string({ required_error: "password is required" })
-    .min(6, { message: "Password is required" }),
+    .string({ required_error: t("Password is required") })
+    .min(6, { message: t("Password must be at least 6 characters long") }),
   monthlyIncome: z.enum(
     [
-      "Under 800 KD",
-      "Between 800 - 1499 KD",
-      "Between 1500 - 3000 KD",
-      "Over 3000 KD",
+      t("Under 800 KD"),
+      t("Between 800 - 1499 KD"),
+      t("Between 1500 - 3000 KD"),
+      t("Over 3000 KD"),
     ],
-    { required_error: "MonthlyIncome is required" }
+    { required_error: t("Monthly income is required") }
   ),
 });
 

@@ -33,13 +33,13 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
         />
         <div>
           <h1 className="text-20 font-500">
-            Property ID: #{modalData?._id.slice(0, 6)}
+            {t("Property ID")}: #{modalData?._id.slice(0, 6)}
           </h1>
           <h1 className="text-20 font-500">
-            Total Booking: {modalData?.totalBooking ?? 0}
+            {t("Total Booking")}: {modalData?.totalBooking ?? 0}
           </h1>
           <div className="flex items-center gap-x-2 text-gray mt-2">
-            <h5 className="font-500 text-black"> Reviews:</h5>
+            <h5 className="font-500 text-black"> {t("Reviews")}:</h5>
             <span>
               <StarFilled className="text-[#fbb606] text-18" />
             </span>
@@ -47,7 +47,7 @@ const PropertyDetails = ({ modalData }: { modalData: any }) => {
             <p>({modalData?.totalReviews ?? 0})</p>
           </div>
           <div className="flex items-center gap-x-2 text-16 text-gray mt-2">
-            <h5 className="font-500 text-black">Owner:</h5>
+            <h5 className="font-500 text-black">{t("Owner")}:</h5>
             <p className="bg-[#A3D9A5] p-[2px] rounded-sm">
               {modalData?.host?.name}
             </p>

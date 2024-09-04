@@ -5,7 +5,6 @@ import { Button, Dropdown, Menu, Space } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import eye from "../../../assets/eye.png";
 import info from "../../../assets/info.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
@@ -99,13 +98,14 @@ const Property = () => {
       render: (data: any, index: number) => {
         return (
           <div className="flex items-center gap-x-2">
-            <img
+            {/* <img
               className="cursor-pointer"
               src={eye}
+              width={35}
               onClick={() => {
                 handleToggleModal(data);
               }}
-            />
+            /> */}
             <img
               className="cursor-pointer"
               src={info}

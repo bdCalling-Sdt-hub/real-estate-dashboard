@@ -69,14 +69,14 @@ const Host = () => {
   };
 
   const handleToBlock = async () => {
-    toast.loading("Blocking...", { id: "block", duration: 2000 });
+    toast.loading(t("blocking..."), { id: "block", duration: 2000 });
     try {
       const res: any = await updateUserFn({
         id,
         body: { status: "blocked" },
       }).unwrap();
       if (res.success) {
-        toast.success(t("user blocked success"), {
+        toast.success(t("user blocked successfully"), {
           id: "block",
           duration: 2000,
         });
@@ -88,25 +88,30 @@ const Host = () => {
     }
   };
 
-  const handelToUnBlock = async (id: string) => {
-    toast.loading("Blocking...", { id: "active", duration: 2000 });
+  const handleToUnBlock = async (id: string) => {
+    toast.loading(t("Unblocking..."), { id: "active", duration: 2000 });
     try {
       const res: any = await updateUserFn({
         id,
         body: { status: "active" },
       }).unwrap();
+      setBlockModal(false);
       if (res.success) {
-        toast.success(t("user unblock success"), {
+        toast.success(t("user unblocked successfully"), {
           id: "active",
           duration: 2000,
         });
+        setBlockModal(false);
       } else {
         toast.success(res.message, { id: "active", duration: 2000 });
+        setBlockModal(false);
       }
     } catch (error) {
       ErrorResponse(error, "active");
+      setBlockModal(false);
     }
   };
+
   // const onSearch: SearchProps["onSearch"] = (value, _e) => setSearch(value);
 
   const column = [
@@ -177,12 +182,13 @@ const Host = () => {
                 src={block}
                 width={35}
                 alt=""
-                onClick={() => handelToUnBlock(data?._id)}
+                onClick={() => handleToUnBlock(data?._id)}
               />
             ) : (
               <img
                 className="cursor-pointer"
                 src={eye}
+                width={35}
                 alt=""
                 onClick={() => {
                   setid(data?._id), setBlockModal((prev) => !prev);

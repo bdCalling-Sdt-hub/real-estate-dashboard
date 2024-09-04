@@ -67,8 +67,8 @@ const Guest = () => {
     setLimit(pageSize);
   };
 
-  const handelToBlock = async () => {
-    toast.loading("Blocking...", { id: "block", duration: 2000 });
+  const handleToBlock = async () => {
+    toast.loading(t("blocking"), { id: "block", duration: 2000 });
     try {
       const res: any = await updateUserFn({
         id,
@@ -76,7 +76,7 @@ const Guest = () => {
       }).unwrap();
 
       if (res.success) {
-        toast.success(t("user blocked success"), {
+        toast.success(t("user blocked successfully"), {
           id: "block",
           duration: 2000,
         });
@@ -89,8 +89,8 @@ const Guest = () => {
     }
   };
 
-  const handelToUnBlock = async (id: string) => {
-    toast.loading("Unblocking...", { id: "active", duration: 2000 });
+  const handleToUnBlock = async (id: string) => {
+    toast.loading(t("unblocking"), { id: "active", duration: 2000 });
     try {
       const res: any = await updateUserFn({
         id,
@@ -98,7 +98,7 @@ const Guest = () => {
       }).unwrap();
 
       if (res.success) {
-        toast.success(t("user succesfully unblocked"), {
+        toast.success(t("user unblocked successfully"), {
           id: "active",
           duration: 2000,
         });
@@ -178,12 +178,13 @@ const Guest = () => {
                 src={block}
                 alt=""
                 width={35}
-                onClick={() => handelToUnBlock(data?._id)}
+                onClick={() => handleToUnBlock(data?._id)}
               />
             ) : (
               <img
                 className="cursor-pointer"
                 src={eye}
+                width={35}
                 alt=""
                 onClick={() => {
                   setid(data?._id), setBlockModal((prev) => !prev);
@@ -216,7 +217,7 @@ const Guest = () => {
               {t("No")}
             </Button>
             <Button
-              onClick={() => handelToBlock()}
+              onClick={() => handleToBlock()}
               className="border text-20 h-[50px] w-[200px] font-500  bg-[#64B5F6] border-[#64B5F6] rounded-full text-white"
             >
               {t("Yes")}
@@ -237,7 +238,7 @@ const Guest = () => {
         <div className="flex gap-x-2">
           <Input.Search
             style={{ width: 304 }}
-            placeholder={t("search")}
+            placeholder={t("Search")}
             allowClear
             onChange={(e) => setSearch(e.target.value)}
           />

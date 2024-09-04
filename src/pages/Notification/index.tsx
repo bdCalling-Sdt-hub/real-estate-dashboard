@@ -4,6 +4,7 @@ import { Button, Row, Spin } from "antd";
 import NotificationCard from "../../component/NotificationCom/NotificationCard";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import NoData from "../../component/NoData/NoData";
 import ErrorResponse from "../../component/UI/ErrorResponse";
@@ -16,8 +17,9 @@ import {
 import { useAppSelector } from "../../redux/hooks";
 
 const Notification = () => {
+  const [updateNotification] = useMarkAsReadMutation();
   const user: TUser | null = useAppSelector(useCurrentUser);
-
+  const { t } = useTranslation();
   const [page, setPage] = useState<number>(1);
   const query: Record<string, any> = {};
   if (page) query["page"] = page;
@@ -28,12 +30,11 @@ const Notification = () => {
   const onChange = (page: number, pageSize: number) => {
     setPage(page);
   };
-  const [updateNotification] = useMarkAsReadMutation();
   const submit = async () => {
-    const toastId = toast.loading("Updating...");
+    const toastId = toast.loading(t("Updating..."));
     try {
       await updateNotification({}).unwrap();
-      toast.success("Mark as read successfully", {
+      toast.success(t("Marked as read successfully"), {
         id: toastId,
         duration: 2000,
       });
@@ -48,7 +49,7 @@ const Notification = () => {
       <div className="flex justify-end">
         {notificationData?.data && (
           <Button onClick={submit} className="bg-primary text-white ">
-            Mark As Read
+            {t("Mark As Read")}
           </Button>
         )}
       </div>
