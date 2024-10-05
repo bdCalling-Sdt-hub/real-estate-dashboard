@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
     }
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto" id="add-product-detailed-desc">
       <h1 className="text-20 text-gray font-500 mb-2">{t("Privacy Policy")}</h1>
       <JoditEditor
         // config={{

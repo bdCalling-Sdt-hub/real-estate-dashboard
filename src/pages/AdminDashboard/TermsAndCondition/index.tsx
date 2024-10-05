@@ -46,7 +46,7 @@ const TermsAndConditions = () => {
     }
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto" id="add-product-detailed-desc">
       <h1 className="text-20 text-gray font-500 mb-2">
         {t("Terms and Condition")}
       </h1>
