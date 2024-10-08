@@ -4,13 +4,13 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDoneOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 import {
   useGetContentsQuery,
   useUpdateContentMutation,
 } from "../../../redux/features/content/contentApi";
-import ErrorResponse from "../../../component/UI/ErrorResponse";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ const AboutUs = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setContent(data?.data?.data[0].aboutUs);
+      setContent(data?.data?.data[0]?.aboutUs);
     }
   }, [isSuccess, data]);
   if (isLoading) {
@@ -40,7 +40,7 @@ const AboutUs = () => {
     }
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto" id="add-product-detailed-desc">
       <h1 className="text-20 text-gray font-500 mb-2">{t("About Us")}</h1>
       <JoditEditor
         // config={{
@@ -53,7 +53,7 @@ const AboutUs = () => {
       <div className="flex justify-end mt-4">
         <Button
           onClick={onSubmit}
-          className="bg-primary flex items-center border-0 font-600 "
+          className="bg-primary text-white flex items-center border-0 font-600 "
           size="large"
           icon={<MdDoneOutline />}
         >

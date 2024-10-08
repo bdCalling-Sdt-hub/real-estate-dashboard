@@ -1,11 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from "antd";
 import { useTranslation } from "react-i18next";
-import { IoLocateOutline } from "react-icons/io5";
-import moment from "moment";
+import unverified from "../../../assets/unverified.png";
+import verified2 from "../../../assets/verified2.png";
 import { NumberFormat } from "../../../utils/Format";
+const DetailItem = ({
+  label,
+  value,
+  labelStyle = "text-18 font-500",
+  valueStyle = "",
+}: any) => {
+  const { t } = useTranslation();
+  return (
+    <p className="my-1">
+      <span className={labelStyle}>{t(label)}:</span>{" "}
+      <span className={valueStyle}>{value}</span>
+    </p>
+  );
+};
 const HostDetails = ({ modalData }: { modalData: any }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   return (
     <div>
       <h1 className="text-30 font-500">{t("Landlords Information")}</h1>
@@ -15,10 +29,19 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
         <img src={modalData?.image} alt={modalData?.name} width={200} />
         <div>
           <h1 className="text-20 font-500">{modalData?.name}</h1>
-          <div className="flex items-center gap-x-2 text-gray mt-2">
-            <IoLocateOutline />
-            <p>{modalData?.address}</p>
-          </div>
+          <p>
+            {t("Total Properties")}: {modalData?.totalProperties ?? 0}
+          </p>
+          <p className="flex items-center gap-x-2 text-16 font-500">
+            {t("Verification Status")}:
+            <span>
+              {modalData?.isVerified ? (
+                <img src={verified2} />
+              ) : (
+                <img src={unverified} />
+              )}
+            </span>
+          </p>
         </div>
       </div>
       <Divider />
@@ -26,47 +49,46 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
       {/* section 3 */}
       <div className="flex justify-between">
         <div>
-          <h1 className="text-20 font-500">{t("Personal Preferrence")}</h1>
+          <h1 className="text-20 font-500">{t("Personal Information")}</h1>
           <div className="mt-1 text-gray">
-            <p>
-              {t("Joining Date")}: {moment(modalData?.createdAt).format("L")}
-            </p>
-            <p className="my-1">
-              {t("Contact")}:{" "}
-              {modalData?.phoneNumber
-                ? NumberFormat(modalData?.phoneNumber)
-                : modalData?.phoneNumber}
-            </p>
-            <p className="my-1">
-              {t("Email")}: {modalData?.email}
-            </p>
+            {/* <DetailItem label="Username" value={modalData?.username} /> */}
+            <DetailItem label="Full Name" value={modalData?.name} />
+            <DetailItem
+              label={t("Phone Number")}
+              value={
+                modalData?.phoneNumber
+                  ? NumberFormat(modalData?.phoneNumber)
+                  : modalData?.phoneNumber
+              }
+            />
+            <DetailItem label="Email" value={modalData?.email} />
+            <DetailItem label="Nationality" value={modalData?.nationality} />
+            <DetailItem label="Gender" value={modalData?.gender} />
+            <DetailItem label="Date of Birth" value={modalData?.dateOfBirth} />
           </div>
         </div>
         <div>
           <h1 className="text-20 font-500">{t("Bank Information")}</h1>
           <div className="mt-1 text-gray">
-            <p>
-              {t("Bank Name")}: {modalData?.bankInfo?.bankName}
-            </p>
-            <p className="mt-1">
-              {t("Beneficiarys Full Name")}:{" "}
-              {modalData?.bankInfo?.accountHolder}
-            </p>
-            <p className="mt-1">
-              {t("IBAN/Account No")}: {modalData?.bankInfo?.accountNumber}
-            </p>
-            <p className="mt-1">
-              {t("Beneficiarys Address")}: {modalData?.bankInfo?.bankAddress}
-            </p>
-            <p className="mt-1">
-              {t("country")}: {modalData?.bankInfo?.country}
-            </p>
-            <p className="mt-1">
-              {t("swiftCode")}: {modalData?.bankInfo?.swiftCode}
-            </p>
+            <DetailItem label="Country" value={modalData?.bankInfo?.country} />
+            <DetailItem
+              label="Beneficiary's Full Name"
+              value={modalData?.bankInfo?.accountHolder}
+            />
+            <DetailItem
+              label="IBAN/Account No"
+              value={modalData?.bankInfo?.accountNumber}
+            />
+            <DetailItem
+              label="Beneficiary's Address"
+              value={modalData?.bankInfo?.bankAddress}
+            />
 
+            <DetailItem
+              label="Swift Code"
+              value={modalData?.bankInfo?.swiftCode}
+            />
           </div>
-  
         </div>
       </div>
     </div>

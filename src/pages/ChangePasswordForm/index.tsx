@@ -1,22 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
-import GuruForm from "../../component/Form/FormProvider";
-import ResInput from "../../component/Form/ResInput";
-import { NavLink, useNavigate } from "react-router-dom";
 import { GiConfirmed } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import ResForm from "../../component/Form/FormProvider";
+import ResInput from "../../component/Form/ResInput";
+import ErrorResponse from "../../component/UI/ErrorResponse";
 import {
   useChangePasswordMutation,
   useForgotPasswordMutation,
   useProfileQuery,
 } from "../../redux/features/auth/authApi";
-import { toast } from "sonner";
-import ErrorResponse from "../../component/UI/ErrorResponse";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { authValidationSchema } from "../../schema/auth.schema";
-import { useAppDispatch } from "../../redux/hooks";
 import { setToken } from "../../redux/features/otp/otpSlice";
-import ResForm from "../../component/Form/FormProvider";
+import { useAppDispatch } from "../../redux/hooks";
+import { authValidationSchema } from "../../schema/auth.schema";
 
 interface SubmitProps {
   currentPassword: string;
@@ -28,7 +27,7 @@ const ChangePasswordFrom = () => {
   const dispatch = useAppDispatch();
   const [changePassword] = useChangePasswordMutation();
   const { data: profile } = useProfileQuery(undefined);
-  const [forgotPassword] = useForgotPasswordMutation(); 
+  const [forgotPassword] = useForgotPasswordMutation();
   const onSubmit = async (data: any) => {
     const toastId = toast.loading("Changing....");
     try {
@@ -44,7 +43,7 @@ const ChangePasswordFrom = () => {
   const handleForgotPassword = async () => {
     const toastId = toast.loading("Sending Otp");
     try {
-      const res = await forgotPassword(profile?.data).unwrap(); 
+      const res = await forgotPassword(profile?.data).unwrap();
       toast.success("An otp sent to your email address", {
         id: toastId,
         duration: 2000,
@@ -100,7 +99,7 @@ const ChangePasswordFrom = () => {
 
           <Button
             htmlType="submit"
-            className="bg-primary w-full h-[38px] flex justify-center items-center font-600 text-18 border-0"
+            className="bg-primary text-white w-full h-[38px] flex justify-center items-center font-600 text-18 border-0"
             icon={<GiConfirmed />}
           >
             Confirm

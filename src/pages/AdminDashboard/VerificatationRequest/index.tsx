@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
+import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Input, Menu } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import infoIcon from "../../../assets/info.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
+import { useGetAllUserQuery } from "../../../redux/features/auth/authApi";
 import VerificatonDetails from "./VerificationDetails";
-import {
-  useGetAllUserQuery, 
-} from "../../../redux/features/auth/authApi"; 
-
 const VerificationRequest = () => {
   const query: Record<string, any> = {};
   const [show, setShow] = useState<boolean>(false);
@@ -18,8 +16,6 @@ const VerificationRequest = () => {
   const [limit, setLimit] = useState<number>(10);
   const [filter, SetFilter] = useState<string | null>(null);
 
-
-  const [verificationData, setVerificationData] = useState([]);
   const { t } = useTranslation();
 
   query["limit"] = limit;
@@ -35,15 +31,13 @@ const VerificationRequest = () => {
   //   query["isVerified"] = isVerified;
   // }
 
-  const { data: data, isSuccess } = useGetAllUserQuery({ ...query });
+  const {
+    data: data,
+    isLoading,
+    isFetching,
+  } = useGetAllUserQuery({ ...query });
 
   const [modalData, setModalData] = useState({});
-
-  useEffect(() => {
-    if (isSuccess) {
-      setVerificationData(data?.data?.data);
-    }
-  }, [isSuccess, data]);
 
   const handleToggleModal = (data: any) => {
     setModalData(data);
@@ -112,7 +106,9 @@ const VerificationRequest = () => {
       render: (data: any) => {
         return (
           <div className="flex items-center gap-x-2">
-            <EyeOutlined
+            <img
+              src={infoIcon}
+              alt=""
               className="text-18 cursor-pointer"
               onClick={() => handleToggleModal(data)}
             />
@@ -166,14 +162,15 @@ const VerificationRequest = () => {
         showModal={show}
         setShowModal={setShow}
         width={1000}
-        title="Verification Information"
+        title={t("Verification Information")}
       >
         <VerificatonDetails modalData={modalData} setShow={setShow} />
       </ResModal>
 
       <ResTable
         column={column}
-        data={verificationData}
+        loading={isFetching || isLoading}
+        data={data?.data?.data}
         pagination={{
           total: data?.data?.meta?.total || 0,
           pageSize: limit || 10,

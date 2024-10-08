@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider } from "antd";
+import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { IoLocateOutline } from "react-icons/io5";
-import img from "./../../../assets/property.png";
-import moment from "moment";
 import { NumberFormat, priceFormat } from "../../../utils/Format";
+import img from "./../../../assets/property.png";
 
-const AdsDetails = ({ modalData }: { modalData: any }) => { 
+const AdsDetails = ({ modalData }: { modalData: any }) => {
   const { t } = useTranslation();
   return (
     <div>

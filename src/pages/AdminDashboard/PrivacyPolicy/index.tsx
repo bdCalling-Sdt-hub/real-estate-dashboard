@@ -4,13 +4,13 @@ import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDoneOutline } from "react-icons/md";
-import ErrorResponse from "../../../component/UI/ErrorResponse";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 import {
   useGetContentsQuery,
   useUpdateContentMutation,
 } from "../../../redux/features/content/contentApi";
-import { useNavigate } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
@@ -22,10 +22,10 @@ const PrivacyPolicy = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setContent(data?.data?.data[0].privacyPolicy);
+      setContent(data?.data?.data[0]?.privacyPolicy);
     }
   }, [isSuccess, data]);
-  if (isLoading) { 
+  if (isLoading) {
     toast.loading("Loading...", { id: "content" });
   }
   const onSubmit = async () => {
@@ -34,7 +34,7 @@ const PrivacyPolicy = () => {
       if (res?.success) {
         toast.success("Privacy policy is updated", { id: "content" });
         navigate("/admin/setting");
-      }else{
+      } else {
         toast.success(res?.message, { id: "content" });
       }
     } catch (error) {
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
     }
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto" id="add-product-detailed-desc">
       <h1 className="text-20 text-gray font-500 mb-2">{t("Privacy Policy")}</h1>
       <JoditEditor
         // config={{

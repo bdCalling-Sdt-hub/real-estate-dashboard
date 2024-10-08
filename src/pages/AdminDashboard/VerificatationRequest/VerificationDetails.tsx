@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Divider, Image } from "antd";
+import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BsCheck2Circle } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
+import { toast } from "sonner";
 import ResModal from "../../../component/Modal/Modal";
 import RejectForm from "../../../component/RejectForm/RejectForm";
-import drivingLicense from "./../../../assets/driving.jfif";
-import moment from "moment";
-import { useUpdateUserMutation } from "../../../redux/features/auth/authApi";
-import { toast } from "sonner";
 import ErrorResponse from "../../../component/UI/ErrorResponse";
-import { CgLayoutGrid } from "react-icons/cg";
+import { useUpdateUserMutation } from "../../../redux/features/auth/authApi";
 const VerificatonDetails = ({
   modalData,
   setShow,
@@ -33,18 +31,18 @@ const VerificatonDetails = ({
       const res: any = await updateUserFn({
         id,
         body: { verificationRequest: "accepted", isVerified: true },
-      }).unwrap(); 
+      }).unwrap();
       if (res.success) {
         toast.success(t("user verifications accepted"), { id: "accept" });
         setShow((prev: any) => !prev);
-      }else{
+      } else {
         toast.success(res.message, { id: "accept" });
       }
     } catch (error) {
       ErrorResponse(error, "accept");
     }
   };
- 
+
   return (
     <div>
       <ResModal
@@ -57,25 +55,25 @@ const VerificatonDetails = ({
       <h1 className="text-30 font-500">{t("Verification Details")}</h1>
       <Divider />
       {/* section 2 */}
-      <h1 className="text-32 font-semibold my-4">Selfie</h1>
+      <h1 className="text-32 font-semibold my-4">{t("Selfie")}</h1>
       <Image
-          className="object-cover"
-          height={200}
-          src={modalData?.documents?.selfie}
-          alt="civilId frontSide"
-        />
+        className="object-cover"
+        height={200}
+        src={modalData?.documents?.selfie}
+        alt="civilId frontSide"
+      />
 
-<h1 className="text-32 font-semibold my-4">Documents</h1>
+      <h1 className="text-32 font-semibold my-4">{t("Documents")}</h1>
       <div className="flex gap-x-4">
-       
-        {
-          modalData?.documents?.documents?.length > 0 && modalData?.documents?.documents?.map((doc:any)=> <Image
-          className="object-cover"
-          height={200}
-          src={doc?.url}
-          alt="Documents"
-        />)
-        }
+        {modalData?.documents?.documents?.length > 0 &&
+          modalData?.documents?.documents?.map((doc: any) => (
+            <Image
+              className="object-cover"
+              height={200}
+              src={doc?.url}
+              alt="Documents"
+            />
+          ))}
       </div>
       <Divider />
 

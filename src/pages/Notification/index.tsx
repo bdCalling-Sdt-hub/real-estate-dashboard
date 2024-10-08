@@ -1,40 +1,40 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Row } from "antd";
+import { Button, Row, Spin } from "antd";
 import NotificationCard from "../../component/NotificationCom/NotificationCard";
 
-import GuruPagination from "../../component/UI/Pagination";
-import { notificationArray } from "../../db";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import NoData from "../../component/NoData/NoData";
+import ErrorResponse from "../../component/UI/ErrorResponse";
+import ResPagination from "../../component/UI/Pagination";
+import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 import {
   useGetMyNotificationQuery,
   useMarkAsReadMutation,
 } from "../../redux/features/notification/notificationApi";
-import { toast } from "sonner";
-import ErrorResponse from "../../component/UI/ErrorResponse";
-import ResPagination from "../../component/UI/Pagination";
-import { useState } from "react";
-import NoData from "../../component/NoData/NoData";
 import { useAppSelector } from "../../redux/hooks";
-import { TUser, useCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Notification = () => {
+  const [updateNotification] = useMarkAsReadMutation();
   const user: TUser | null = useAppSelector(useCurrentUser);
-
+  const { t } = useTranslation();
   const [page, setPage] = useState<number>(1);
   const query: Record<string, any> = {};
   if (page) query["page"] = page;
   query["limit"] = 10;
-  const { data: notificationData } = useGetMyNotificationQuery(query);
+  const { data: notificationData, isLoading } =
+    useGetMyNotificationQuery(query);
 
   const onChange = (page: number, pageSize: number) => {
     setPage(page);
   };
-  const [updateNotification] = useMarkAsReadMutation();
   const submit = async () => {
-    const toastId = toast.loading("Updating...");
+    const toastId = toast.loading(t("Updating..."));
     try {
       await updateNotification({}).unwrap();
-      toast.success("Mark as read successfully", {
+      toast.success(t("Marked as read successfully"), {
         id: toastId,
         duration: 2000,
       });
@@ -44,37 +44,44 @@ const Notification = () => {
     }
   };
 
-  console.log(notificationData);
   return (
     <div>
       <div className="flex justify-end">
         {notificationData?.data && (
           <Button onClick={submit} className="bg-primary text-white ">
-            Mark As Read
+            {t("Mark As Read")}
           </Button>
         )}
       </div>
       <div className="container mx-auto mt-4">
-        {notificationData?.data ? (
-          <Row gutter={[16, 16]}>
-            {notificationData.data.map((data: any, index: number) => (
-              <NotificationCard key={index} data={data} />
-            ))}
-          </Row>
-        ) : (
-          <div className="flex justify-center items-center">
-            <NoData />
+        {isLoading ? (
+          <div className="flex justify-center items-center ">
+            <Spin tip="Loading" size="large"></Spin>
           </div>
-        )}
+        ) : (
+          <>
+            {notificationData?.data?.length > 0 ? (
+              <Row gutter={[16, 16]}>
+                {notificationData?.data?.map((data: any, index: number) => (
+                  <NotificationCard key={index} data={data} />
+                ))}
+              </Row>
+            ) : (
+              <div className="flex justify-center items-center">
+                <NoData />
+              </div>
+            )}
 
-        <div className=" text-end mt-4">
-          {notificationData?.data && (
-            <ResPagination
-              total={notificationData?.meta?.total as number}
-              onChange={onChange}
-            />
-          )}
-        </div>
+            <div className="text-end mt-4">
+              {notificationData?.data && (
+                <ResPagination
+                  total={notificationData?.meta?.total as number}
+                  onChange={onChange}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

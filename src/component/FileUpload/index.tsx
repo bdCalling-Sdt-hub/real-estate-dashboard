@@ -3,6 +3,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { ConfigProvider, Upload } from "antd";
 import { MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { multiUpload } from "../../themes/uploadTheme";
 
 const FileUpload = ({
@@ -11,10 +12,12 @@ const FileUpload = ({
   listType = "picture-card",
   imageUrl,
   image,
+  theme,
 }: any) => {
   const customRequest = ({ file }: { file: File | null }) => {
     setSelectedFile(file);
   };
+  const { t } = useTranslation();
   const props: any = {
     name: "file",
     disabled: disabled,
@@ -22,6 +25,7 @@ const FileUpload = ({
     imageUrl: imageUrl,
     multiple: false,
     showUploadList: false,
+    theme: {},
     customRequest: customRequest,
   };
   const handleButton = (e: MouseEvent<HTMLButtonElement>) => {
@@ -30,17 +34,16 @@ const FileUpload = ({
   const uploadButton = (
     <button
       style={{ border: 0, background: "none" }}
-      type="button"
       onClick={(e) => handleButton(e)}
     >
       <PlusOutlined className="text-primary" />
       <div style={{ marginTop: 8 }} className="text-primary">
-        Upload
+        {t("Upload")}
       </div>
     </button>
-  ); 
+  );
   return (
-    <ConfigProvider theme={multiUpload}>
+    <ConfigProvider theme={theme ?? multiUpload}>
       <Upload {...props}>
         {image || imageUrl ? (
           <img

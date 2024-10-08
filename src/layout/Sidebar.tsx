@@ -11,14 +11,14 @@ import { IoLogInOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { logout, useCurrentUser } from "../redux/features/auth/authSlice";
 import { adminRoutes } from "../router/admin.route.";
-import { SidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 import { sidebardThemes } from "../themes/sidebarThemes";
+import { SidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 
-const Sidebar = () => { 
+const Sidebar = () => {
   const { lang } = useAppSelector((state) => state?.lang);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   const { role }: any = useAppSelector(useCurrentUser) || "admin";
   console.log(role);
@@ -42,7 +42,7 @@ const Sidebar = () => {
         overflow: "auto",
         position: "fixed",
         top: "0",
-        backgroundColor: "#FBDDB0",
+        backgroundColor: "#F5F5F5",
         ...(lang === "ar" ? { right: 0 } : { left: 0 }),
       }}
     >
@@ -58,7 +58,7 @@ const Sidebar = () => {
       </div>
       <Menu
         style={{
-          backgroundColor: "#FBDDB0",
+          backgroundColor: "#F5F5F5",
           marginTop: "10px",
         }}
         // theme="dark"
@@ -74,7 +74,7 @@ const Sidebar = () => {
           <Button
             onClick={handeLogout}
             icon={<IoLogInOutline />}
-            className="w-full bg-primary flex items-center justify-center font-600 text-18 h-[40px]"
+            className="w-full bg-[#A9C9FF] flex items-center justify-center font-600 text-18 h-[40px]"
           >
             {t("Log Out")}
           </Button>

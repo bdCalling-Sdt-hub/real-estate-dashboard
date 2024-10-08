@@ -7,10 +7,10 @@ import {
   createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store";
-import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import { tagTypesList } from "../../types/tagTypes";
+import { logout, setUser } from "../features/auth/authSlice";
+import { RootState } from "../store";
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BACKEND_BASEURL,
   credentials: "include",
@@ -38,7 +38,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
-  let result = await baseQuery(args, api, extraOptions); 
+  let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === 404) {
     toast.error((result.error.data as any).message);
   }
@@ -46,7 +46,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     toast.error((result.error.data as any).message);
   }
   if (result?.error?.status === 401) {
-    //* Send Refresh 
+    //* Send Refresh
 
     const res = await fetch(
 
@@ -58,7 +58,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       }
     );
 
-    const data = await res.json(); 
+    const data = await res.json();
     if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
 

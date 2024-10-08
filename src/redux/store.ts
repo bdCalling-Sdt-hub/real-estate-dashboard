@@ -26,7 +26,7 @@ const persistConfig = {
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authSlice);
-
+// const persistPropertyReducer = persistReducer(persistConfig, PropertySlice);
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,

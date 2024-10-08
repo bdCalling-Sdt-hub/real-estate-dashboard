@@ -13,10 +13,11 @@ const AgentCard = ({ data }: any) => {
           />
           <div>
             <h1 className="text-20 font-500 mb-1">{data?.author?.name}</h1>
+            <p>{data?.author?.address}</p>
           </div>
         </div>
         <h1 className="text-20 font-500 text-gray">
-          {data?.totalTransactions}
+          {data?.totalTransactions} Units
         </h1>
         <h1>{priceFormat(data?.totalIncome)}</h1>
       </div>

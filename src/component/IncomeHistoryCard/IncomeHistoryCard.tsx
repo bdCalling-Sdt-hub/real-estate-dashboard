@@ -3,7 +3,6 @@ import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { priceFormat } from "../../utils/Format";
- 
 
 const IncomeHistoryCard = ({
   todayIncome,
@@ -14,9 +13,9 @@ const IncomeHistoryCard = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <Row align="middle" justify="center" gutter={16}>
-      <Col span={12}>
-        <div className="bg-white flex justify-between items-center p-6 rounded">
+    <Row gutter={[16, 16]}>
+      <Col span={8}>
+        <div className="bg-white flex justify-between items-center p-6 rounded shadow-sm">
           <div className="bg-[#EEEFFF] p-2 rounded-full">
             <RiMoneyDollarCircleLine size={45} color="#3A6FF8" />
           </div>
@@ -28,8 +27,8 @@ const IncomeHistoryCard = ({
           </div>
         </div>
       </Col>
-      <Col span={12}>
-        <div className="bg-white flex justify-between items-center  p-6 rounded">
+      <Col span={8}>
+        <div className="bg-white flex justify-between items-center  p-6 rounded shadow-sm">
           <div className="bg-[#FFE6E1] p-2 rounded-full">
             <RiMoneyDollarCircleLine size={45} color="#FF8E26" />
           </div>

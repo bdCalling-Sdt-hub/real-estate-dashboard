@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EyeOutlined, FilterOutlined } from "@ant-design/icons";
+import { FilterOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Space } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import info from "../../../assets/info.png";
 import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { useGetAllCategoriesQuery } from "../../../redux/features/category/categoryApi";
 import { useGetAllPropertyQuery } from "../../../redux/features/property/propertyApi";
-import { priceFormat } from "../../../utils/Format";
 import PropertyDetails from "./PropertyDetails";
-
 const Property = () => {
   const [category, setCategory] = useState<string | null>(null);
   const query: Record<string, any> = {};
@@ -18,25 +18,21 @@ const Property = () => {
   const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
-  const [property, setProperty] = useState([]);
   const { t } = useTranslation();
   if (category) {
     query["category"] = category;
   }
   query["limit"] = limit;
   query["page"] = page;
-  const { data: data, isSuccess } = useGetAllPropertyQuery({ ...query });
-
+  const {
+    data: data,
+    isLoading,
+    isFetching,
+  } = useGetAllPropertyQuery({ ...query });
   categoryQuery["limit"] = 99999999999;
   const { data: categories } = useGetAllCategoriesQuery({ ...categoryQuery });
   const navigate = useNavigate();
   const [modalData, setModalData] = useState({});
-
-  useEffect(() => {
-    if (isSuccess) {
-      setProperty(data?.data?.allResidence);
-    }
-  }, [isSuccess, data]);
 
   const handleToggleModal = (data: any) => {
     setModalData(data);
@@ -50,44 +46,82 @@ const Property = () => {
 
   const column = [
     {
+      title: t("Property ID"),
+      dataIndex: "_id",
+      key: "_id",
+      render: (data: any) => {
+        return <p>#{t(data?.slice(0, 6))}</p>;
+      },
+    },
+    {
       title: t("Property Name"),
       dataIndex: "propertyName",
       key: "propertyName",
     },
+    // {
+    //   title: t("Rent"),
+    //   dataIndex: "rent",
+    //   key: "rent",
+    //   render: (data: any) => {
+    //     return priceFormat(data);
+    //   },
+    // },
     {
-      title: t("Rent"),
-      dataIndex: "rent",
-      key: "rent",
+      title: t("Governorate"),
+      dataIndex: "address",
+      key: "address",
       render: (data: any) => {
-        return priceFormat(data);
+        return <p>{t(data?.governorate)}</p>;
+      },
+    },
+
+    {
+      title: t("Area"),
+      dataIndex: "address",
+      key: "address",
+      render: (data: any) => {
+        return <p>{t(data?.area)}</p>;
       },
     },
     {
-      title: t("Category"),
-      dataIndex: "category",
-      key: "category",
-      render: (data: any) => {
-        return <p>{t(data?.name)}</p>;
-      },
+      title: t("Rental Type"),
+      dataIndex: "rentType",
+      key: "rentType",
     },
     {
-      title: t("Landlord Name"),
-      dataIndex: "host",
-      key: "agent",
-      render: (data: any) => {
-        return <p>{data?.name}</p>;
-      },
+      title: t("Bedrooms"),
+      dataIndex: "bedrooms",
+      key: "bedrooms",
     },
     {
       title: t("Action"),
-      key: "action",
-      render: (data: any) => {
+      render: (data: any, index: number) => {
         return (
-          <div>
-            <EyeOutlined
-              className="text-18 cursor-pointer"
-              onClick={() => handleToggleModal(data)}
+          <div className="flex items-center gap-x-2">
+            {/* <img
+              className="cursor-pointer"
+              src={eye}
+              width={35}
+              onClick={() => {
+                handleToggleModal(data);
+              }}
+            /> */}
+            <img
+              className="cursor-pointer"
+              src={info}
+              onClick={() => {
+                handleToggleModal(data);
+              }}
             />
+            {/* {data?.status === "blocked" ? (
+            <ResConfirm handleOk={() => handelToUnBlock(data?._id)}>
+              <MdBlock className="text-18 cursor-pointer " color="red" />
+            </ResConfirm>
+          ) : (
+            <ResConfirm handleOk={() => handelToBlock(data?._id)}>
+              <CgUnblock className="text-18 cursor-pointer" color="green" />
+            </ResConfirm>
+          )} */}
           </div>
         );
       },
@@ -97,7 +131,7 @@ const Property = () => {
   return (
     <div className="container mx-auto h-80 my-auto">
       <div className="flex justify-between items-center">
-        <h1 className="text-20 mb-2 font-500 text-gray">{t("Real Estate")}</h1>
+        <h1 className="text-20 mb-2 font-500 text-gray">{t("Properties")}</h1>
 
         <div className="flex gap-x-4 mb-2">
           <Space size="middle">
@@ -129,7 +163,7 @@ const Property = () => {
             className="bg-primary text-white "
             onClick={() => navigate("/admin/realState/create")}
           >
-            Add real Estate
+            {t("Add Property")}
           </Button>
         </div>
       </div>
@@ -142,8 +176,9 @@ const Property = () => {
         <PropertyDetails modalData={modalData} />
       </ResModal>
       <ResTable
+        loading={isFetching || isLoading}
         column={column}
-        data={property}
+        data={data?.data?.allResidence}
         // onTableChange={}
         pagination={{
           total: data?.data?.meta?.total || 0,
