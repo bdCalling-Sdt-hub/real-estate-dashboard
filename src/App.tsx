@@ -14,7 +14,7 @@ import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
 import PrivateRoute from "./router/PrivateRoutes";
 
-const URL = "http://sestate.mamnon.de/";
+const URL = import.meta.env.REACT_APP_SOCKET_URL;
 
 function App() {
   const token: string | null = useAppSelector(useCurrentToken);

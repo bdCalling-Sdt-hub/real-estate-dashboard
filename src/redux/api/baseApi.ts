@@ -12,7 +12,7 @@ import { tagTypesList } from "../../types/tagTypes";
 import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store";
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://estate.mamnon.de/api/v1",
+  baseUrl: import.meta.env.VITE_BACKEND_BASEURL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const otpToken = sessionStorage.getItem("token");
@@ -49,7 +49,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     //* Send Refresh
 
     const res = await fetch(
-      "http://115.127.156.14:9005/api/v1/auth/refresh-token",
+
+      `${import.meta.env.VITE_BACKEND_BASEURL}/auth/refresh-token`,
 
       {
         method: "POST",
