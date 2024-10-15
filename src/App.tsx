@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { ConfigProvider } from "antd";
 import { io } from "socket.io-client";
 import PrivateRoute from "./router/PrivateRoutes";
+import { Helmet } from "react-helmet-async";
 
 const URL = import.meta.env.REACT_APP_SOCKET_URL;
 
@@ -38,11 +39,12 @@ function App() {
       socket.off(user?.userId as string, handleNotificationEvent);
       socket.disconnect();
     };
-  }, [dispatch, socket, user]);
-
+  }, [dispatch, socket, user]); 
+ 
   return (
     <PrivateRoute role={undefined}>
       <ConfigProvider direction={lang === "ar" ? "rtl" : "ltr"}>
+      
         <MainLayout />
       </ConfigProvider>
     </PrivateRoute>
