@@ -204,6 +204,8 @@ const Guest = () => {
     },
   ];
 
+
+  console.log(data);
   return (
     <div className="container mx-auto">
       <ResModal showModal={blockModal} setShowModal={setBlockModal}>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Divider } from "antd";
+import { Divider, Image } from "antd";
 import { useTranslation } from "react-i18next";
 import unverified from "../../../assets/unverified.png";
 import verified2 from "../../../assets/verified2.png";
@@ -21,6 +21,8 @@ const DetailItem = ({
 };
 const GuestDetails = ({ modalData }: { modalData: any }) => {
   const { t } = useTranslation();
+
+  console.log(modalData);
   return (
     <div>
       <h1 className="text-30 font-500">{t("Tenant Information")}</h1>
@@ -46,10 +48,10 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
       <Divider />
 
       {/* section 3 */}
-      <div className="flex justify-between">
-        <div>
-          <div className="mt-1 text-black font-500 text-16 flex flex-col gap-y-3">
+      <div className=""> 
+          <div className="mt-1 text-black font-500 text-16 grid grid-cols-2">
             {/* <DetailItem label="Username" value={modalData?.userName} /> */}
+            {/* <div className="grid grid-cols-2 w-full"> */}
             <DetailItem label="Full Name" value={modalData?.name} />
             <DetailItem label="Email" value={modalData?.email} />
             <DetailItem
@@ -68,18 +70,35 @@ const GuestDetails = ({ modalData }: { modalData: any }) => {
             <DetailItem
               label="Income Bracket"
               value={modalData?.monthlyIncome}
+            /> 
+          </div>
+        </div> 
+
+    {modalData?.documents?.selfie &&
+    <>
+    <h1 className="text-32 font-semibold my-4">{t("Selfie")}</h1>
+    
+    <Image
+        className="object-cover"
+        height={200}
+        src={modalData?.documents?.selfie}
+        alt="civilId frontSide"
+      />
+      </>}
+
+     {modalData?.documents?.documents?.length > 0 && <> <h1 className="text-32 font-semibold my-4">{t("Documents")}</h1>
+      <div className="flex gap-x-4">
+        {
+          modalData?.documents?.documents?.map((doc: any) => (
+            <Image
+              className="object-cover"
+              height={200}
+              src={doc?.url}
+              alt="Documents"
             />
-          </div>
-        </div>
-        {/* <div>
-          <h1 className="text-20 font-500">Owner Information</h1>
-          <div className="mt-1 text-gray">
-            <p>Owner Name:Franklin</p>
-            <p className="mt-1">Contact: +01254256426</p>
-          </div>
-        </div> */}
-      </div>
-    </div>
+          ))}
+      </div></>}
+      </div> 
   );
 };
 
