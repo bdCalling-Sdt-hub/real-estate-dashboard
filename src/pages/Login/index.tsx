@@ -15,6 +15,8 @@ import { setUser, TUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { authValidationSchema } from "../../schema/auth.schema";
 import { verifyToken } from "../../utils/verifyToken";
+import LoginHeader from "./header";
+import { Header } from "antd/es/layout/layout";
 const Login = () => {
   // const [LoginFn] = useLoginMutation()
   const { t } = useTranslation();
@@ -38,22 +40,21 @@ const Login = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen flex items-center justify-center">
-      <Row align="middle" justify="center" gutter={16}>
-        <Col span={12}>
-          <img src={logo} alt="Logo" />
-          <img src={loginVector} alt="Login Vector" />
-        </Col>
-        <Col span={12}>
+    <>
+     <Header className="sticky top-0 z-10 w-full bg-[#A9C9FF] ">
+
+    <LoginHeader />
+     </Header>
+    <div className="container mx-auto h-screen flex items-center justify-center"> 
           <div className="w-[500px] mx-auto">
             <div className="bg-white px-4 rounded">
-              <div className="text-center mt-6">
+              <div className="text-center">
                 <h1 className="text-primary text-32 font-600">
                   {t("Welcome!")}
                 </h1>
-                <p className="text-20 text-gray">
+                {/* <p className="text-20 text-gray">
                   {t("Please login for a better experience!")}
-                </p>
+                </p> */}
               </div>
               <div className="mt-[20px]">
                 <GuruForm
@@ -91,9 +92,9 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </Col>
-      </Row>
+ 
     </div>
+    </>
   );
 };
 
