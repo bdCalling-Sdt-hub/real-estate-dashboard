@@ -8,11 +8,14 @@ import { useAppSelector } from "../redux/hooks";
 import { paginationTheme } from "../themes/paginationThemes";
 import { sidebardThemes } from "../themes/sidebarThemes";
 import HeaderLayout from "./HeaderLayout";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar"; 
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 
 const MainLayout = () => {
   const collapsed = useAppSelector((state) => state.layout.collapsed);
   const { lang } = useAppSelector((state) => state.lang);
+  const { i18n, t } = useTranslation();
 
   const navigate = useNavigate();
   const User = useAppSelector(useCurrentUser);
@@ -31,8 +34,12 @@ const MainLayout = () => {
     }
   }, [User, navigate]);
 
+
+  
+
   return (
-    <div>
+    <>
+     
       <ConfigProvider theme={sidebardThemes}>
         <Layout style={{ minHeight: "100vh", backgroundColor: "white" }}>
           <Sidebar />
@@ -66,7 +73,7 @@ const MainLayout = () => {
           </Layout>
         </Layout>
       </ConfigProvider>
-    </div>
+    </>
   );
 };
 
