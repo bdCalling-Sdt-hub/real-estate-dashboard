@@ -34,12 +34,12 @@ const bookingApi = baseApi.injectEndpoints({
         params: query,
       }),
       providesTags: [tagTypes.booking],
-    }),
+    }), 
   }),
 });
 
 export const {
   useGetAllBookingQuery,
   useUpdateBookingMutation,
-  useGetBookingStaticsQuery,
+  useGetBookingStaticsQuery, 
 } = bookingApi;

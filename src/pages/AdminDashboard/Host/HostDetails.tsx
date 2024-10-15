@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Divider } from "antd";
+import { Divider, Image } from "antd";
 import { useTranslation } from "react-i18next";
 import unverified from "../../../assets/unverified.png";
 import verified2 from "../../../assets/verified2.png";
@@ -91,6 +91,31 @@ const HostDetails = ({ modalData }: { modalData: any }) => {
           </div>
         </div>
       </div>
+
+      {modalData?.documents?.selfie &&
+    <>
+    <h1 className="text-32 font-semibold my-4">{t("Selfie")}</h1>
+    
+    <Image
+        className="object-cover"
+        height={200}
+        src={modalData?.documents?.selfie}
+        alt="civilId frontSide"
+      />
+      </>}
+
+     {modalData?.documents?.documents?.length > 0 && <> <h1 className="text-32 font-semibold my-4">{t("Documents")}</h1>
+      <div className="flex gap-x-4">
+        {
+          modalData?.documents?.documents?.map((doc: any) => (
+            <Image
+              className="object-cover"
+              height={200}
+              src={doc?.url}
+              alt="Documents"
+            />
+          ))}
+      </div></>}
     </div>
   );
 };

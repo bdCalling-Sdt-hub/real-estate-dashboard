@@ -8,6 +8,11 @@ import ResModal from "../../../component/Modal/Modal";
 import ResTable from "../../../component/Table";
 import { useGetAllBookingQuery } from "../../../redux/features/booking/bookingApi";
 import BookingDetails from "./BookingDetails";
+import { IoCloudDownloadOutline } from "react-icons/io5"; 
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
+import { toast } from "sonner";
+import ErrorResponse from "../../../component/UI/ErrorResponse";
 const Booking = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState<boolean>(false);
@@ -27,12 +32,32 @@ const Booking = () => {
   } = useGetAllBookingQuery({ ...query });
   const [modalData, setModalData] = useState({});
   const startIndex = (page - 1) * limit;
-  console.log(data);
+  const token: string | null = useAppSelector(useCurrentToken);
+
   const onPaginationChange = (page: any, pageSize: any) => {
     setPage(page);
     setLimit(pageSize);
   };
-
+const handelToDownLoad =async(id:string)=>{
+  try {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/bookings/generate-contract/${id}`,{
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    const data = await res.json()
+    toast.success(data?.message, {id:"doc", duration: 3000});
+   if(data?.success){
+    window.open(data?.data, '_blank');
+   } 
+  } catch (error) {
+    ErrorResponse(error, "doc")
+    
+  }
+}
   const column = [
     {
       title: t("ID"),
@@ -80,13 +105,18 @@ const Booking = () => {
       render: (data: any) => {
         setModalData(data);
         return (
-          <div>
+          <div className="flex items-center justify-center gap-5">
             <img
               className="text-18 cursor-pointer"
               src={info}
               alt=""
               onClick={handleToggleModal}
             />
+            <button onClick={()=>handelToDownLoad(data?._id)}>
+
+<IoCloudDownloadOutline size={22} />
+            </button>
+
           </div>
         );
       },
